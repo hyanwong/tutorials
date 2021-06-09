@@ -58,8 +58,8 @@ can create them.
 
 ## Text format
 
-The ``TreeSequence.draw_text`` and
-``Tree.draw_text`` methods provide
+The {meth}`TreeSequence.draw_text <tskit.TreeSequence.draw_text>` and
+{meth}`Tree.draw_text <tskit.Tree.draw_text>` methods provide
 a quick way to print out a tree sequence, or an individual tree within it. They are
 primarily useful for looking at topologies in small datasets (e.g. fewer than 20 sampled
 genomes), and do not display mutations.
@@ -79,7 +79,7 @@ print(ts_tiny.first().draw_text(
 
 ## SVG format
 
-Most users will want to use the SVG drawing functions
+Most users will want to take advantage of the SVG drawing functions
 {meth}`TreeSequence.draw_svg <tskit.TreeSequence.draw_svg>` and
 {meth}`Tree.draw_svg <tskit.Tree.draw_svg>` for visualization.
 Being a vectorised format, SVG files are suitable for presentations, publication, and
@@ -106,7 +106,7 @@ this tutorial).
 
 ### Axes and scaling
 
-For ease of drawing, the text representation and the SVG image above use unconventional
+For ease of drawing, both the text representation and the SVG image above use unconventional
 non-linear X and Y coordinate systems. By default, the SVG output uses a more
 conventional linear scale for both time (Y) and genome position (X), and indicates the
 position of each tree along the genome by an alternating shaded background. Although
@@ -117,16 +117,16 @@ causing labels to overlap:
 SVG(ts_tiny.draw_svg(size=svg_size, y_axis=True))
 ```
 
-One way to avoid overlapping labels on the Y axis is to use the ``y_ticks`` parameter,
-which will be used in most subsequent examples in this tutorial.
+One way to avoid overlapping labels on the Y axis is to specify tick locations via the
+``y_ticks`` parameter; this will be used in most subsequent examples in this tutorial.
 
 ### Larger tree sequences
 
 So far, we have plotted only very small tree sequences. To visualize larger tree
 sequences it is sometimes advisable to focus on a small region of the genome, possibly
 even a single tree. The ``x_lim`` parameter allows you to plot the part of a tree
-sequence that spans a particular genomic region: here's a slighly larger tree sequence
-with 8 samples, but where we've restricted the amount of the tree sequence we plot:
+sequence that spans a particular genomic region. Here's a slighly larger 8 sample
+example, where we've only plotted 10000 kb of the genome:
 
 ```{code-cell} ipython3
 x_limits = [5000, 15000]
@@ -219,7 +219,7 @@ SVG(third_tree.draw_svg(size=(200, 300)))
 (sec_tskit_viz_extra_mutations)=
 
 However, when plotting a single tree it may not be evident that identical branches
-may exist in several adjacent trees, indicating an {ref}`edge <tskit:sec_introduction>`
+may exist in several adjacent trees, indicating an {ref}`edge <tskit:sec_data_model_definitions_edge>`
 that persists across adjacent trees. For instance the rightmost branch in the tree above,
 from node 10 down to 7, exists in the previous two trees too. Indeed, this edge has a
 mutation on it at position 6295, in the first tree. This mutation is not plotted in the
@@ -337,9 +337,8 @@ The additional classes are primarily based on the IDs of trees, nodes, parent (a
 nodes, individuals, populations, mutations, and sites. These class names start with a
 single letter (respectively `t`, `n`, `a`, `i`, `p`, `m`, and `s`) followed by a
 numerical ID. A comprehensive example is the rightmost leaf (node 7) in the third tree
-in the mutated tree sequence, plotted in the previous section but one. In that tree
-sequence, node 7 is a leaf and also a
-sample node. It belongs to
+in the mutated tree sequence, plotted in the previous section but one. In that tree, node
+7 is a leaf and also a {ref}`sample node <sec_data_model_definitions_sample>`. It belongs to
 an {ref}`individual <sec_nodes_or_individuals>` with ID 3, comes from the population with
 ID 2, and has an immediate ancestor (parent) node with ID 10. It also has mutations with
 IDs 16 and 17 above it, and those mutations are associated with site IDs 15 and 16.
@@ -360,7 +359,7 @@ SVG(ts_small.draw_svg(time_scale="rank", size=wide_fmt, style=css_string))
 
 :::{note}
 Branches in multiple trees that have the same parent and child do not always
-correspond to a single {ref}`edge <tskit:sec_introduction>`
+correspond to a single {ref}`edge <tskit:sec_data_model_definitions_edge>`
 in a tree sequence: for example, edges have the
 additional constraint that they must belong to _adjacent_ trees.
 :::
@@ -871,7 +870,7 @@ picture like this:
 
 ### Demographic processes
 
-If you are generating a tree sequence via a {ref}`Demes <msprime:sec_demography_importing>`
+If you are generating a tree sequence via a {ref}`<msprime:sec_demography_importing_demes>`
 model, then you can visualize a schematic of the demography itself (rather than the
 resulting tree sequence) using the [demesdraw](https://grahamgower.github.io/demesdraw/)
 software.
