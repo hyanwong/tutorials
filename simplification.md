@@ -3,8 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.9.1
+    format_version: 0.13
+    jupytext_version: 1.10.3
 kernelspec:
   display_name: Python 3
   language: python
@@ -14,20 +14,17 @@ kernelspec:
 ```{currentmodule} tskit
 ```
 
-```{code-cell} ipython3
-:tags: [remove-cell]
-def create_notebook_data():
-    pass
-
-# create_notebook_data()  # uncomment to recreate the tree seqs used in this notebook
-```
-
 (sec_simplification)=
 
 # Simplification
-% remove underscores in title when tutorial is complete or near-complete
 
-**Georgia Tsambos**
+**Georgia Tsambos** and **Yan Wong**
+
+Often a tree sequence may contain extra genealogical information which you don't need.
+Here are some example scenarios:
+
+ - You have carried out a forward simulation, and the genealogy contains paths of inheritance that are dead ends (i.e. which don't end up in any of the current sampled genomes)
+ - You are only interested in the ancestry of a certain
 
 :::{todo}
 Create content. See https://github.com/tskit-dev/tutorials/issues/52
