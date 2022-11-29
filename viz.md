@@ -683,11 +683,22 @@ simple 2-tip SVG tree produced by tskit looks something like this:
 ```
 
 And in a tree sequence plot, the SVG simply consists of a set of such trees, together
-with groups containing the background and axes, if required.
+with groups containing the background and axes, if required. Here's an example
 ```
 <g class="tree-sequence">
   <g class="background"></g>
-  <g class="axes"></g>
+  <g class="axes">
+      <g class="x-axis">
+          <g class="title"><text class="lab" ...>Genome position</text></g>
+          <line class="ax-line"></g>
+          <g class="ticks">...</g>
+      </g>
+      <g class="y-axis">
+          <g class="title"><text class="lab" ...>Time (generations)</text></g>
+          <line class="ax-line"></g>
+          <g class="ticks">...</g>
+      </g>
+  </g>
   <g class="trees">
     <g class="tree t0">...</g>
     <g class="tree t1">...</g>
