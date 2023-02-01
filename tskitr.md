@@ -44,7 +44,7 @@ n
 The `$` operator can also be used to call methods, for example, the 
 {meth}`~TreeSequence.simplify` method associated with the tree sequence.
 The method parameters are given as native R objects
-(but note that object IDs are still use tskit's 0-based indexing system).
+(but note that object IDs still use tskit's 0-based indexing system).
 
 ```{code-cell}
 reduced_ts <- ts$simplify(0:7)  # only keep samples with ids 0, 1, 2, 3, 4, 5, 6, 7
