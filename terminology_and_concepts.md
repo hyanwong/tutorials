@@ -145,8 +145,8 @@ objects. In tree sequences, however, all nodes, both internal and terminal,
 are represented by an **integer ID**, unique over the entire tree sequence, and which exists
 at a specific point in time. A branch point in any of the trees is associated with
 an *internal node*, representing an ancestor in which a single DNA
-sequence was duplicated (in forwards-time terminology) or in which multiple sequences
-coalesced (in backwards-time terminology). 
+sequence was duplicated (in for-time terminology) or in which multiple sequences
+coalesced (in backward-time terminology). 
 
 
 (sec_terminology_nodes_samples)=

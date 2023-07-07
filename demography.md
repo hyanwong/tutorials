@@ -61,7 +61,7 @@ Also, note that we no longer need to specify ``population_size`` in {func}`mspri
 However, **this simulation will run forever** unless we also
 specify some migration between the groups!
 To understand why, recall that ``msprime`` is a `coalescent`-based simulator.
-The simulation will run backwards-in-time, simulating until `all` samples have
+The simulation will run backward-in-time, simulating until `all` samples have
 coalesced to a single common ancestor at each genomic location.
 However, with no migration between our two populations, samples in one
 population will never coalesce with samples in another population.
@@ -99,7 +99,7 @@ population `dest` in each generation.
 And if both of your populations are exchanging migrants at the same rate, you can save yourself some typing by specifying them with a single {meth}`msprime.Demography.set_symmetric_migration_rate` call.
 
 ```{note}
-The reason for this (perhaps) counter-intuitive specification of `source` and `dest` is that ``msprime`` simulates backwards-in-time. See [this](https://tskit.dev/msprime/docs/latest/demography.html#direction-of-time) for further explanation.
+The reason for this (perhaps) counter-intuitive specification of `source` and `dest` is that ``msprime`` simulates backward-in-time. See [this](https://tskit.dev/msprime/docs/latest/demography.html#direction-of-time) for further explanation.
 ```
 
 For instance, the following migration matrix specifies that in each generation,
@@ -253,7 +253,7 @@ make a diagram showing this
 We'll specify this with the {meth}`msprime.Demography.add_population_split` method.
 We need to know the time of the event, and the IDs or labels of the derived and ancestral populations participating in the divergence event.
 Notice that in this case, we do not need to provide proportions as we did in the case of admixture.
-This makes sense when you think about the fact that msprime simulates backwards-in-time: all lineages in all of the derived populations originate from the ancestral population in a split event.
+This makes sense when you think about the fact that msprime simulates backward-in-time: all lineages in all of the derived populations originate from the ancestral population in a split event.
 Any differences in 'quantities' of migrants must be modelled by sizes of the derived populations at the time of the split. 
 
 ```{code-cell} ipython 3
@@ -314,7 +314,7 @@ dem.add_mass_migration(time=50, source=0, dest=1, proportion=0.3)
 dem
 ```
 
-Note that these are viewed as backwards-in-time events,
+Note that these are viewed as backward-in-time events,
 so ``source`` is the population that receives migrants from ``dest``.
 
 ```{code-cell} 
@@ -356,8 +356,8 @@ dem.sort_events()
 ts = msprime.sim_ancestry(samples={"A" : 3, "B" : 3}, demography=dem, sequence_length=1000, random_seed=63461, recombination_rate=1e-7)
 ```
 
-Note that because ``msprime`` simulates backwards-in-time, parameter changes must be
-interpreted backwards-in-time as well.
+Note that because ``msprime`` simulates backward-in-time, parameter changes must be
+interpreted backward-in-time as well.
 For instance, the ``pop1_growth`` event in the example above
 specifies continual growth in the early history of population 1 up until 100
 generations in the past.

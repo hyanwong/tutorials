@@ -18,12 +18,12 @@ kernelspec:
 % remove underscores in title when tutorial is complete or near-complete
 
 This tutorial shows how tskit can be used to
-build your own forwards-in-time tree sequence recording simulator from scratch.
+build your own forward-in-time tree sequence recording simulator from scratch.
 
 :::{note}
 If you are simply trying to obtain a tree sequence which is
-the result of a forwards-in-time simulation, this can be done by using one of the
-highly capable forwards-in-time genetic simulators that already exist, such as
+the result of a forward-in-time simulation, this can be done by using one of the
+highly capable forward-in-time genetic simulators that already exist, such as
 [SLiM](https://messerlab.org/slim/) or [fwdpy11](https://github.com/molpopgen/fwdpy11).
 Documentation and tutorials for these tools exist on their respective websites. This
 tutorial focusses instead on illustrating the general principles that lie behind such
