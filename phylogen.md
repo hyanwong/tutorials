@@ -84,12 +84,12 @@ single unified representation of large genomic datasets, storing trees,
 sequence data and metadata in a single efficient structure. Examples are given
 in the section below entitled {ref}`sec_phylogen_unified_structure`.
 
-As the name suggests, a tree sequence can also store and analyse a sequence of
-trees along a genome (i.e. a "phylogenetic network"). This is necessary to
-account for recombination between lineages, and may be important even when looking at
-species-level phylogenies due to the effects of hybridization and incomplete lineage
-sorting. An overview, and links to further details are given at the
-{ref}`end of this page <sec_phylogen_multiple_trees>`.
+As the name suggests, a tree sequence can also store and analyse a sequence of trees
+along a genome (i.e. a type of "phylogenetic network"). This graph-based format allows
+recombination between lineages to be captured, and may be important even when
+describing relationships between different species, due to the effects of
+hybridization and incomplete lineage sorting. An overview, and links to further
+details are given at the {ref}`end of this page <sec_phylogen_multiple_trees>`.
 
 ## Hints for phylogeneticists
 
