@@ -1,614 +1,1256 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Demography &#8212; Tskit Tutorials</title>
-    
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    <title>Demography &#8212; Tree Sequence Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-      
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'demography';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bottlenecks" href="bottlenecks.html" />
-    <link rel="prev" title="Do you really need mutations?" href="no_mutations.html" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-
-
-
+    <link rel="next" title="Instantaneous Bottlenecks" href="bottlenecks.html" />
+    <link rel="prev" title="Advanced msprime topics" href="advanced_msprime.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
   
   
-  <h1 class="site-logo" id="site-title">Tskit Tutorials</h1>
   
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/tskit_logo.svg" class="logo__image only-light" alt="Tree Sequence Tutorials - Home"/>
+    <script>document.write(`<img src="_static/tskit_logo.svg" class="logo__image only-dark" alt="Tree Sequence Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="what_is.html">What is a tree sequence?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tree sequence basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="terminology_and_concepts.html">Terminology &amp; concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started with <strong class="program">tskit</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analysing_tree_sequences.html"><em>Analysing tree sequences</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysing_trees.html">Analysing trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incremental_algorithms.html"><em>Incremental algorithms</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="counting_topologies.html">Counting topologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallelization.html"><em>Parallelization</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further tskit tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tables_and_editing.html">Tables and editing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplification.html"><em>Simplification</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="viz.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">Working with Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="args.html">ARGs as tree sequences</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="simulation_overview.html">Tree sequences and simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_mutations.html">Do you really need mutations?</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_msprime.html">Advanced <strong class="program">msprime</strong> topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Demography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bottlenecks.html">Instantaneous Bottlenecks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introgression.html">Introgression</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="completing_forward_sims.html">Completing forwards simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forward_sims.html">Building a forward simulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_forward_sims.html"><em>Advanced forward simulations</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other languages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tskitr.html">Tskit and R</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorial_development.html"><em>Developing new tutorials</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tskit for ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="popgen.html"><code class="docutils literal notranslate"><span class="pre">Tskit</span></code> for population genetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phylogen.html"><code class="docutils literal notranslate"><span class="pre">Tskit</span></code> for phylogenetics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/demography.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
 </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Introduction
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Using tskit
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="getting_started.html">
-   Getting started with tskit
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="viz.html">
-   Visualisation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="data_structures.html">
-   Data structures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="no_mutations.html">
-   Do you really need mutations?
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Backward time simulations
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Demography
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bottlenecks.html">
-   Bottlenecks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="introgression.html">
-   Introgression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="completing-forward-sims.html">
-   Completing forwards simulations
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Forward time simulations
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="forward_sims.html">
-   Forward simulations
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Development
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="development.html">
-   Development
-  </a>
- </li>
-</ul>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/demography.rst"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.rst</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-        <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/tsk-dev/tutorials"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/tsk-dev/tutorials/issues/new?title=Issue%20on%20page%20%2Fdemography.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
-
-        <!-- Launch buttons -->
-
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#population-structure">
-   Population structure
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#migrations">
-   Migrations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#constant-migration">
-     Constant migration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#changing-migration-rates">
-     Changing migration rates
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mass-migrations">
-     Mass migrations
-    </a>
-   </li>
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#changing-population-sizes-or-growth-rates">
-   Changing population sizes or growth rates
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#debugging-demography">
-   Debugging demography
-  </a>
- </li>
-</ul>
+</div>
 
-        </nav>
-        
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Demography</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#population-structure">Population structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migrations">Migrations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-migration">Constant migration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-migration-rates">Changing migration rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#admixture-and-population-splits">Admixture and population splits</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#admixture">Admixture</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#population-splits">Population splits</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-migrations">Mass migrations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-population-sizes-or-growth-rates">Changing population sizes or growth rates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#census-events">Census events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-demography">Debugging demography</a></li>
+</ul>
+            </nav>
+        </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
-  <div class="section" id="demography">
-<h1>Demography<a class="headerlink" href="#demography" title="Permalink to this headline">¶</a></h1>
-<p>So far, we’ve been simulating samples from a single population of a constant size,
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="demography">
+<span id="sec-msprime-demography"></span><h1>Demography<a class="headerlink" href="#demography" title="Permalink to this heading">#</a></h1>
+<p><strong>Georgia Tsambos</strong></p>
+<p>By default, <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.sim_ancestry" title="(in Python)"><code class="xref py py-func docutils literal notranslate"><span class="pre">msprime.sim_ancestry()</span></code></a> simulates samples from a single population of a constant size,
 which isn’t particularly exciting!
 One of the strengths of msprime is that it can be used to specify quite complicated
 models of demography and population history with a simple Python API.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">msprime</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="population-structure">
+<h2>Population structure<a class="headerlink" href="#population-structure" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">msprime</span></code> supports simulation from multiple discrete populations,
+each of which is initialized in <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.Demography</span></code></a> via the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_population" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_population()</span></code></a> method.
+For each population, you can specify a sample size, an effective population size
+at time = 0, an exponential growth rate and a name.</p>
+<p>Suppose we wanted to simulate three sequences each from two populations
+with a constant effective population size of 500.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">Demography</span><span class="p">()</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in red.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in blue.&quot;</span><span class="p">,</span><span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="margin-left:20px"><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Populations (2)</b><table border="1" class="tskit-table"><thead><tr><th>id</th><th>name</th><th>description</th><th>initial_size</th><th>growth_rate</th><th>default_sampling_time</th><th>extra_metadata</th></tr></thead><tbody><tr><td>0</td><td>A</td><td>Plotted in red.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr><tr><td>1</td><td>B</td><td>Plotted in blue.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Migration matrix (all zero)</b><table border="1" class="tskit-table"><thead><tr></tr></thead><tbody></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Events (0)</b><table border="1" class="tskit-table"><thead><tr></tr></thead><tbody></tbody></table></div></div></div></div>
+</div>
+<p>The <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.Demography</span></code></a> object that we’ve just created can be passed to <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.sim_ancestry" title="(in Python)"><code class="xref py py-func docutils literal notranslate"><span class="pre">msprime.sim_ancestry()</span></code></a> via the <code class="docutils literal notranslate"><span class="pre">demography</span></code> argument.
+We’ll also use the <code class="docutils literal notranslate"><span class="pre">samples</span></code> argument to specify how many sample inividuals we wish to draw from each of these populations.
+In this case, we’ll simulate three from each.
+Also, note that we no longer need to specify <code class="docutils literal notranslate"><span class="pre">population_size</span></code> in <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.sim_ancestry" title="(in Python)"><code class="xref py py-func docutils literal notranslate"><span class="pre">msprime.sim_ancestry()</span></code></a> as we have provided a separate size for each population.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ts = msprime.sim_ancestry(</span>
+<span class="c1">#   samples={&quot;A&quot; : 3, &quot;B&quot; : 3}, </span>
+<span class="c1">#   demography=dem,</span>
+<span class="c1">#   random_seed=12,</span>
+<span class="c1">#   sequence_length=1000, </span>
+<span class="c1">#   recombination_rate=1e-4</span>
+<span class="c1">#   )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, <strong>this simulation will run forever</strong> unless we also
+specify some migration between the groups!
+To understand why, recall that <code class="docutils literal notranslate"><span class="pre">msprime</span></code> is a <code class="docutils literal notranslate"><span class="pre">coalescent</span></code>-based simulator.
+The simulation will run backwards-in-time, simulating until <code class="docutils literal notranslate"><span class="pre">all</span></code> samples have
+coalesced to a single common ancestor at each genomic location.
+However, with no migration between our two populations, samples in one
+population will never coalesce with samples in another population.
+To fix this, let’s add some migration events to the specific demographic history.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A lot of the material in this section was first presented in a workshop
-at the SMBE Speciation meeting in June 2019.
-You can download the exercises as a standalone Jupyter notebook over
-<a class="reference external" href="https://github.com/DRL/SMBE-SGE-2019/blob/master/Session_1/2.Introduction_to_msprime.ipynb">here</a>,
-or run the exercises in an online binder session by following the instructions at the bottom of
-<a class="reference external" href="https://github.com/DRL/SMBE-SGE-2019">this page</a>.</p>
+<p>In this default setup, the samples will be drawn from time = 0, but see <a class="reference external" href="https://tskit.dev/msprime/docs/latest/ancestry.html#sampling-time">here</a> if you wish to change this.</p>
 </div>
-<div class="section" id="population-structure">
-<h2>Population structure<a class="headerlink" href="#population-structure" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">msprime</span></code> supports simulation from multiple discrete populations,
-each of which is initialized with a <a class="reference external" href="https://tskit.dev/msprime/docs/latest/v0/api.html#msprime.PopulationConfiguration" title="(in Python v0.1.dev1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.PopulationConfiguration</span></code></a> object.
-For each population, you can specify a sample size, an effective population size
-at time = 0 and an exponential growth rate.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Population structure in <code class="docutils literal notranslate"><span class="pre">msprime</span></code> closely follows the model used in the
 <code class="docutils literal notranslate"><span class="pre">ms</span></code> simulator.
 Unlike <code class="docutils literal notranslate"><span class="pre">ms</span></code> however, all times and rates are specified
-in generations and all populations sizes are absolute (that is, not
-multiples of <span class="math notranslate nohighlight">\(N_e\)</span>).</p>
+in generations and all population sizes are absolute (that is, not
+multiples of <code class="docutils literal notranslate"><span class="pre">population_size</span></code>).</p>
 </div>
-<p>Suppose we wanted to simulate three sequences each from two populations
-with a constant effective population size of 500.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pop0</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationConfiguration</span><span class="p">(</span><span class="n">sample_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">initial_size</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">pop1</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationConfiguration</span><span class="p">(</span><span class="n">sample_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">initial_size</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>You can give these to <a class="reference external" href="https://tskit.dev/msprime/docs/latest/v0/api.html#msprime.simulate" title="(in Python v0.1.dev1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">msprime.simulate()</span></code></a> as a list
-using the <code class="docutils literal notranslate"><span class="pre">population_configurations</span></code> argument.
-(Note that we no longer need to specify <code class="docutils literal notranslate"><span class="pre">Ne</span></code> as we have provided a separate size for each population).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ts = msprime.simulate(population_configurations = [pop0, pop1],</span>
-<span class="c1">#       random_seed = 12, length = 1000, recombination_rate = 1e-4,</span>
-<span class="c1">#       mutation_rate = 7e-4)</span>
-</pre></div>
-</div>
-<p>However, <strong>this simulation will run forever</strong> unless we also
-specify some migration between the groups!
-To understand why, recall that <code class="docutils literal notranslate"><span class="pre">msprime</span></code> is a <cite>coalescent</cite>-based simulator.
-The simulation will run backwards-in-time, simulating until <cite>all</cite> samples have
-coalesced to a single common ancestor at each genomic location.
-However, with no migration between our two populations, samples in one
-population will never coalesce with samples in another population.
-To fix this, let’s add some migration events to the specific demographic history.</p>
-</div>
-<div class="section" id="migrations">
-<h2>Migrations<a class="headerlink" href="#migrations" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="migrations">
+<h2>Migrations<a class="headerlink" href="#migrations" title="Permalink to this heading">#</a></h2>
 <p>With msprime, you can specify continual rates of migrations between
-populations, as well as one-off mass migrations.</p>
-<div class="section" id="constant-migration">
-<h3>Constant migration<a class="headerlink" href="#constant-migration" title="Permalink to this headline">¶</a></h3>
-<a class="reference internal image-reference" href="_images/tute-population-structure-1.png"><img alt="2 populations with constant migration rate." src="_images/tute-population-structure-1.png" style="width: 500px;" /></a>
-<p>Migration rates between the populations can be specified as the elements of an
-<em>N</em> by <em>N</em> numpy array, and given to <a class="reference external" href="https://tskit.dev/msprime/docs/latest/v0/api.html#msprime.simulate" title="(in Python v0.1.dev1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">msprime.simulate()</span></code></a> via the
-<code class="docutils literal notranslate"><span class="pre">migration_matrix</span></code> argument. The diagonal elements of this array must each be
-0, and the <em>(i, j)</em> th element specifies the expected number of migrants moving
-from population <em>j</em> to population <em>i</em> per generation, divided by the size of
-population <em>i</em>.  When this rate is small (close to 0), it is approximately
-equal to the fraction of population <em>i</em> that consists of new migrants from
-population <em>j</em> in each generation.</p>
+populations, as well as admixture events, divergences and one-off mass migrations.</p>
+<section id="constant-migration">
+<h3>Constant migration<a class="headerlink" href="#constant-migration" title="Permalink to this heading">#</a></h3>
+<p><img alt="constant-migration-diagram" src="_images/tute-population-structure-1.png" /></p>
+<p>Migration rates between the populations can be thought as the elements of an
+<em>N</em> by <em>N</em> numpy array, and are passed to our <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.Demography</span></code></a> object individually via the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.set_migration_rate" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.set_migration_rate()</span></code></a>
+method.
+This allows us to specify the expected number of migrants moving
+from population <code class="docutils literal notranslate"><span class="pre">dest</span></code> to population <code class="docutils literal notranslate"><span class="pre">source</span></code> per generation, divided by the size of
+population <code class="docutils literal notranslate"><span class="pre">source</span></code>.  When this rate is small (close to 0), it is approximately
+equal to the fraction of population <code class="docutils literal notranslate"><span class="pre">source</span></code> that consists of new migrants from
+population <code class="docutils literal notranslate"><span class="pre">dest</span></code> in each generation.
+And if both of your populations are exchanging migrants at the same rate, you can save yourself some typing by specifying them with a single <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.set_symmetric_migration_rate" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.set_symmetric_migration_rate()</span></code></a> call.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The reason for this (perhaps) counter-intuitive specification of <code class="docutils literal notranslate"><span class="pre">source</span></code> and <code class="docutils literal notranslate"><span class="pre">dest</span></code> is that <code class="docutils literal notranslate"><span class="pre">msprime</span></code> simulates backwards-in-time. See <a class="reference external" href="https://tskit.dev/msprime/docs/latest/demography.html#direction-of-time">this</a> for further explanation.</p>
+</div>
 <p>For instance, the following migration matrix specifies that in each generation,
 approximately 5% of population 0 consists of migrants from population 1, and
 approximately 2% of population 1 consists of migrants from population 0.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>
-<span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">Demography</span><span class="p">()</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in red.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in blue.&quot;</span><span class="p">,</span><span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
-<span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-        <span class="n">population_configurations</span> <span class="o">=</span> <span class="p">[</span><span class="n">pop0</span><span class="p">,</span> <span class="n">pop1</span><span class="p">],</span>
-        <span class="n">migration_matrix</span> <span class="o">=</span> <span class="n">M</span><span class="p">,</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="n">random_seed</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
-        <span class="n">recombination_rate</span> <span class="o">=</span> <span class="mf">1e-7</span><span class="p">)</span>
+<span class="c1"># Set migration rates.</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">set_migration_rate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">set_migration_rate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="c1"># Simulate.</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span>
+  <span class="n">samples</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;A&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+  <span class="n">demography</span><span class="o">=</span><span class="n">dem</span><span class="p">,</span>
+  <span class="n">sequence_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+  <span class="n">random_seed</span><span class="o">=</span><span class="mi">141</span><span class="p">,</span>
+  <span class="n">recombination_rate</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+<span class="n">ts</span>
 </pre></div>
 </div>
-<p>One consequence of specifying <a class="reference external" href="https://tskit.dev/msprime/docs/latest/v0/api.html#msprime.PopulationConfiguration" title="(in Python v0.1.dev1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.PopulationConfiguration</span></code></a> objects
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <div>
+              <style>
+                .tskit-table thead tr th {text-align: left;padding: 0.5em 0.5em;}
+                .tskit-table tbody tr td {padding: 0.5em 0.5em;}
+                .tskit-table tbody tr td:first-of-type {text-align: left;}
+                .tskit-details-label {vertical-align: top; padding-right:5px;}
+                .tskit-table-set {display: inline-flex;flex-wrap: wrap;margin: -12px 0 0 -12px;width: calc(100% + 12px);}
+                .tskit-table-set-table {margin: 12px 0 0 12px;}
+                details {display: inline-block;}
+                summary {cursor: pointer; outline: 0; display: list-item;}
+              </style>
+              <div class="tskit-table-set">
+                <div class="tskit-table-set-table">
+                  <table class="tskit-table">
+                    <thead>
+                      <tr>
+                        <th style="padding:0;line-height:21px;">
+                          <img style="height: 32px;display: inline-block;padding: 3px 5px 3px 0;" src="https://raw.githubusercontent.com/tskit-dev/administrative/main/tskit_logo.svg"/>
+                          <a target="_blank" href="https://tskit.dev/tskit/docs/latest/python-api.html#the-treesequence-class"> Tree Sequence </a>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Trees</td><td>1</td></tr>
+                      <tr><td>Sequence Length</td><td>1000.0</td></tr>
+                      <tr><td>Time Units</td><td>generations</td></tr>
+                      <tr><td>Sample Nodes</td><td>4</td></tr>
+                      <tr><td>Total Size</td><td>2.3 KiB</td></tr>
+                      <tr>
+                        <td>Metadata</td><td style="text-align: left;">No Metadata</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tskit-table-set-table">
+                  <table class="tskit-table">
+                    <thead>
+                      <tr>
+                        <th style="line-height:21px;">Table</th>
+                        <th>Rows</th>
+                        <th>Size</th>
+                        <th>Has Metadata</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                  <tr>
+                    <td>Edges</td>
+                      <td>6</td>
+                      <td>200 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Individuals</td>
+                      <td>2</td>
+                      <td>80 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Migrations</td>
+                      <td>0</td>
+                      <td>8 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Mutations</td>
+                      <td>0</td>
+                      <td>16 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Nodes</td>
+                      <td>7</td>
+                      <td>204 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Populations</td>
+                      <td>2</td>
+                      <td>288 Bytes</td>
+                      <td style="text-align: center;">
+                        ✅
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Provenances</td>
+                      <td>1</td>
+                      <td>1.4 KiB</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Sites</td>
+                      <td>0</td>
+                      <td>16 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </div></div>
+</div>
+<p>One consequence of specifying <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Population" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.Population</span></code></a> objects
 is that each of the simulated nodes will now belong to one of our specified
 populations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
-
-<span class="c1"># id  flags   population  individual  time    metadata</span>
-<span class="c1"># 0   1   0   -1  0.00000000000000</span>
-<span class="c1"># 1   1   0   -1  0.00000000000000</span>
-<span class="c1"># 2   1   0   -1  0.00000000000000</span>
-<span class="c1"># 3   1   1   -1  0.00000000000000</span>
-<span class="c1"># 4   1   1   -1  0.00000000000000</span>
-<span class="c1"># 5   1   1   -1  0.00000000000000</span>
-<span class="c1"># 6   0   0   -1  11.88714489632197</span>
-<span class="c1"># 7   0   1   -1  224.72850970133027</span>
-<span class="c1"># 8   0   1   -1  471.21813561520798</span>
-<span class="c1"># 9   0   1   -1  539.93458624531195</span>
-<span class="c1"># 10  0   1   -1  1723.16029992759240</span>
-<span class="c1"># 11  0   1   -1  3813.34990584180423</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">nodes</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <div>
+            <style scoped="">
+                .tskit-table tbody tr th:only-of-type {vertical-align: middle;}
+                .tskit-table tbody tr th {vertical-align: top;}
+                .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+                .tskit-table tbody th {padding: 0.5em 0.5em;}
+            </style>
+            <table border="1" class="tskit-table">
+                <thead>
+                    <tr>
+                        <th>id</th><th>flags</th><th>population</th><th>individual</th><th>time</th><th>metadata</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0.00000000</td><td></td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0.00000000</td><td></td></tr>
+<tr><td>2</td><td>1</td><td>1</td><td>1</td><td>0.00000000</td><td></td></tr>
+<tr><td>3</td><td>1</td><td>1</td><td>1</td><td>0.00000000</td><td></td></tr>
+<tr><td>4</td><td>0</td><td>0</td><td>-1</td><td>161.20712736</td><td></td></tr>
+<tr><td>5</td><td>0</td><td>1</td><td>-1</td><td>336.10713452</td><td></td></tr>
+<tr><td>6</td><td>0</td><td>1</td><td>-1</td><td>590.71203375</td><td></td></tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div></div>
 </div>
 <p>Notice that the <code class="docutils literal notranslate"><span class="pre">population</span></code> column of the node table now contains values of 0 and 1.
 If you are working in a Jupyter notebook, you can draw the tree sequence
 with nodes coloured by population label using SVG:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
-
-<span class="n">colour_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;blue&quot;</span><span class="p">}</span>
-<span class="n">node_colours</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">colour_map</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">population</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
-<span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">trees</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tree on interval:&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">interval</span><span class="p">)</span>
-    <span class="c1"># The code below will only work in a Jupyter notebook with SVG output enabled.</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">SVG</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">node_colours</span><span class="o">=</span><span class="n">node_colours</span><span class="p">)))</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colour_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;blue&quot;</span><span class="p">}</span>
+<span class="n">styles</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;.node.p</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> &gt; .sym </span><span class="se">{{</span><span class="s2">fill: </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> </span><span class="se">}}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">colour_map</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="c1"># The code below will only work in a Jupyter notebook with SVG output enabled.</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">draw_svg</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">styles</span><span class="p">))</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/tute-constant-migration-svg-out.png"><img alt="2 populations with constant migration rate." src="_images/tute-constant-migration-svg-out.png" style="width: 500px;" /></a>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c195b9b6c8554c61a4c4acf5521241fd228fe9666d4b04736fd644d51f867c50.svg" src="_images/c195b9b6c8554c61a4c4acf5521241fd228fe9666d4b04736fd644d51f867c50.svg" /></div>
+</div>
 <p>More coalescences are happening in population 1 than population 0.
 This makes sense given that population 1 is specifying more migrants to
 population 0 than vice versa.</p>
-</div>
-<div class="section" id="changing-migration-rates">
-<h3>Changing migration rates<a class="headerlink" href="#changing-migration-rates" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="changing-migration-rates">
+<h3>Changing migration rates<a class="headerlink" href="#changing-migration-rates" title="Permalink to this heading">#</a></h3>
 <p>We can change any of the migration rates at any time in the simulation.
-To do this, we just need to add a <a class="reference external" href="https://tskit.dev/msprime/docs/latest/api.html#msprime.MigrationRateChange" title="(in Python v0.1.dev1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.MigrationRateChange</span></code></a> object
-specifying the index of the migration matrix to be changed,
+To do this, we just need to use the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_migration_rate_change" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_migration_rate_change()</span></code></a> method on our <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.Demography</span></code></a> object,
+specifying the populations whose migration rates are to be changed,
 the time of the change and the new migration rate.</p>
 <p>For instance, say we wanted to specify that in each generation prior to
 time = 100, 1% of population 0 consisted of migrants from population 1.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">migration_rate_change</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">MigrationRateChange</span><span class="p">(</span>
-            <span class="n">time</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">matrix_index</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>A list of these changes can be supplied to <a class="reference external" href="https://tskit.dev/msprime/docs/latest/v0/api.html#msprime.simulate" title="(in Python v0.1.dev1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">msprime.simulate()</span></code></a> via the
-<code class="docutils literal notranslate"><span class="pre">demographic_events</span></code> input:
-(If there is more than 1 change, ensure they are ordered by backwards-time!)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-        <span class="n">population_configurations</span> <span class="o">=</span> <span class="p">[</span><span class="n">pop0</span><span class="p">,</span> <span class="n">pop1</span><span class="p">],</span>
-        <span class="n">migration_matrix</span> <span class="o">=</span> <span class="n">M</span><span class="p">,</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="n">demographic_events</span> <span class="o">=</span> <span class="p">[</span><span class="n">migration_rate_change</span><span class="p">],</span>
-        <span class="n">random_seed</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
-        <span class="n">recombination_rate</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">)</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span><span class="o">.</span><span class="n">add_migration_rate_change</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dem</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="mass-migrations">
-<h3>Mass migrations<a class="headerlink" href="#mass-migrations" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://tskit.dev/msprime/docs/latest/api.html#msprime.MassMigration" title="(in Python v0.1.dev1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.MassMigration</span></code></a> objects are used to specify one-off events in which some fraction of a population moves into another population. These are useful for specifying divergence and admixture events.</p>
-<a class="reference internal image-reference" href="_images/tute-mass-migration.png"><img alt="2 populations with a mass migration." src="_images/tute-mass-migration.png" style="width: 500px;" /></a>
-<p>You’ll need to provide the time of the event in generations,
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="margin-left:20px"><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Populations (2)</b><table border="1" class="tskit-table"><thead><tr><th>id</th><th>name</th><th>description</th><th>initial_size</th><th>growth_rate</th><th>default_sampling_time</th><th>extra_metadata</th></tr></thead><tbody><tr><td>0</td><td>A</td><td>Plotted in red.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr><tr><td>1</td><td>B</td><td>Plotted in blue.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Migration matrix</b><table border="1" class="tskit-table"><thead><tr><th></th><th>A</th><th>B</th></tr></thead><tbody><tr><td>A</td><td>0</td><td title='Backwards in time migration rate from population A to B = 0.05 per generation.
+Forwards in time, this is the expected number of migrants moving from B to A per
+generation, divided by the size of A.'>0.05</td></tr><tr><td>B</td><td title='Backwards in time migration rate from population B to A = 0.02 per generation.
+Forwards in time, this is the expected number of migrants moving from A to B per
+generation, divided by the size of B.'>0.02</td><td>0</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Events (1)</b><table border="1" class="tskit-table"><thead><tr><th>time</th><th>type</th><th>parameters</th><th>effect</th></tr></thead><tbody><tr><td>100</td><td><a href='https://tskit.dev/msprime/docs/latest/api.html#msprime.Demography.add_migration_rate_change'>Migration rate change</a></td><td>source=0, dest=1, rate=0.01</td><td>Backwards-time migration rate from 0 to 1 → 0.01</td></tr></tbody></table></div></div></div></div>
+</div>
+<p>The output above shows that we have successfully added our first demographic event to our <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.Demography</span></code></a> object, a migration rate change.
+We are now ready to simulate:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span>
+  <span class="n">samples</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;A&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+  <span class="n">demography</span><span class="o">=</span><span class="n">dem</span><span class="p">,</span>
+  <span class="n">sequence_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+  <span class="n">random_seed</span><span class="o">=</span><span class="mi">63461</span><span class="p">,</span>
+  <span class="n">recombination_rate</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+<span class="n">ts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <div>
+              <style>
+                .tskit-table thead tr th {text-align: left;padding: 0.5em 0.5em;}
+                .tskit-table tbody tr td {padding: 0.5em 0.5em;}
+                .tskit-table tbody tr td:first-of-type {text-align: left;}
+                .tskit-details-label {vertical-align: top; padding-right:5px;}
+                .tskit-table-set {display: inline-flex;flex-wrap: wrap;margin: -12px 0 0 -12px;width: calc(100% + 12px);}
+                .tskit-table-set-table {margin: 12px 0 0 12px;}
+                details {display: inline-block;}
+                summary {cursor: pointer; outline: 0; display: list-item;}
+              </style>
+              <div class="tskit-table-set">
+                <div class="tskit-table-set-table">
+                  <table class="tskit-table">
+                    <thead>
+                      <tr>
+                        <th style="padding:0;line-height:21px;">
+                          <img style="height: 32px;display: inline-block;padding: 3px 5px 3px 0;" src="https://raw.githubusercontent.com/tskit-dev/administrative/main/tskit_logo.svg"/>
+                          <a target="_blank" href="https://tskit.dev/tskit/docs/latest/python-api.html#the-treesequence-class"> Tree Sequence </a>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Trees</td><td>1</td></tr>
+                      <tr><td>Sequence Length</td><td>1000.0</td></tr>
+                      <tr><td>Time Units</td><td>generations</td></tr>
+                      <tr><td>Sample Nodes</td><td>4</td></tr>
+                      <tr><td>Total Size</td><td>2.3 KiB</td></tr>
+                      <tr>
+                        <td>Metadata</td><td style="text-align: left;">No Metadata</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tskit-table-set-table">
+                  <table class="tskit-table">
+                    <thead>
+                      <tr>
+                        <th style="line-height:21px;">Table</th>
+                        <th>Rows</th>
+                        <th>Size</th>
+                        <th>Has Metadata</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                  <tr>
+                    <td>Edges</td>
+                      <td>6</td>
+                      <td>200 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Individuals</td>
+                      <td>2</td>
+                      <td>80 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Migrations</td>
+                      <td>0</td>
+                      <td>8 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Mutations</td>
+                      <td>0</td>
+                      <td>16 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Nodes</td>
+                      <td>7</td>
+                      <td>204 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Populations</td>
+                      <td>2</td>
+                      <td>288 Bytes</td>
+                      <td style="text-align: center;">
+                        ✅
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Provenances</td>
+                      <td>1</td>
+                      <td>1.5 KiB</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Sites</td>
+                      <td>0</td>
+                      <td>16 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </div></div>
+</div>
+</section>
+<section id="admixture-and-population-splits">
+<h3>Admixture and population splits<a class="headerlink" href="#admixture-and-population-splits" title="Permalink to this heading">#</a></h3>
+<section id="admixture">
+<h4>Admixture<a class="headerlink" href="#admixture" title="Permalink to this heading">#</a></h4>
+<p>It is also easy to specify admixture and divergence events with msprime.
+Suppose we wanted to specify our demography so that 50 generations ago,
+30% of population 0 was a migrant from population 1:</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>make a diagram showing this</p>
+</div>
+<p>We can do this by using the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_admixture" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_admixture()</span></code></a> method on our demography object.
+We must supply a list of ancestral populations participating in the admixture, and a list of the same size specifying the proportions of migrants from each of these populations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">Demography</span><span class="p">()</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;AncestralPop0&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in red.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;AncestralPop1&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in blue.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;AdmixedPop&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in green.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">set_migration_rate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">set_migration_rate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="c1"># Specify admixture event.</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_admixture</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">derived</span><span class="o">=</span><span class="s2">&quot;AdmixedPop&quot;</span><span class="p">,</span> <span class="n">ancestral</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AncestralPop0&quot;</span><span class="p">,</span> <span class="s2">&quot;AncestralPop1&quot;</span><span class="p">],</span> <span class="n">proportions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This simulates a sample where all nodes (ancestral haplotypes) are from the admixed population up until the time of the admixture event, and before this, all nodes are from one of the ancestral populations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span>
+  <span class="n">samples</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;AncestralPop0&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;AncestralPop1&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;AdmixedPop&quot;</span> <span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+  <span class="n">demography</span><span class="o">=</span><span class="n">dem</span><span class="p">,</span>
+  <span class="n">sequence_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+  <span class="n">random_seed</span><span class="o">=</span><span class="mi">63</span><span class="p">,</span>
+  <span class="n">recombination_rate</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Populations of nodes from time &lt; 50:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">population</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">time</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Populations of nodes from time &gt;= 50:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">population</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">time</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Populations of nodes from time &lt; 50:
+[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+Populations of nodes from time &gt;= 50:
+[1, 1, 1, 1, 0, 1, 1, 1, 0, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Admixtures and population splits are special types of demographic events that affect the <em>state</em> of some of the defined populations, in addition to moving lineages between populations.
+The output below shows that by adding the admixture event, we are triggering a change in the state of <code class="docutils literal notranslate"><span class="pre">AdmixedPop</span></code> at time = 50;
+the population is active at the start of the simulation, but becomes inactive for all steps of the simulation beyond time 50.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="margin-left:20px"><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Populations (3)</b><table border="1" class="tskit-table"><thead><tr><th>id</th><th>name</th><th>description</th><th>initial_size</th><th>growth_rate</th><th>default_sampling_time</th><th>extra_metadata</th></tr></thead><tbody><tr><td>0</td><td>AncestralPop0</td><td>Plotted in red.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr><tr><td>1</td><td>AncestralPop1</td><td>Plotted in blue.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr><tr><td>2</td><td>AdmixedPop</td><td>Plotted in green.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Migration matrix</b><table border="1" class="tskit-table"><thead><tr><th></th><th>AncestralPop0</th><th>AncestralPop1</th><th>AdmixedPop</th></tr></thead><tbody><tr><td>AncestralPop0</td><td>0</td><td title='Backwards in time migration rate from population AncestralPop0 to AncestralPop1
+= 0.05 per generation. Forwards in time, this is the expected number of migrants
+moving from AncestralPop1 to AncestralPop0 per generation, divided by the size
+of AncestralPop0.'>0.05</td><td title='Backwards in time migration rate from population AncestralPop0 to AdmixedPop =
+0.0 per generation. Forwards in time, this is the expected number of migrants
+moving from AdmixedPop to AncestralPop0 per generation, divided by the size of
+AncestralPop0.'>0</td></tr><tr><td>AncestralPop1</td><td title='Backwards in time migration rate from population AncestralPop1 to AncestralPop0
+= 0.02 per generation. Forwards in time, this is the expected number of migrants
+moving from AncestralPop0 to AncestralPop1 per generation, divided by the size
+of AncestralPop1.'>0.02</td><td>0</td><td title='Backwards in time migration rate from population AncestralPop1 to AdmixedPop =
+0.0 per generation. Forwards in time, this is the expected number of migrants
+moving from AdmixedPop to AncestralPop1 per generation, divided by the size of
+AncestralPop1.'>0</td></tr><tr><td>AdmixedPop</td><td title='Backwards in time migration rate from population AdmixedPop to AncestralPop0 =
+0.0 per generation. Forwards in time, this is the expected number of migrants
+moving from AncestralPop0 to AdmixedPop per generation, divided by the size of
+AdmixedPop.'>0</td><td title='Backwards in time migration rate from population AdmixedPop to AncestralPop1 =
+0.0 per generation. Forwards in time, this is the expected number of migrants
+moving from AncestralPop1 to AdmixedPop per generation, divided by the size of
+AdmixedPop.'>0</td><td>0</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Events (1)</b><table border="1" class="tskit-table"><thead><tr><th>time</th><th>type</th><th>parameters</th><th>effect</th></tr></thead><tbody><tr><td>50</td><td><a href='https://tskit.dev/msprime/docs/latest/api.html#msprime.Demography.add_admixture'>Admixture</a></td><td>derived=AdmixedPop ancestral=[AncestralPop0, AncestralPop1] proportions=[0.30, 0.70]</td><td>Moves all lineages from admixed population &#x27;AdmixedPop&#x27; to ancestral populations. Lineages move to &#x27;AncestralPop0&#x27; with proba 0.3; &#x27;AncestralPop1&#x27; with proba 0.7. Set &#x27;AdmixedPop&#x27; to inactive, and all migration rates to and from &#x27;AdmixedPop&#x27; to zero.</td></tr></tbody></table></div></div></div></div>
+</div>
+<p>This means that, for example, adding any demographic events that affect <code class="docutils literal notranslate"><span class="pre">AdmixedPop</span></code> beyond this time will produce an error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span><span class="o">.</span><span class="n">add_migration_rate_change</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s2">&quot;AncestralPop0&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;AdmixedPop&quot;</span><span class="p">);</span>
+<span class="c1"># ts = msprime.sim_ancestry(</span>
+<span class="c1">#   samples={&quot;AncestralPop0&quot; : 0, &quot;AncestralPop1&quot; : 0, &quot;AdmixedPop&quot; : 6},</span>
+<span class="c1">#   demography=dem,</span>
+<span class="c1">#   sequence_length=1000,</span>
+<span class="c1">#   random_seed=63,</span>
+<span class="c1">#   recombination_rate=1e-7)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To read more about the way that msprime treats the life cycle of populations, see <a class="reference external" href="https://tskit.dev/msprime/docs/latest/demography.html#sec-demography-populations-life-cycle">here</a>.</p>
+</section>
+<section id="population-splits">
+<h4>Population splits<a class="headerlink" href="#population-splits" title="Permalink to this heading">#</a></h4>
+<p>We can also simulate population divergences with msprime.
+Suppose we want to model a situation where all lineages from multiple populations are migrants from a single ancestral population at a single point in time.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>make a diagram showing this</p>
+</div>
+<p>We’ll specify this with the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_population_split" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_population_split()</span></code></a> method.
+We need to know the time of the event, and the IDs or labels of the derived and ancestral populations participating in the divergence event.
+Notice that in this case, we do not need to provide proportions as we did in the case of admixture.
+This makes sense when you think about the fact that msprime simulates backwards-in-time: all lineages in all of the derived populations originate from the ancestral population in a split event.
+Any differences in ‘quantities’ of migrants must be modelled by sizes of the derived populations at the time of the split.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">Demography</span><span class="p">()</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in red.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in blue.&quot;</span><span class="p">,</span><span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;AncestralPopulation&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in green.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Add the population split.</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population_split</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">derived</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">ancestral</span><span class="o">=</span><span class="s2">&quot;AncestralPopulation&quot;</span><span class="p">)</span>
+<span class="n">dem</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="margin-left:20px"><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Populations (3)</b><table border="1" class="tskit-table"><thead><tr><th>id</th><th>name</th><th>description</th><th>initial_size</th><th>growth_rate</th><th>default_sampling_time</th><th>extra_metadata</th></tr></thead><tbody><tr><td>0</td><td>A</td><td>Plotted in red.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr><tr><td>1</td><td>B</td><td>Plotted in blue.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr><tr><td>2</td><td>AncestralPopulation</td><td>Plotted in green.</td><td>500.0</td><td>0</td><td>1e+02</td><td>{}</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Migration matrix (all zero)</b><table border="1" class="tskit-table"><thead><tr></tr></thead><tbody></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Events (1)</b><table border="1" class="tskit-table"><thead><tr><th>time</th><th>type</th><th>parameters</th><th>effect</th></tr></thead><tbody><tr><td>100</td><td><a href='https://tskit.dev/msprime/docs/latest/api.html#msprime.Demography.add_population_split'>Population Split</a></td><td>derived=[A, B], ancestral=AncestralPopulation</td><td>Moves all lineages from derived populations &#x27;A&#x27; and &#x27;B&#x27; to the ancestral &#x27;AncestralPopulation&#x27; population. Also set the derived populations to inactive, and all migration rates to and from the derived populations to zero.</td></tr></tbody></table></div></div></div></div>
+</div>
+<p>Population splits will also modify the state of each of the derived populations,
+changing them from active to inactive at the time of the split.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span>
+  <span class="n">samples</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;A&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;AncestralPopulation&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+  <span class="n">demography</span><span class="o">=</span><span class="n">dem</span><span class="p">,</span>
+  <span class="n">sequence_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+  <span class="n">random_seed</span><span class="o">=</span><span class="mi">63</span><span class="p">,</span>
+  <span class="n">recombination_rate</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Populations of nodes from time &lt; 100:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">population</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">time</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Populations of nodes from time &gt;= 100:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">population</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">time</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Populations of nodes from time &lt; 100:
+[0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0]
+Populations of nodes from time &gt;= 100:
+[2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="mass-migrations">
+<h3>Mass migrations<a class="headerlink" href="#mass-migrations" title="Permalink to this heading">#</a></h3>
+<p>If you used any of versions of msprime prior to 1.0,
+you may be familiar with mass migration events.
+These are used to specify one-off events in which some fraction of a population moves into another population, and can be supplied to a <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.Demography</span></code></a> object using the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_mass_migration" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_mass_migration()</span></code></a> method.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Unlike <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_admixture" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_admixture()</span></code></a> and <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_population_split" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_population_split()</span></code></a> mentioned above, <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_mass_migration" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_mass_migration()</span></code></a> <strong>does not</strong> change any population states or migration rates. We <strong>strongly recommend</strong> that you use the more specialised methods to model admixture and divergence events – it is both simpler and safer!</p>
+</div>
+<p>You’ll need to provide the time of the mass migration in generations,
 the ID of the source and destination populations,
-and a migration proportion (which defaults to 1.0).
-For example, the following specifies that 50 generations ago,
+and a migration proportion.</p>
+<p><img alt="" src="_images/tute-mass-migration.png" /></p>
+<p>For example, the following specifies that 50 generations ago,
 30% of population 0 was a migrant from population 1.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">admixture_event</span>  <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">MassMigration</span><span class="p">(</span><span class="n">time</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">source</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dest</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">proportion</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">Demography</span><span class="p">()</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in red.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in blue.&quot;</span><span class="p">,</span><span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">set_migration_rate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">set_migration_rate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="c1"># Add the mass migration.</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_mass_migration</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">dem</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="margin-left:20px"><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Populations (2)</b><table border="1" class="tskit-table"><thead><tr><th>id</th><th>name</th><th>description</th><th>initial_size</th><th>growth_rate</th><th>default_sampling_time</th><th>extra_metadata</th></tr></thead><tbody><tr><td>0</td><td>A</td><td>Plotted in red.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr><tr><td>1</td><td>B</td><td>Plotted in blue.</td><td>500.0</td><td>0</td><td>0</td><td>{}</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Migration matrix</b><table border="1" class="tskit-table"><thead><tr><th></th><th>A</th><th>B</th></tr></thead><tbody><tr><td>A</td><td>0</td><td title='Backwards in time migration rate from population A to B = 0.05 per generation.
+Forwards in time, this is the expected number of migrants moving from B to A per
+generation, divided by the size of A.'>0.05</td></tr><tr><td>B</td><td title='Backwards in time migration rate from population B to A = 0.02 per generation.
+Forwards in time, this is the expected number of migrants moving from A to B per
+generation, divided by the size of B.'>0.02</td><td>0</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Events (1)</b><table border="1" class="tskit-table"><thead><tr><th>time</th><th>type</th><th>parameters</th><th>effect</th></tr></thead><tbody><tr><td>50</td><td><a href='https://tskit.dev/msprime/docs/latest/api.html#msprime.Demography.add_mass_migration'>Mass Migration</a></td><td>source=0, dest=1, proportion=0.3</td><td>Lineages currently in population 0 move to 1 with probability 0.3 (equivalent to individuals migrating from 1 to 0 forwards in time)</td></tr></tbody></table></div></div></div></div>
 </div>
 <p>Note that these are viewed as backwards-in-time events,
 so <code class="docutils literal notranslate"><span class="pre">source</span></code> is the population that receives migrants from <code class="docutils literal notranslate"><span class="pre">dest</span></code>.</p>
-<p>Any mass migrations can be added into the list of <code class="docutils literal notranslate"><span class="pre">demographic_events</span></code> supplied to <a class="reference external" href="https://tskit.dev/msprime/docs/latest/v0/api.html#msprime.simulate" title="(in Python v0.1.dev1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">msprime.simulate()</span></code></a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-        <span class="n">population_configurations</span> <span class="o">=</span> <span class="p">[</span><span class="n">pop0</span><span class="p">,</span> <span class="n">pop1</span><span class="p">],</span>
-        <span class="n">migration_matrix</span> <span class="o">=</span> <span class="n">M</span><span class="p">,</span>
-        <span class="n">demographic_events</span> <span class="o">=</span> <span class="p">[</span><span class="n">admixture_event</span><span class="p">],</span>
-        <span class="n">random_seed</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="n">recombination_rate</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span>
-        <span class="n">mutation_rate</span> <span class="o">=</span> <span class="mf">7e-4</span><span class="p">)</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span>
+  <span class="n">samples</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;A&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+  <span class="n">demography</span><span class="o">=</span><span class="n">dem</span><span class="p">,</span>
+  <span class="n">sequence_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+  <span class="n">random_seed</span><span class="o">=</span><span class="mi">63461</span><span class="p">,</span>
+  <span class="n">recombination_rate</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><a class="reference external" href="https://tskit.dev/msprime/docs/latest/api.html#msprime.MassMigration" title="(in Python v0.1.dev1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.MassMigration</span></code></a> objects can also be used to specify divergence events, but we must take some care.</p>
-<a class="reference internal image-reference" href="_images/tute-divergence-1.png"><img alt="2 populations with a divergence." src="_images/tute-divergence-1.png" style="width: 500px;" /></a>
-<p>The following specifies that 200 generations ago, 100% of population 1 was a migrant from population 0.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">divergence_event</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">MassMigration</span><span class="p">(</span>
-        <span class="n">time</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">source</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dest</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proportion</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>We’ll add this to our list of demographic_events.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-        <span class="n">population_configurations</span> <span class="o">=</span> <span class="p">[</span><span class="n">pop0</span><span class="p">,</span> <span class="n">pop1</span><span class="p">],</span>
-        <span class="n">migration_matrix</span> <span class="o">=</span> <span class="n">M</span><span class="p">,</span>
-        <span class="n">demographic_events</span> <span class="o">=</span> <span class="p">[</span><span class="n">admixture_event</span><span class="p">,</span> <span class="n">divergence_event</span><span class="p">],</span>
-        <span class="n">random_seed</span> <span class="o">=</span> <span class="mi">28</span><span class="p">,</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="n">recombination_rate</span> <span class="o">=</span> <span class="mf">1e-7</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>However, when we look at the population IDs corresponding to the the nodes from more than 200 generations ago, there are still some nodes from both populations. This is not what what we’d expect to see if we’d correctly simulated a divergence event!</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">population</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">time</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">]</span>
-<span class="c1"># [1, 0, 1, 1]</span>
-</pre></div>
-</div>
-<p>The reason is that at present, we are simulating a situation in which population 1 exists prior to generation 200, but is completely replaced by migrants from population 0 at time = 200. And because we’ve specified a migration matrix, there will still be some migrants from population 0 to population 1 in prior generations.</p>
-<a class="reference internal image-reference" href="_images/tute-divergence-2.png"><img alt="2 populations with a divergence and migration beforehand." src="_images/tute-divergence-2.png" style="width: 500px;" /></a>
-<p>We can fix this by also specifying that prior to time = 200, population 1 had no migration from population 0.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rate_change</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">MigrationRateChange</span><span class="p">(</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">matrix_index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-
-<span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-        <span class="n">population_configurations</span> <span class="o">=</span> <span class="p">[</span><span class="n">pop0</span><span class="p">,</span> <span class="n">pop1</span><span class="p">],</span>
-        <span class="n">migration_matrix</span> <span class="o">=</span> <span class="n">M</span><span class="p">,</span>
-        <span class="n">demographic_events</span> <span class="o">=</span> <span class="p">[</span><span class="n">admixture_event</span><span class="p">,</span> <span class="n">divergence_event</span><span class="p">,</span> <span class="n">rate_change</span><span class="p">],</span>
-        <span class="n">random_seed</span> <span class="o">=</span> <span class="mi">28</span><span class="p">,</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="n">recombination_rate</span> <span class="o">=</span> <span class="mf">1e-7</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Now all ancestral nodes prior to generation 200 are exclusively from population 0. Hooray!</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">population</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">time</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">]</span>
-<span class="c1"># [0, 0, 0, 0, 0]</span>
-
-<span class="c1"># This only works in a Jupyter notebook.</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
-
-<span class="n">colour_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;blue&quot;</span><span class="p">}</span>
-<span class="n">node_colours</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">colour_map</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">population</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
-<span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">trees</span><span class="p">():</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">SVG</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">node_colours</span><span class="o">=</span><span class="n">node_colours</span><span class="p">)))</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/tute-divergence-svg-out.png"><img alt="2 populations with a divergence, SVG output." src="_images/tute-divergence-svg-out.png" style="width: 200px;" /></a>
 </div>
 </div>
-<div class="section" id="changing-population-sizes-or-growth-rates">
-<h2>Changing population sizes or growth rates<a class="headerlink" href="#changing-population-sizes-or-growth-rates" title="Permalink to this headline">¶</a></h2>
-<a class="reference internal image-reference" href="_images/tute-parameter-changes.png"><img alt="2 populations with a complex demographic history." src="_images/tute-parameter-changes.png" style="width: 500px;" /></a>
+</section>
+</section>
+<section id="changing-population-sizes-or-growth-rates">
+<h2>Changing population sizes or growth rates<a class="headerlink" href="#changing-population-sizes-or-growth-rates" title="Permalink to this heading">#</a></h2>
+<p><img alt="" src="_images/tute-parameter-changes.png" /></p>
 <p>We may wish to specify changes to rates of population growth,
 or sudden changes in population size at a particular time.
-Both of these can be specified with <a class="reference external" href="https://tskit.dev/msprime/docs/latest/api.html#msprime.PopulationParametersChange" title="(in Python v0.1.dev1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.PopulationParametersChange</span></code></a>
-objects in the supplied list of <code class="docutils literal notranslate"><span class="pre">demographic_events</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bottleneck in Population 0 between 50 - 150 generations ago.</span>
-<span class="n">pop0_bottleneck_ends</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationParametersChange</span><span class="p">(</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">initial_size</span> <span class="o">=</span> <span class="mi">250</span><span class="p">,</span> <span class="n">population</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">pop0_bottleneck_starts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationParametersChange</span><span class="p">(</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span> <span class="n">initial_size</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">population</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+Both of these can be specified by applying the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_population_parameters_change" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_population_parameters_change()</span></code></a>
+method to our <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.Demography</span></code></a> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">Demography</span><span class="p">()</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in red.&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Plotted in blue.&quot;</span><span class="p">,</span><span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">set_migration_rate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">set_migration_rate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="c1"># Bottleneck in Population 0 between 50 - 150 generations ago.</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population_parameters_change</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population_parameters_change</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Exponential growth in Population 1 starting 50 generations ago.</span>
-<span class="n">pop1_growth</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationParametersChange</span><span class="p">(</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">growth_rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">population</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population_parameters_change</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">growth_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-        <span class="n">population_configurations</span> <span class="o">=</span> <span class="p">[</span><span class="n">pop0</span><span class="p">,</span> <span class="n">pop1</span><span class="p">],</span>
-        <span class="n">migration_matrix</span> <span class="o">=</span> <span class="n">M</span><span class="p">,</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="n">demographic_events</span> <span class="o">=</span> <span class="p">[</span><span class="n">pop0_bottleneck_ends</span><span class="p">,</span> <span class="n">pop1_growth</span><span class="p">,</span> <span class="n">pop0_bottleneck_starts</span><span class="p">],</span>
-        <span class="n">random_seed</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
-        <span class="n">recombination_rate</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">)</span>
+<span class="c1"># Sort events, since we&#39;ve added some out of time order.</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">sort_events</span><span class="p">()</span>
+
+<span class="c1"># Simulate.</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;A&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="n">demography</span><span class="o">=</span><span class="n">dem</span><span class="p">,</span> <span class="n">sequence_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">63461</span><span class="p">,</span> <span class="n">recombination_rate</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Since <code class="docutils literal notranslate"><span class="pre">msprime</span></code> simulates backwards-in-time, parameter changes must be
+</div>
+</div>
+<p>Note that because <code class="docutils literal notranslate"><span class="pre">msprime</span></code> simulates backwards-in-time, parameter changes must be
 interpreted backwards-in-time as well.
 For instance, the <code class="docutils literal notranslate"><span class="pre">pop1_growth</span></code> event in the example above
 specifies continual growth in the early history of population 1 up until 100
 generations in the past.</p>
-</div>
-</div>
-<div class="section" id="debugging-demography">
-<h2>Debugging demography<a class="headerlink" href="#debugging-demography" title="Permalink to this headline">¶</a></h2>
-<p>As we’ve seen, it’s pretty easy to make mistakes when specifying demography!</p>
-<p>To help you spot these, msprime provides a debugger that prints out your
-population history in a more human-readable form.
-It’s good to get into the habit of running the <a class="reference external" href="https://tskit.dev/msprime/docs/latest/api.html#msprime.DemographyDebugger" title="(in Python v0.1.dev1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.DemographyDebugger</span></code></a>
-before running your simulations.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_history</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">DemographyDebugger</span><span class="p">(</span>
-<span class="n">population_configurations</span><span class="o">=</span><span class="p">[</span><span class="n">pop0</span><span class="p">,</span> <span class="n">pop1</span><span class="p">],</span> <span class="n">migration_matrix</span> <span class="o">=</span> <span class="n">M</span><span class="p">,</span>
-<span class="n">demographic_events</span><span class="o">=</span><span class="p">[</span><span class="n">admixture_event</span><span class="p">,</span> <span class="n">divergence_event</span><span class="p">,</span> <span class="n">rate_change</span><span class="p">])</span>
+</section>
+<section id="census-events">
+<h2>Census events<a class="headerlink" href="#census-events" title="Permalink to this heading">#</a></h2>
+<p>There may be situations where you are particularly interested in the chromosomes that are ancestral to your simulated sample at a particular time.
+For instance, you might want to know how many different lineages are ancestral to your sample at some past time.
+Perhaps you are interested to know which populations these ancestors belonged to (ie. <em>local ancestry</em>).
+In both cases, msprime can help you by allowing you to add a <em>census</em> to your simulation at a particular time.
+This is done with the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.Demography.add_census" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msprime.Demography.add_census()</span></code></a>
+method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">Demography</span><span class="p">()</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
-<span class="n">my_history</span><span class="o">.</span><span class="n">print_history</span><span class="p">()</span>
+<span class="c1"># Add a census at time 350.</span>
+<span class="n">dem</span><span class="o">.</span><span class="n">add_census</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
 
-<span class="c1"># Model =  hudson(reference_size=1)</span>
-<span class="c1"># ============================</span>
-<span class="c1"># Epoch: 0 -- 50.0 generations</span>
-<span class="c1"># ============================</span>
-<span class="c1">#      start     end      growth_rate |     0        1</span>
-<span class="c1">#    -------- --------       -------- | -------- --------</span>
-<span class="c1"># 0 |   500      500                0 |     0      0.05</span>
-<span class="c1"># 1 |   500      500                0 |   0.02       0</span>
-<span class="c1">#</span>
-<span class="c1"># Events @ generation 50.0</span>
-<span class="c1">#    - Mass migration: Lineages moved with probability 0.3 backwards in time with source 0 &amp; dest 1</span>
-<span class="c1">#                      (equivalent to migration from 1 to 0 forwards in time)</span>
-<span class="c1"># ================================</span>
-<span class="c1"># Epoch: 50.0 -- 200.0 generations</span>
-<span class="c1"># ================================</span>
-<span class="c1">#      start     end      growth_rate |     0        1</span>
-<span class="c1">#    -------- --------       -------- | -------- --------</span>
-<span class="c1"># 0 |   500      500                0 |     0      0.05</span>
-<span class="c1"># 1 |   500      500                0 |   0.02       0</span>
-<span class="c1">#</span>
-<span class="c1"># Events @ generation 200.0</span>
-<span class="c1">#    - Mass migration: Lineages moved with probability 1 backwards in time with source 1 &amp; dest 0</span>
-<span class="c1">#                      (equivalent to migration from 0 to 1 forwards in time)</span>
-<span class="c1">#    - Migration rate change to 0 everywhere</span>
-<span class="c1"># ===============================</span>
-<span class="c1"># Epoch: 200.0 -- inf generations</span>
-<span class="c1"># ===============================</span>
-<span class="c1">#      start     end      growth_rate |     0        1</span>
-<span class="c1">#    -------- --------       -------- | -------- --------</span>
-<span class="c1"># 0 |   500      500                0 |     0        0</span>
-<span class="c1"># 1 |   500      500                0 |     0        0</span>
+<span class="c1"># Simulate.</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span>
+  <span class="n">samples</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;A&quot;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+  <span class="n">demography</span><span class="o">=</span><span class="n">dem</span><span class="p">,</span>
+  <span class="n">sequence_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+  <span class="n">random_seed</span><span class="o">=</span><span class="mi">112</span><span class="p">,</span>
+  <span class="n">recombination_rate</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>The effect of the census is to add nodes onto each branch of the tree sequence at the census time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IDs of census nodes:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">flags</span><span class="o">==</span><span class="n">msprime</span><span class="o">.</span><span class="n">NODE_IS_CEN_EVENT</span><span class="p">])</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">draw_svg</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IDs of census nodes:
+[5, 6, 7]
+</pre></div>
+</div>
+<img alt="_images/0d1eedf3c45268d5f3c7101f37cae1f78cb2221ee9aa44db8bf22e2e06d25d8f.svg" src="_images/0d1eedf3c45268d5f3c7101f37cae1f78cb2221ee9aa44db8bf22e2e06d25d8f.svg" /></div>
+</div>
+<p>By extracting these node IDs, you can perform further analyses using the ancestral haplotypes.
+See <a class="reference external" href="https://tskit.dev/msprime/docs/latest/ancestry.html#census-events">here</a> for a slightly more involved example of this.</p>
+</section>
+<section id="debugging-demography">
+<h2>Debugging demography<a class="headerlink" href="#debugging-demography" title="Permalink to this heading">#</a></h2>
+<p>As we’ve seen, it’s pretty easy to make mistakes when specifying demography!</p>
+<p>To help you spot these, msprime provides a debugger that prints out your
+population history in a more human-readable form.
+It’s good to get into the habit of running the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.DemographyDebugger" title="(in Python)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msprime.DemographyDebugger</span></code></a>
+before running your simulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_history</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">DemographyDebugger</span><span class="p">(</span><span class="n">demography</span><span class="o">=</span><span class="n">dem</span><span class="p">)</span>
+<span class="n">my_history</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><details open="true"><summary>Epoch[0]: [0, 350) generations</summary><div style="margin-left:20px"><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Populations (total=1 active=1)</b><table border="1" class="tskit-table"><thead><tr><th></th><th>start</th><th>end</th><th>growth_rate</th></tr></thead><tbody><tr><td>A</td><td> 500.0</td><td> 500.0</td><td> 0</td></tr></tbody></table></div><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Events @ generation 350</b><table border="1" class="tskit-table"><thead><tr><th>time</th><th>type</th><th>parameters</th><th>effect</th></tr></thead><tbody><tr><td>350</td><td><a href='https://tskit.dev/msprime/docs/latest/api.html#msprime.Demography.add_census_event'>Census</a></td><td></td><td>Insert census nodes to record the location of all lineages</td></tr></tbody></table></div></div></details><details open="true"><summary>Epoch[1]: [350, inf) generations</summary><div style="margin-left:20px"><div><style scoped="">
+            .tskit-table thead tr th:only-of-type {vertical-align: middle;}
+            .tskit-table thead tr th {text-align: center;vertical-align: top;}
+            .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+            .tskit-table tbody th {padding: 0.5em 0.5em;}
+        </style><b>Populations (total=1 active=1)</b><table border="1" class="tskit-table"><thead><tr><th></th><th>start</th><th>end</th><th>growth_rate</th></tr></thead><tbody><tr><td>A</td><td> 500.0</td><td> 500.0</td><td> 0</td></tr></tbody></table></div></div></details></div></div></div>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -622,7 +1264,7 @@ before running your simulations.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -630,38 +1272,117 @@ before running your simulations.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="no_mutations.html" title="previous page">Do you really need mutations?</a>
-    <a class='right-next' id="next-link" href="bottlenecks.html" title="next page">Bottlenecks</a>
 
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Tskit Developers<br/>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="advanced_msprime.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Advanced <strong class="program">msprime</strong> topics</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="bottlenecks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Instantaneous Bottlenecks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#population-structure">Population structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migrations">Migrations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-migration">Constant migration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-migration-rates">Changing migration rates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#admixture-and-population-splits">Admixture and population splits</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#admixture">Admixture</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#population-splits">Population splits</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-migrations">Mass migrations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-population-sizes-or-growth-rates">Changing population sizes or growth rates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#census-events">Census events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-demography">Debugging demography</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tskit Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

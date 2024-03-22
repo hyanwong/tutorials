@@ -1,0 +1,1122 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Terminology &amp; concepts &#8212; Tree Sequence Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'terminology_and_concepts';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started with tskit" href="getting_started.html" />
+    <link rel="prev" title="What is a tree sequence?" href="what_is.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/tskit_logo.svg" class="logo__image only-light" alt="Tree Sequence Tutorials - Home"/>
+    <script>document.write(`<img src="_static/tskit_logo.svg" class="logo__image only-dark" alt="Tree Sequence Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="what_is.html">What is a tree sequence?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tree sequence basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Terminology &amp; concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started with <strong class="program">tskit</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analysing_tree_sequences.html"><em>Analysing tree sequences</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysing_trees.html">Analysing trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incremental_algorithms.html"><em>Incremental algorithms</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="counting_topologies.html">Counting topologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallelization.html"><em>Parallelization</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further tskit tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tables_and_editing.html">Tables and editing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplification.html"><em>Simplification</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="viz.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">Working with Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="args.html">ARGs as tree sequences</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="simulation_overview.html">Tree sequences and simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_mutations.html">Do you really need mutations?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_msprime.html">Advanced <strong class="program">msprime</strong> topics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="demography.html">Demography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bottlenecks.html">Instantaneous Bottlenecks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introgression.html">Introgression</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="completing_forward_sims.html">Completing forwards simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forward_sims.html">Building a forward simulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_forward_sims.html"><em>Advanced forward simulations</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other languages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tskitr.html">Tskit and R</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorial_development.html"><em>Developing new tutorials</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tskit for ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="popgen.html"><code class="docutils literal notranslate"><span class="pre">Tskit</span></code> for population genetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phylogen.html"><code class="docutils literal notranslate"><span class="pre">Tskit</span></code> for phylogenetics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/terminology_and_concepts.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Terminology & concepts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genomes">Genomes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nodes">Nodes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-nodes">Sample nodes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edges">Edges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-and-tree-sequences">Trees and tree sequences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#individuals-and-populations">Individuals and populations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutations-and-sites">Mutations and sites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#provenance">Provenance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts">Concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-changes-ancestral-recombinations-and-sprs">Tree changes, ancestral recombinations, and SPRs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-sequences-and-args">Tree sequences and ARGs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tables">Tables</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="terminology-concepts">
+<span id="sec-terminology-and-concepts"></span><h1>Terminology &amp; concepts<a class="headerlink" href="#terminology-concepts" title="Permalink to this heading">#</a></h1>
+<p>If you have read “<a class="reference internal" href="what_is.html#sec-what-is"><span class="std std-ref">What is a tree sequence?</span></a>” we hope to have piqued your interest in tree
+sequences. This tutorial serves as an introduction to the terminology and some of the
+concepts behind <strong class="program">tskit</strong>, the tree sequence toolkit.</p>
+<section id="terminology">
+<span id="sec-terminology"></span><h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a class="reference internal" href="intro.html#sec-intro-downloading-datafiles"><span class="std std-ref">Downloading tutorial datafiles</span></a> to run this tutorial on your own computer</p>
+</div>
+</aside>
+<p>A tree sequence is a data structure which describes a set of correlated
+evolutionary trees, together with some associated data that specifies, for example,
+the location of mutations in the tree sequence. More technically, a tree sequence
+stores a biological structure known as an “Ancestral Recombination Graph”, or ARG.</p>
+<p>Below are the most important <a class="reference external" href="https://tskit.dev/tskit/docs/stable/glossary.html#sec-data-model-definitions" title="(in Python)"><span class="xref std std-ref">terms and concepts</span></a>
+that you’ll encounter in these tutorials,  but first we’ll <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.load" title="(in Python)"><code class="xref py py-func docutils literal notranslate"><span class="pre">load()</span></code></a> a tree
+sequence from a <code class="docutils literal notranslate"><span class="pre">.trees</span></code> file using the
+<a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#sec-python-api" title="(in Python)"><span>Python API</span></a> (which will be used in the rest of this tutorial):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tskit</span>
+<span class="c1"># We will often store the python tree sequence object in a variable named &quot;ts&quot;</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">tskit</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data/basics.trees&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="genomes">
+<h3>Genomes<a class="headerlink" href="#genomes" title="Permalink to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://tskit.dev/msprime/docs/stable/ancestry.html#sec-ancestry-multiple-chromosomes" title="(in Python)"><span class="xref std std-ref">Workarounds</span></a> exist
+to represent a multi-chromosome genome as a tree
+sequence, but are not covered here</p>
+</div>
+</aside>
+<p>A tree sequence covers a contiguous section of a single chromosome.
+For clarity of explanation, we use the word “genome” to refer to the section spanned by
+the whole tree sequence (if you find it easier, imagine our examples describe an
+organism with a single, short chromosome).</p>
+<p>In the tree sequence we have just loaded,
+the genome is of length 1000, conventionally interpreted as the number of base
+pairs. This is accessible using the <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.TreeSequence.sequence_length" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sequence_length</span></code></a> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">sequence_length</span>  <span class="c1"># a floating point number: positions need not be integers</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>It can be helpful to visualize the tree sequence as a set of local trees along the genome:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">draw_svg</span><span class="p">(</span>
+    <span class="n">y_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">y_gridlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">time_scale</span><span class="o">=</span><span class="s2">&quot;log_time&quot;</span><span class="p">,</span>
+    <span class="n">y_ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/9d4b35464691e8f65bfc8002062fdfcf36e818399f936a7374d0037df3540b93.svg" src="_images/9d4b35464691e8f65bfc8002062fdfcf36e818399f936a7374d0037df3540b93.svg" /></div>
+</div>
+<p>Each tree records the lines of descent along which a piece of DNA has been
+inherited (ignore for the moment the red symbols, which represent a mutation).
+For example, the first tree tells us that DNA from ancestral genome 7 duplicated
+to produce two lineages, which ended up in genomes 1 and 4, both of which exist in the
+current population. In fact, since this pattern is seen in all trees, these particular
+lines of inheritance were taken by all the DNA in this 1000 base pair genome.</p>
+</section>
+<section id="nodes">
+<span id="sec-terminology-nodes"></span><h3>Nodes<a class="headerlink" href="#nodes" title="Permalink to this heading">#</a></h3>
+<p>Trees in a tree sequence are represented in a slightly unusual way.
+In the majority of libraries dealing with trees, each node is represented
+as an object in memory and the relationship between nodes as pointers between these
+objects. In tree sequences, however, all nodes, both internal and terminal,
+are represented by an <strong>integer ID</strong>, unique over the entire tree sequence, and which exists
+at a specific point in time. A branch point in any of the trees is associated with
+an <em>internal node</em>, representing an ancestor in which a single DNA
+sequence was duplicated (in forwards-time terminology) or in which multiple sequences
+coalesced (in backwards-time terminology).</p>
+<section id="sample-nodes">
+<span id="sec-terminology-nodes-samples"></span><h4>Sample nodes<a class="headerlink" href="#sample-nodes" title="Permalink to this heading">#</a></h4>
+<p>The tip (leaf) nodes of the tree are usually marked as <em>sample nodes</em>, plotted as square
+symbols in the visualization. Sample nodes are the focal nodes in a tree sequence; they
+normally represent genomes from which we have obtained data (i.e. which we have “sampled”),
+and which therefore have a fully known genetic sequence. There are 6 sample nodes,
+labelled <span class="math notranslate nohighlight">\(0..5\)</span>, and also 6 non-sample nodes, labelled <span class="math notranslate nohighlight">\(6..11\)</span>, in the tree sequence above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are&quot;</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">,</span> <span class="s2">&quot;nodes, of which&quot;</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">num_samples</span><span class="p">,</span> <span class="s2">&quot;are sample nodes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 12 nodes, of which 6 are sample nodes
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="edges">
+<span id="sec-terminology-edges"></span><h3>Edges<a class="headerlink" href="#edges" title="Permalink to this heading">#</a></h3>
+<p>In an evolutionary tree, the connections between nodes are conventionally referred to as
+“branches”. In a tree sequence, we instead refer to directional connections between nodes
+as <em>edges</em>, emphasizing that they usually persist across multiple trees. Thus each of the
+three trees in the example above has a branch from node 7 to node 1, but those three
+branches represent just a single edge.</p>
+<p>Each edge is associated with a parent node ID and a child node ID. The time of the parent
+node must be
+strictly greater than the time of the child node, and the difference in these times is
+sometimes referred to as the “length” of the edge. Since trees in a tree sequence are
+usually taken to represent marginal trees along a genome, as well as the time dimension
+each edge also has a genomic <em>span</em>, defined by a <em>left</em> and a <em>right</em> position
+along the genome. There are 15 edges in the tree sequence above. Here’s an example of
+one of them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are&quot;</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">num_edges</span><span class="p">,</span> <span class="s2">&quot;edges, one of which is:</span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 15 edges, one of which is:
+  Edge(left=307.0, right=567.0, parent=10, child=9, metadata=b&#39;&#39;, id=10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>(the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> value is discussed below)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <em>number of edges</em> largely determines the entire size of a tree sequence file. Edges
+essentially encode ancestral information, and the number in a tree sequence can
+be used as a rough measure of many things such as the compressibility of a simulation,
+the speed with which analyses are likely to run, or even the effectiveness of ancestral
+inference. To give some sense of scale, a basic inferred tree sequence of human
+chromosome 20 in the UK Biobank dataset of a million genomes consists of 62 million edges
+which define 16 thousand trees; the uncompressed tree sequence takes 2.1 gigabytes of
+disk space, and it takes of the order of a few seconds to iterate over all the trees.</p>
+</div>
+</section>
+<section id="trees-and-tree-sequences">
+<span id="sec-terminology-trees-and-tree-sequences"></span><h3>Trees and tree sequences<a class="headerlink" href="#trees-and-tree-sequences" title="Permalink to this heading">#</a></h3>
+<p>The combination of nodes and edges results in a tree sequence. This can be visualized,
+as in the drawing above, as a set of correlated trees. The
+sample nodes, <span class="math notranslate nohighlight">\(0..5\)</span> in the drawing, are present in all the trees (since we have their
+full genomes), but the other nodes, such as node <span class="math notranslate nohighlight">\(9\)</span>, need not be: indeed in larger
+tree sequences they are rarely so.</p>
+<p>In tree sequence terminology, we don’t explictly keep track of where nodes
+start and end. Only edges (not nodes) possess a genomic span. So for example, this tree
+sequence is defined using edges like <span class="math notranslate nohighlight">\((7\rightarrow1)\)</span> which span the entire genome,
+edges like <span class="math notranslate nohighlight">\((11\rightarrow10)\)</span> which only span the leftmost section of the genome, and
+edges like <span class="math notranslate nohighlight">\((11\rightarrow8)\)</span> which span the rightmost part of the genome. Every time an
+edge changes it creates a new tree; the location of the change is known as a <em>breakpoint</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">breakpoints</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">(</span><span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are&quot;</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">num_trees</span><span class="p">,</span> <span class="s2">&quot;trees, associated with breakpoints&quot;</span><span class="p">,</span> <span class="n">breakpoints</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 3 trees, associated with breakpoints [   0.  307.  567. 1000.]
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>More details about these and related methods are given in the <a class="reference internal" href="analysing_trees.html#sec-analysing-trees"><span class="std std-ref">Analysing trees</span></a>
+and <a class="reference internal" href="getting_started.html#sec-tskit-getting-started"><span class="std std-ref">Getting started</span></a> tutorials.</p>
+</aside>
+<p>Note that in keeping with the reliance on node numbers (rather than objects), information
+about the relationships between nodes in a tree is obtained using their <strong>integer IDs</strong>.
+In the Python API, for instance, the <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.TreeSequence.first" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TreeSequence.first()</span></code></a>
+method will return the first tree, which then provides basic methods to obtain
+information about (say) node <span class="math notranslate nohighlight">\(7\)</span>, including the IDs of its parent and child nodes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_tree</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">parent_of_7</span> <span class="o">=</span> <span class="n">first_tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">children_of_7</span> <span class="o">=</span> <span class="n">first_tree</span><span class="o">.</span><span class="n">children</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node 7&#39;s parent is&quot;</span><span class="p">,</span> <span class="n">parent_of_7</span><span class="p">,</span> <span class="s2">&quot;and childen are&quot;</span><span class="p">,</span> <span class="n">children_of_7</span><span class="p">,</span> <span class="s2">&quot;in the first tree&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 7&#39;s parent is 11 and childen are (1, 4) in the first tree
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="individuals-and-populations">
+<span id="sec-terminology-individuals-and-populations"></span><h3>Individuals and populations<a class="headerlink" href="#individuals-and-populations" title="Permalink to this heading">#</a></h3>
+<p>Sometimes we know that one or more nodes belong to a particular
+<em><a class="reference external" href="https://tskit.dev/tskit/docs/stable/glossary.html#sec-nodes-or-individuals" title="(in Python)"><span class="xref std std-ref">individual</span></a></em>. For example,
+most organisms are diploid, so if we sequence the DNA from an individual we are likely to
+obtain two copies of each autosomal chromosome. The tree with six sample nodes above
+could therefore represent the result of sampling three diploid individuals from a larger
+population. The tree sequence can keep track of the individuals in which nodes reside,
+and store specific information about them (such as the individuals’ spatial location)
+as well as arbitrary <a class="reference external" href="https://tskit.dev/tskit/docs/stable/metadata.html#sec-metadata" title="(in Python)"><span class="xref std std-ref">metadata</span></a> (such as a name). In this particular
+tree sequence the sample nodes are indeed associated with three named diploid
+individuals: <code class="docutils literal notranslate"><span class="pre">Ada</span></code>, <code class="docutils literal notranslate"><span class="pre">Bob</span></code> and <code class="docutils literal notranslate"><span class="pre">Cat</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">ts</span><span class="o">.</span><span class="n">num_individuals</span><span class="si">}</span><span class="s2"> individuals defined in the tree sequence:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">individual</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">individuals</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Individual </span><span class="si">{</span><span class="n">individual</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: metadata=</span><span class="si">{</span><span class="n">individual</span><span class="o">.</span><span class="n">metadata</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 3 individuals defined in the tree sequence:
+* Individual 0: metadata={&#39;name&#39;: &#39;Ada&#39;}
+* Individual 1: metadata={&#39;name&#39;: &#39;Bob&#39;}
+* Individual 2: metadata={&#39;name&#39;: &#39;Cat&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Adding these individual names to the sample node labels show that indeed, each of the
+three individuals has 2 sample nodes (note that these 2 nodes do not always cluster
+together in the trees, as the original simulation was of a randomly mating population)</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">samples</span><span class="p">():</span>
+    <span class="n">node_labels</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">ts</span><span class="o">.</span><span class="n">individual</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">individual</span><span class="p">)</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="n">styles</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;.node &gt; .lab {font-size: 70%}&quot;</span>
+    <span class="s2">&quot;.leaf &gt; .lab {text-anchor: start; transform: rotate(90deg) translate(6px)}&quot;</span>
+<span class="p">)</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">draw_svg</span><span class="p">(</span>
+    <span class="n">node_labels</span><span class="o">=</span><span class="n">node_labels</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="n">styles</span><span class="p">,</span>
+    <span class="n">y_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">y_gridlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">time_scale</span><span class="o">=</span><span class="s2">&quot;log_time&quot;</span><span class="p">,</span>
+    <span class="n">y_ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/a2838dcfd9daca0c32c1ef9bba7ec90edeca5ef971edc19d7d360798e13ff209.svg" src="_images/a2838dcfd9daca0c32c1ef9bba7ec90edeca5ef971edc19d7d360798e13ff209.svg" /></div>
+</div>
+<p>In the same way that nodes can be associated with a specific individual, nodes can also
+be associated with a larger <em>population</em>. In this example, there is only one population
+(to which all the nodes belong):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ts</span><span class="o">.</span><span class="n">num_populations</span><span class="si">}</span><span class="s2"> population(s) defined:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">population</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">populations</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">population</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 population(s) defined:
+* Population(id=0, metadata={&#39;description&#39;: &#39;British from England and Scotland&#39;, &#39;name&#39;: &#39;GBR&#39;})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mutations-and-sites">
+<span id="sec-terminology-mutations-and-sites"></span><h3>Mutations and sites<a class="headerlink" href="#mutations-and-sites" title="Permalink to this heading">#</a></h3>
+<p>In <strong class="program">tskit</strong>, <em>mutations</em> occur at specific, defined <em>sites</em>. A mutation is
+positioned above a particular node (specified by the node ID), occurs at a particular
+site (specified by a site ID), and involves a change of allelic state to a defined
+<a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.Mutation.derived_state" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">derived_state</span></code></a>. A mutation therefore can be specified something like
+this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ts</span><span class="o">.</span><span class="n">num_mutations</span><span class="si">}</span><span class="s2"> mutation(s) in the tree sequence:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">mutation</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">mutations</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">mutation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 mutation(s) in the tree sequence:
+* Mutation(id=0, site=0, node=8, derived_state=&#39;G&#39;, parent=-1, metadata=b&#39;&#39;, time=nan, edge=12)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The mutation can have a <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.Mutation.time" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">time</span></code></a> or if, as in this case, the times of
+mutations in the tree sequence are unknown, all mutations can have the special NaN value
+<a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.UNKNOWN_TIME" title="(in Python)"><code class="xref py py-data docutils literal notranslate"><span class="pre">tskit.UNKNOWN_TIME</span></code></a>. Notice that the genomic position of the mutation is not
+included. Instead, that is a property of the <em>site</em> to which the mutation refers, in
+this case, site ID 0 (which happens to be at position 751):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">site</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># For convenience, the Python API also returns the mutations at the site</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Site(id=0, position=751.0, ancestral_state=&#39;T&#39;, mutations=[Mutation(id=0, site=0, node=8, derived_state=&#39;G&#39;, parent=-1, metadata=b&#39;&#39;, time=nan, edge=12)], metadata=b&#39;&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the plot above, since the the only mutation is above node 8 in the last tree, and has
+a <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.Mutation.derived_state" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">derived_state</span></code></a> of “G”, we know that the samples descending from node
+8 in the last tree (sample genomes 2, 3, and 5) have a “G” at <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.Site.position" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">position</span></code></a> 751,
+while the others have the <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.Site.ancestral_state" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ancestral_state</span></code></a> of “T”. This means that Ada is
+homozygous for “T”, Bob is homozygous for “G”, and Cat is heterozygous “T/G”.
+In other words the ancestral state and the details of any mutations at that site,
+when coupled with the tree topology at the site <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.Site.position" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">position</span></code></a>, is sufficient to
+define the allelic state possessed by each sample.</p>
+<p>Note that even though the genome is 1000 base pairs long, the tree sequence only contains
+a single site, because we usually only bother defining <em>variable</em> sites in a tree
+sequence (e.g. positions seen in studies to have samples possessing different alleles at
+that genomic location). It is perfectly possible to have a site with no mutations
+(or silent mutations) — i.e. a “monomorphic” site — but such sites are not normally
+used in further analysis.</p>
+</section>
+<section id="provenance">
+<span id="sec-terminology-provenance"></span><h3>Provenance<a class="headerlink" href="#provenance" title="Permalink to this heading">#</a></h3>
+<p>The history of the tree sequence is recorded in a set of provenance entries. That
+includes what produced it, and what operations have been done to it and when. For
+instance, if it was produced by <a class="reference internal" href="simplification.html#sec-simplification"><span class="std std-ref">simplifying</span></a> a tree
+sequence produced by the msprime simulator, the first provenance entry would record the
+call to msprime that produced it, and the second the call to
+<a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.TreeSequence.simplify" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simplify()</span></code></a> that was done on the result. Ideally, the list of
+provenance entries are sufficient to exactly recreate the tree sequence, but this
+is not always possible.</p>
+</section>
+</section>
+<section id="concepts">
+<span id="sec-concepts"></span><h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading">#</a></h2>
+<p>There are some basic concepts which can be helpful with thinking about tree sequences.
+For reference, here is the tree sequence topology that we have been using:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">draw_svg</span><span class="p">(</span>
+    <span class="n">y_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">y_gridlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">time_scale</span><span class="o">=</span><span class="s2">&quot;log_time&quot;</span><span class="p">,</span>
+    <span class="n">y_ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;.mut, .site {display: none}&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/e6335965c61b049680378ae204664dcd9c41d010a32c7188c64b2e06a49aa078.svg" src="_images/e6335965c61b049680378ae204664dcd9c41d010a32c7188c64b2e06a49aa078.svg" /></div>
+</div>
+<p>Note that all these trees show strictly bifurcating splits, but this does not need to be
+the case for tree sequences in general. In particular, where tree sequences have been
+created by the multiple-merger coalecent process, or in tree
+sequences that have been inferred from real data, it is possible to have a parent node
+with 3 or more children in a particular tree (these are known as <em>polytomies</em>).</p>
+<section id="tree-changes-ancestral-recombinations-and-sprs">
+<span id="sec-concepts-sprs"></span><h3>Tree changes, ancestral recombinations, and SPRs<a class="headerlink" href="#tree-changes-ancestral-recombinations-and-sprs" title="Permalink to this heading">#</a></h3>
+<p>The process of recombination usually results in trees along a genome where adjacent
+trees differ by only a few “tree edit” or SPR (subtree-prune-and-regraft) operations.
+The result is a tree sequence in which very few edges
+<a class="reference internal" href="what_is.html#fig-what-is-edge-diffs"><span class="std std-ref">change from tree to tree</span></a>.
+This is the underlying reason that <code class="docutils literal notranslate"><span class="pre">tskit</span></code> is so
+efficient, and is well illustrated in the example tree sequence above.</p>
+<p>In this (simulated) tree sequence, each tree differs from the next by a single SPR.
+The subtree defined by node 7 in the first tree has been pruned and regrafted onto the
+branch between 0 and 10, to create the second tree. The second and third trees have the
+same topology, but differ because their ultimate coalesence happened in a different
+ancestor (easy to spot in a simulation, but hard to detect in real data). This is also
+caused by a single SPR: looking at the second tree, either the subtree below node 8 or
+the subtree below node 9 must have been pruned and regrafted higher up on the same
+lineage to create the third tree. Because this is a fully <a class="reference internal" href="simplification.html#sec-simplification"><span class="std std-ref">simplified</span></a>
+tree sequence, it is impossible to tell which of these two possible SPRs occurred. To
+know this, we would need to have a tree sequence with the exact history of recombinations
+recorded (see below).</p>
+<p>In general, each detectable recombination occurring in ancestral history results in a
+single SPR in the tree sequence. If recombination breakpoints occurs at unique
+positions (an “infinite sites” model of breakpoints), then the number of trees in a tree
+sequence equals the number of ancestral recombination events plus one. If recombinations
+can occur at the same physical position (e.g. if the genome is treated as a set of
+discrete integer positions, as in the simulation that created this tree sequence) then
+moving from  one tree to the next in a tree sequence might require multiple SPRs if
+there are multiple, overlaid ancestral recombination events.</p>
+</section>
+<section id="tree-sequences-and-args">
+<span id="sec-concepts-args"></span><h3>Tree sequences and ARGs<a class="headerlink" href="#tree-sequences-and-args" title="Permalink to this heading">#</a></h3>
+<p>Much of the literature on ancestral inference concentrates on the Ancestral Recombination
+Graph, or ARG, in which details of the position and potentially the timing of
+recombination events are explictly stored. Although a tree sequence <em>can</em> represent such
+an ARG, by incorporating nodes that represent recombination events (see the
+<a class="reference internal" href="args.html#sec-args"><span class="std std-ref">ARGs as tree sequences</span></a> tutorial), this is not normally done for two reasons:</p>
+<ol class="arabic simple">
+<li><p>Many recombination events are undetectable from sequence data, and even if they are
+detectable, they can be logically impossible to place in the genealogy (as in the
+second SPR example above).</p></li>
+<li><p>The number of recombination events in the genealogy can grow to dominate the total
+number of nodes in the total tree sequence, without actually contributing to the
+realised sequences in the samples. In other words, recombination nodes are redundant
+to the storing of genome data.</p></li>
+</ol>
+<p>Therefore, compared to an ARG, you can think of a standard tree sequence as simply
+storing the trees <em>created by</em> recombination events, rather than attempting to record the
+recombination events themselves. The actual recombination events can be sometimes be
+inferred from these trees but, as we have seen, it’s not always possible. Here’s another
+way to put it:</p>
+<blockquote>
+<div><p>“an ARG encodes the events that occurred in the history of a sample,
+whereas a tree sequence encodes the outcome of those events”
+(<a class="reference external" href="https://doi.org/10.1534/genetics.120.303253">Kelleher <em>et al.</em>, 2019</a>)</p>
+</div></blockquote>
+</section>
+<section id="tables">
+<h3>Tables<a class="headerlink" href="#tables" title="Permalink to this heading">#</a></h3>
+<p>The underlying data in a tree sequence are stored in a collection of tables. Details of
+these tables, as well as some basic properties of the tree sequence which they encode,
+are shown when printing a tree sequence to the screen:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span>  <span class="c1"># or use `print(ts)` for the plain text representation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <div>
+              <style>
+                .tskit-table thead tr th {text-align: left;padding: 0.5em 0.5em;}
+                .tskit-table tbody tr td {padding: 0.5em 0.5em;}
+                .tskit-table tbody tr td:first-of-type {text-align: left;}
+                .tskit-details-label {vertical-align: top; padding-right:5px;}
+                .tskit-table-set {display: inline-flex;flex-wrap: wrap;margin: -12px 0 0 -12px;width: calc(100% + 12px);}
+                .tskit-table-set-table {margin: 12px 0 0 12px;}
+                details {display: inline-block;}
+                summary {cursor: pointer; outline: 0; display: list-item;}
+              </style>
+              <div class="tskit-table-set">
+                <div class="tskit-table-set-table">
+                  <table class="tskit-table">
+                    <thead>
+                      <tr>
+                        <th style="padding:0;line-height:21px;">
+                          <img style="height: 32px;display: inline-block;padding: 3px 5px 3px 0;" src="https://raw.githubusercontent.com/tskit-dev/administrative/main/tskit_logo.svg"/>
+                          <a target="_blank" href="https://tskit.dev/tskit/docs/latest/python-api.html#the-treesequence-class"> Tree Sequence </a>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Trees</td><td>3</td></tr>
+                      <tr><td>Sequence Length</td><td>1000.0</td></tr>
+                      <tr><td>Time Units</td><td>generations</td></tr>
+                      <tr><td>Sample Nodes</td><td>6</td></tr>
+                      <tr><td>Total Size</td><td>3.7 KiB</td></tr>
+                      <tr>
+                        <td>Metadata</td><td style="text-align: left;">No Metadata</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tskit-table-set-table">
+                  <table class="tskit-table">
+                    <thead>
+                      <tr>
+                        <th style="line-height:21px;">Table</th>
+                        <th>Rows</th>
+                        <th>Size</th>
+                        <th>Has Metadata</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                  <tr>
+                    <td>Edges</td>
+                      <td>15</td>
+                      <td>488 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Individuals</td>
+                      <td>3</td>
+                      <td>166 Bytes</td>
+                      <td style="text-align: center;">
+                        ✅
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Migrations</td>
+                      <td>0</td>
+                      <td>8 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Mutations</td>
+                      <td>1</td>
+                      <td>53 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Nodes</td>
+                      <td>12</td>
+                      <td>344 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Populations</td>
+                      <td>1</td>
+                      <td>255 Bytes</td>
+                      <td style="text-align: center;">
+                        ✅
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Provenances</td>
+                      <td>3</td>
+                      <td>2.2 KiB</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                  <tr>
+                    <td>Sites</td>
+                      <td>1</td>
+                      <td>41 Bytes</td>
+                      <td style="text-align: center;">
+                        
+                      </td>
+                    </tr>
+                
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </div></div>
+</div>
+<p>There is a separate API for dealing with a tree sequence as a collection of tables,
+which can be useful for dealing with large datasets, and is needed if you want to
+<a class="reference internal" href="tables_and_editing.html#sec-tables-editing"><span class="std std-ref">edit</span></a> an existing tree sequence. This is covered in
+the <a class="reference internal" href="tables_and_editing.html#sec-tables"><span class="std std-ref">Tables and editing</span></a> tutorial.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="what_is.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">What is a tree sequence?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="getting_started.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Getting started with <strong class="program">tskit</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genomes">Genomes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nodes">Nodes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-nodes">Sample nodes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edges">Edges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-and-tree-sequences">Trees and tree sequences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#individuals-and-populations">Individuals and populations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mutations-and-sites">Mutations and sites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#provenance">Provenance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts">Concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-changes-ancestral-recombinations-and-sprs">Tree changes, ancestral recombinations, and SPRs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-sequences-and-args">Tree sequences and ARGs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tables">Tables</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tskit Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,387 +1,472 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introgression &#8212; Tskit Tutorials</title>
-    
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    <title>Introgression &#8212; Tree Sequence Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-      
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'introgression';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Completing forwards simulations" href="completing-forward-sims.html" />
-    <link rel="prev" title="Bottlenecks" href="bottlenecks.html" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-
-
-
+    <link rel="next" title="Completing forwards simulations" href="completing_forward_sims.html" />
+    <link rel="prev" title="Instantaneous Bottlenecks" href="bottlenecks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
   
   
-  <h1 class="site-logo" id="site-title">Tskit Tutorials</h1>
   
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/tskit_logo.svg" class="logo__image only-light" alt="Tree Sequence Tutorials - Home"/>
+    <script>document.write(`<img src="_static/tskit_logo.svg" class="logo__image only-dark" alt="Tree Sequence Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="what_is.html">What is a tree sequence?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tree sequence basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="terminology_and_concepts.html">Terminology &amp; concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started with <strong class="program">tskit</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analysing_tree_sequences.html"><em>Analysing tree sequences</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysing_trees.html">Analysing trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incremental_algorithms.html"><em>Incremental algorithms</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="counting_topologies.html">Counting topologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallelization.html"><em>Parallelization</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further tskit tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tables_and_editing.html">Tables and editing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplification.html"><em>Simplification</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="viz.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">Working with Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="args.html">ARGs as tree sequences</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="simulation_overview.html">Tree sequences and simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_mutations.html">Do you really need mutations?</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_msprime.html">Advanced <strong class="program">msprime</strong> topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="demography.html">Demography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bottlenecks.html">Instantaneous Bottlenecks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Introgression</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="completing_forward_sims.html">Completing forwards simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forward_sims.html">Building a forward simulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_forward_sims.html"><em>Advanced forward simulations</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other languages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tskitr.html">Tskit and R</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorial_development.html"><em>Developing new tutorials</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tskit for ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="popgen.html"><code class="docutils literal notranslate"><span class="pre">Tskit</span></code> for population genetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phylogen.html"><code class="docutils literal notranslate"><span class="pre">Tskit</span></code> for phylogenetics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/introgression.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
 </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Introduction
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Using tskit
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="getting_started.html">
-   Getting started with tskit
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="viz.html">
-   Visualisation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="data_structures.html">
-   Data structures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="no_mutations.html">
-   Do you really need mutations?
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Backward time simulations
- </span>
-</p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="demography.html">
-   Demography
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="bottlenecks.html">
-   Bottlenecks
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Introgression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="completing-forward-sims.html">
-   Completing forwards simulations
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Forward time simulations
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="forward_sims.html">
-   Forward simulations
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Development
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="development.html">
-   Development
-  </a>
- </li>
-</ul>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="_sources/introgression.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/introgression.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
+  
 </div>
-
-        <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/tsk-dev/tutorials"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/tsk-dev/tutorials/issues/new?title=Issue%20on%20page%20%2Fintrogression.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
 </div>
+              
+              
 
-
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
-
-        <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/tsk-dev/tutorials/main?urlpath=tree/introgression.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introgression</h1>
     <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#locating-mutations">
-   Locating mutations
-  </a>
- </li>
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#locating-mutations">Locating mutations</a></li>
 </ul>
-
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
-  <div class="section" id="introgression">
-<h1>Introgression<a class="headerlink" href="#introgression" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introgression">
+<span id="sec-msprime-introgression"></span><h1>Introgression<a class="headerlink" href="#introgression" title="Permalink to this heading">#</a></h1>
 <p><strong>Jerome Kelleher and Konrad Lohse</strong></p>
-<p>There has been great interest in understanding the contributions past populations have made to the genetic diversity of current populations via admixture. In particular, the availability of whole genome sequence data from archaic hominins (Green et al 2010) has allowed geneticists to identify admixture tracks (Sankararaman 2016). In the simplest case, admixture tracts can be defined heuristically as regions of the genome that show excessive similarity between a putative source and a recipient population (usually quantified relative to some non-admixted reference population, ref Durand et al 2010). Because recombination breaks down admixture tracts, their length distribution gives a clock for calibrating admixture and this information been used to date the admixure contributions Neanderthals and other archaic hominins have made to non-African humans (Sankararaman 2016) and to recontruct the admixture history between different modern human populations (ref).</p>
-<p>Crucially, the power to identify admixture depends on the relative time bewteen the admixture event and the earlier divergence between source and the recipient population: the shorter this interval, the harder it becomes to detect admixture. This is because ancestral material is increasingly likely to trace its ancestry back to the common ancestral population regardless of whether it has been involved in any recent admixture or not. In other words, it becomes increasingly difficult to distinguish between admixtjure from Incomplete lineage sorting (ILS).</p>
-<p>In the following section we use msprime simulations to ask what fraction of admixture tracts are identifyable as such.</p>
-<p>To illustrate this, we simulate ancestral recombination graphs (ARGs) under a simple toy history of divergence and admixture which is loosely motivated by the demographic history of modern humans and Neandertals. As in previous sections, we will first examine properties of the ARG directly rather than use it to simulate mutations. We assume a minimal sample of a single (haploid) genome from a modern human population in African and Eurasia as well as an ancient Neandertal sample.</p>
-<p>Considering a rooted ARG, we want to distinguish three categories of segments: i) tracts actually involved in Neandertal admixture, ii) the subset of those tracts that coalesces in the Neandertal population and iii) segments at which Eurasians are more closely related to Neandertals than either are to Africans. This latter category must include all of ii) but also an additional set of short tracts that are due to incomplete lineage sorting (ILS). The last category is interesting because it is the only one that can be unambiguously detected in data (via derived mutations that are shared by Neandertals and Eurasians).</p>
-<p>First we set up a highly simplified demographic history of human neandertal demography and simulate a single chromosome of 20Mb length:</p>
+<p>There has been great interest in understanding the contributions past populations have made to the genetic diversity of current populations via <a class="reference external" href="https://en.wikipedia.org/wiki/Genetic_admixture">admixture</a>. In particular, the availability of whole genome sequence data from archaic hominins (<a class="reference external" href="http://doi.org/10.1126/science.1188021">Green et al., 2010</a>) has allowed geneticists to identify admixture tracks (<a class="reference external" href="http://doi.org/10.1016/j.cub.2016.03.037">Sankararaman, 2016</a>). In the simplest case, admixture tracts can be defined heuristically as regions of the genome that show excessive similarity between a putative source and a recipient population (usually quantified relative to some non-admixed reference population, see <a class="reference external" href="http://doi.org/10.1093/molbev/msr048">Durand et al., 2011</a>). Because recombination breaks down admixture tracts, their length distribution gives a clock for calibrating admixture and this information has been used to date the admixure contributions Neanderthals and other archaic hominins have made to non-African modern human populations (<a class="reference external" href="http://doi.org/10.1016/j.cub.2016.03.037">Sankararamanm 2016</a>)</p>
+<p>Crucially, the power to identify admixture depends on the relative time between the admixture event and the earlier divergence between source and recipient population: the shorter this interval, the harder it is to detect admixture. This is because samples from the source and recipient poulations are increasingly likely to share local ancestry regardless of recent admixture. In other words, it becomes increasingly difficult to distinguish admixture from <a class="reference external" href="https://en.wikipedia.org/wiki/Incomplete_lineage_sorting">incomplete lineage sorting</a> (ILS).</p>
+<p>In the following section we use <strong class="program">msprime</strong> simulations to ask what fraction of admixture tracts are identifiable as such.</p>
+<p>To illustrate this, we simulate genetic ancestry under a very simple toy history of divergence and admixture which is loosely motivated by the demographic history of modern humans and Neanderthals. As suggested in <a class="reference internal" href="no_mutations.html#sec-tskit-no-mutations"><span class="std std-ref">other tutorial material</span></a>, we will first examine properties of the resulting tree sequence directly, rather than use it to simulate mutations. We assume a minimal sample of a single (haploid) genome from a modern human population in Africa and Eurasia as well as an ancient Neanderthal sample.</p>
+<p>In the resulting tree sequence we want to distinguish three categories of segments: i) tracts actually involved in Neanderthal admixture, ii) the subset of those tracts in which the Eurasian and Neanderthal lineages we have sampled coalesce within the Neanderthal population and iii) segments at which the Eurasian and Neanderthal lineages are more closely related to each other than either are to the African lineage. The last category is interesting because it is the only one that can be unambiguously detected in data (via derived mutations that are shared by Neanderthals and Eurasians). However, while it must include all of ii), it also contains an additional set of short tracts that are due to ILS.</p>
+<p>First we set up a highly simplified demographic history of human+Neanderthal demography and simulate a single chromosome of 20Mb in length:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">msprime</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">SVG</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Population IDs: Africa, Eurasia, Neanderthal</span>
-<span class="n">AFR</span><span class="p">,</span> <span class="n">EUR</span><span class="p">,</span> <span class="n">NEA</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
-    
-<span class="k">def</span> <span class="nf">run_simulation</span><span class="p">(</span><span class="n">random_seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>   
+<span class="k">def</span> <span class="nf">run_simulation</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">time_units</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">25</span>  <span class="c1"># Conversion factor for kya to generations</span>
-    <span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-        <span class="n">Ne</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># The same for all populations; highly unrealistic!</span>
+    <span class="n">demography</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">Demography</span><span class="p">()</span>
+    <span class="c1"># The same size for all populations; highly unrealistic!</span>
+    <span class="n">Ne</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span>
+    <span class="n">demography</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Africa&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="n">Ne</span><span class="p">)</span>
+    <span class="n">demography</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Eurasia&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="n">Ne</span><span class="p">)</span>
+    <span class="n">demography</span><span class="o">.</span><span class="n">add_population</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Neanderthal&quot;</span><span class="p">,</span> <span class="n">initial_size</span><span class="o">=</span><span class="n">Ne</span><span class="p">)</span>
+
+    <span class="c1"># 2% introgression 50 kya</span>
+    <span class="n">demography</span><span class="o">.</span><span class="n">add_mass_migration</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">50</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;Eurasia&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;Neanderthal&#39;</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+    <span class="c1"># Eurasian &#39;merges&#39; backwards in time into Africa population, 70 kya</span>
+    <span class="n">demography</span><span class="o">.</span><span class="n">add_mass_migration</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">70</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;Eurasia&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;Africa&#39;</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Neanderthal &#39;merges&#39; backwards in time into African population, 300 kya</span>
+    <span class="n">demography</span><span class="o">.</span><span class="n">add_mass_migration</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="mi">300</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;Neanderthal&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;Africa&#39;</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span>
         <span class="n">recombination_rate</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
-        <span class="n">length</span><span class="o">=</span><span class="mi">20</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span>  
+        <span class="n">sequence_length</span><span class="o">=</span><span class="n">sequence_length</span><span class="p">,</span>  
         <span class="n">samples</span><span class="o">=</span><span class="p">[</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="n">AFR</span><span class="p">),</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="n">EUR</span><span class="p">),</span>
+            <span class="n">msprime</span><span class="o">.</span><span class="n">SampleSet</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ploidy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="s1">&#39;Africa&#39;</span><span class="p">),</span>
+            <span class="n">msprime</span><span class="o">.</span><span class="n">SampleSet</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ploidy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="s1">&#39;Eurasia&#39;</span><span class="p">),</span>
             <span class="c1"># Neanderthal sample taken 30 kya</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">30</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="n">NEA</span><span class="p">),</span>
+            <span class="n">msprime</span><span class="o">.</span><span class="n">SampleSet</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ploidy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">30</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="s1">&#39;Neanderthal&#39;</span><span class="p">),</span>
         <span class="p">],</span>
-        <span class="n">population_configurations</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationConfiguration</span><span class="p">(),</span> <span class="c1"># Africa</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationConfiguration</span><span class="p">(),</span> <span class="c1"># Eurasia</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationConfiguration</span><span class="p">(),</span> <span class="c1"># Neanderthal</span>
-        <span class="p">],</span>
-        <span class="n">demographic_events</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">MassMigration</span><span class="p">(</span>
-                <span class="c1"># 2% introgression 50 kya</span>
-                <span class="n">time</span><span class="o">=</span><span class="mi">50</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">,</span>
-                <span class="n">source</span><span class="o">=</span><span class="n">EUR</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">NEA</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="mf">0.02</span><span class="p">),</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">MassMigration</span><span class="p">(</span>
-                <span class="c1"># Eurasian &amp; Africa populations merge 70 kya</span>
-                <span class="n">time</span><span class="o">=</span><span class="mi">70</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">,</span> 
-                <span class="n">source</span><span class="o">=</span><span class="n">EUR</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">AFR</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-            <span class="n">msprime</span><span class="o">.</span><span class="n">MassMigration</span><span class="p">(</span>
-                <span class="c1"># Neanderthal and African populations merge 300 kya</span>
-                <span class="n">time</span><span class="o">=</span><span class="mi">300</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">,</span>
-                <span class="n">source</span><span class="o">=</span><span class="n">NEA</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">AFR</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-        <span class="p">],</span>
+        <span class="n">demography</span> <span class="o">=</span> <span class="n">demography</span><span class="p">,</span>
         <span class="n">record_migrations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Needed for tracking segments.</span>
         <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation of </span><span class="si">{</span><span class="n">sequence_length</span><span class="o">/</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="si">}</span><span class="s2">Mb run, using record_migrations=True&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;NB: time diff from Neanderthal split to admixture event is&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mi">300</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_units</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_units</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> gens&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="p">(</span><span class="mi">300</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_units</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_units</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Ne</span><span class="si">}</span><span class="s2"> coalescence units)&quot;</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">ts</span>
 
-<span class="n">ts</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">run_simulation</span><span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulation of 20.0Mb run, using record_migrations=True
+NB: time diff from Neanderthal split to admixture event is 10000 gens (0.5 coalescence units)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here we run our simulation in the usual way, but including the <code class="docutils literal notranslate"><span class="pre">record_migrations</span></code> option. This allows us to track segments of ancestral material that migrate from the European population into the Neanderthal population (backwards in time). We can then examine the length distributions of these segments and compare them with the length of the segments that also go on to coalesce within the Neanderthal population.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">record_migrations</span></code> option allows us to track segments of ancestral material that migrate from the Eurasian population into the Neanderthal population (backwards in time). We can then examine the length distributions of these segments and compare them with the length of the segments that also go on to coalesce within the Neanderthal population.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_migrating_tracts</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+    <span class="n">neanderthal_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">populations</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Neanderthal&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">migrating_tracts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># Get all tracts that migrated into the neanderthal population</span>
     <span class="k">for</span> <span class="n">migration</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">migrations</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">migration</span><span class="o">.</span><span class="n">dest</span> <span class="o">==</span> <span class="n">NEA</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">migration</span><span class="o">.</span><span class="n">dest</span> <span class="o">==</span> <span class="n">neanderthal_id</span><span class="p">:</span>
             <span class="n">migrating_tracts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">migration</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">migration</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">migrating_tracts</span><span class="p">)</span> 
 
 <span class="k">def</span> <span class="nf">get_coalescing_tracts</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+    <span class="n">neanderthal_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">populations</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Neanderthal&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">coalescing_tracts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">tract_left</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">trees</span><span class="p">():</span>    
+    <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">trees</span><span class="p">():</span>
         <span class="c1"># 1 is the Eurasian sample and 2 is the Neanderthal</span>
-        <span class="n">mrca_pop</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">mrca</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">mrca_pop</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">mrca</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">population</span>
         <span class="n">left</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">mrca_pop</span> <span class="o">==</span> <span class="n">NEA</span> <span class="ow">and</span> <span class="n">tract_left</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mrca_pop</span> <span class="o">==</span> <span class="n">neanderthal_id</span> <span class="ow">and</span> <span class="n">tract_left</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># Start a new tract</span>
             <span class="n">tract_left</span> <span class="o">=</span> <span class="n">left</span>      
-        <span class="k">elif</span> <span class="n">mrca_pop</span> <span class="o">!=</span> <span class="n">NEA</span> <span class="ow">and</span> <span class="n">tract_left</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">mrca_pop</span> <span class="o">!=</span> <span class="n">neanderthal_id</span> <span class="ow">and</span> <span class="n">tract_left</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># End the last tract</span>
             <span class="n">coalescing_tracts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tract_left</span><span class="p">,</span> <span class="n">left</span><span class="p">))</span>
             <span class="n">tract_left</span> <span class="o">=</span> <span class="kc">None</span>
@@ -392,14 +477,14 @@
 <span class="k">def</span> <span class="nf">get_eur_nea_tracts</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
     <span class="n">tracts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">tract_left</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">trees</span><span class="p">():</span>    
+    <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">trees</span><span class="p">():</span>
         <span class="c1"># 1 is the Eurasian sample and 2 is the Neanderthal</span>
         <span class="n">mrca</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">mrca</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">left</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">mrca</span> <span class="o">!=</span> <span class="n">tree</span><span class="o">.</span><span class="n">root</span> <span class="ow">and</span> <span class="n">tract_left</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># Start a new tract</span>
             <span class="n">tract_left</span> <span class="o">=</span> <span class="n">left</span>      
-        <span class="k">elif</span> <span class="n">mrca</span> <span class="o">!=</span> <span class="n">tree</span><span class="o">.</span><span class="n">root</span> <span class="ow">and</span> <span class="n">tract_left</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">mrca</span> <span class="o">==</span> <span class="n">tree</span><span class="o">.</span><span class="n">root</span> <span class="ow">and</span> <span class="n">tract_left</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># End the last tract</span>
             <span class="n">tracts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tract_left</span><span class="p">,</span> <span class="n">left</span><span class="p">))</span>
             <span class="n">tract_left</span> <span class="o">=</span> <span class="kc">None</span>
@@ -415,31 +500,38 @@
 </div>
 </div>
 </div>
-<p>We build three different lists. The first is the set of tracts that have migrated from the Eurasian population into the Neanderthal population, and is done simply by finding all migration records in which the destination population is equal to NEA. The second list (which must contain a subset of the segments in the first list) is the ancestral segments that went on to coalesce within the Neanderthal population. The third list contains all segments in which the Eurasian and Neanderthal sample coalesce before their ancestor coalesces with the African sample. The third list includes both Eurasian segments that migrated to the Neanderthal population and segments that did not migrate and did not coalesce until after the Neanderthal-Human population split 300kya.</p>
+<p>We build three different lists. The first is the set of tracts that exist in the Eurasian genome because they have come from Neanderthals via admixture at time <span class="math notranslate nohighlight">\(T_{ad}\)</span> (be careful here: in <a class="reference external" href="https://tskit.dev/msprime/docs/stable/demography.html#sec-demography-direction-of-time" title="(in Python)"><span class="xref std std-ref">reverse time terminology</span></a>, we denote the “source” population as Eurasian and the “destination” population as Neanderthals). This is done simply by finding all migration records in which the “destination” population name is <code class="docutils literal notranslate"><span class="pre">Neanderthal</span></code>. The second list (which must contain a subset of the segments in the first list) is the ancestral segments that went on to coalesce within the Neanderthal population. The third list contains all segments in which the Eurasian and Neanderthal sample coalesce before their ancestor coalesces with the African sample. The third list includes both Eurasian segments of Neanderthal origin and segments that did not migrate but coalesce further back in time than the Neanderthal-Human population split at <span class="math notranslate nohighlight">\(T_{split}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nea_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eur_nea</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">eur_nea</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">migrating_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">migrating</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">migrating</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">migrating_l</span> <span class="o">=</span> <span class="n">migrating</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">migrating</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">migrating_l</span><span class="p">)</span><span class="si">}</span><span class="s2"> migrating tracts of total length </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">migrating_l</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">migrating_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">migrating_l</span><span class="p">)</span>
 <span class="n">within_nea_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">within_nea</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">within_nea</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">([</span><span class="n">nea_total</span><span class="p">,</span> <span class="n">migrating_total</span><span class="p">,</span> <span class="n">within_nea_total</span><span class="p">])</span>
+<span class="n">nea_eur_closest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eur_nea</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">eur_nea</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">totals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">migrating_total</span><span class="p">,</span> <span class="n">within_nea_total</span><span class="p">,</span> <span class="n">nea_eur_closest</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total lengths:&quot;</span><span class="p">,</span> <span class="n">totals</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proportions:&quot;</span><span class="p">,</span> <span class="n">totals</span><span class="o">/</span><span class="n">ts</span><span class="o">.</span><span class="n">sequence_length</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[10077464.05508275, 316645.8476603916, 164413.62338078953]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 5 migrating tracts of total length 373730.0
+Total lengths: [ 373730.  165617. 4475561.]
+Proportions: [0.0186865  0.00828085 0.22377805]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Although <span class="math notranslate nohighlight">\(f=0.02\)</span> the total length of admixted segments is 5% of the chromosome. Presumably this excess is just due to coalescence variance? We expect a proportion <span class="math notranslate nohighlight">\(1-e^{-(T_{split}-T_{ad})}\)</span> of admixted lineages to coalesce. Given our time parameters <span class="math notranslate nohighlight">\(T_{split}-T_{ad})= 1/2\)</span> (in units of <span class="math notranslate nohighlight">\(2 N_e\)</span> generations), so we expect <span class="math notranslate nohighlight">\(1 -(e^-\frac{1}{2})=0.39\)</span> of admixted sequence to have a coalesce in the neandertal population. Why is the observed fraction just 0.029?</p>
+<p>The total length of admixed segments is about 1.9% of the chromosome, which accords with our migration fraction of <span class="math notranslate nohighlight">\(f=0.02\)</span> (although since this is only made up of 5 tracts, we might expect considerable random variation in this percentage). We expect a proportion <span class="math notranslate nohighlight">\(1-e^{-(T_{split}-T_{ad})}\)</span> of admixed lineages to coalesce, where <span class="math notranslate nohighlight">\(T_{split}\)</span> and <span class="math notranslate nohighlight">\(T_{ad}\)</span> are measured in coalescence units of <span class="math notranslate nohighlight">\(2 N_e\)</span> generations. We have assumed a split time of 300kya, an admixture time of 50kya and a generation time of 25 years. Given these time parameters and <span class="math notranslate nohighlight">\(N_e =10000\)</span>, <span class="math notranslate nohighlight">\(T_{split}-T_{ad} = 1/2\)</span>, so we expect <span class="math notranslate nohighlight">\(1 -(e^{-1/2})=0.39\)</span> of admixed sequence to coalesce in the Neanderthal population. The actual observed proportion is 165617/373730 = 0.44, which isn’t far off. However, the fraction of the genome which shows the Eurasian and the Neanderthal as each others closest relatives is much higher (over 20%): most of this must therefore be ILS.</p>
+<p>How about the <em>lengths</em> of the tracts? We can plot these out in histogram form.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kb</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">1000</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">([</span>
-    <span class="p">(</span><span class="n">eur_nea</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">eur_nea</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">kb</span><span class="p">,</span>
-    <span class="p">(</span><span class="n">migrating</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">migrating</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">kb</span><span class="p">,</span>   
-    <span class="p">(</span><span class="n">within_nea</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">within_nea</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">kb</span><span class="p">,],</span>    
-    <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Migrating&quot;</span><span class="p">,</span> <span class="s2">&quot;EUR-NEA&quot;</span><span class="p">,</span> <span class="s2">&quot;Within NEA&quot;</span><span class="p">]</span>
+    <span class="n">migrating_l</span> <span class="o">*</span> <span class="n">kb</span><span class="p">,</span>   
+    <span class="p">(</span><span class="n">within_nea</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">within_nea</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">kb</span><span class="p">,</span>    
+    <span class="p">(</span><span class="n">eur_nea</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">eur_nea</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">kb</span><span class="p">,],</span>
+    <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Migrating&quot;</span><span class="p">,</span> <span class="s2">&quot;Within NEA&quot;</span><span class="p">,</span> <span class="s2">&quot;EUR-NEA closest&quot;</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -448,49 +540,69 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/introgression_9_0.png" src="_images/introgression_9_0.png" />
+<img alt="_images/2d222fdab1c92ae34ca242f007224b68c083c2bbd84e56347b25551e419e0199.png" src="_images/2d222fdab1c92ae34ca242f007224b68c083c2bbd84e56347b25551e419e0199.png" />
 </div>
 </div>
-<p>Plotting these tract lengths for a single replicate shows that, as expected, admixture tracts are large initially (blue). We can also see that there is extensive ILS which has two effects: First, only a subset  of the admixted material has ancestry in the Neandertal population, it would to check whether this fits the total lengths}). Second there many more tracts at which Neandertals and non-African humans are more closely related to each other due to incomplete lineage sorting (ILS) than there are admixture tracts. Finally ILS tracts because they are old by definition  are substantially shorter than admixture tracts.</p>
-<div class="section" id="locating-mutations">
-<h2>Locating mutations<a class="headerlink" href="#locating-mutations" title="Permalink to this headline">¶</a></h2>
-<p>We are interested in finding the population in which mutations arose. Because mutations are just associated with a specific tree node in msprime, we must simulate some extra information in order to make this question answerable. This is quite straightforward to do, since we can generate a time for each mutation uniformly along a branch and therefore unambiguously locate it time (and, therefore, space).</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>We don’t need to simulate times any more</p>
-</div>
+<p>Note that this is just a single replicate: we would need more replicates (or a larger chromosome) to draw firm conclusions from the patterns. Nevertheless, a few things stand out. Firstly, confirming our assessment of the relative proportions of the three types, the green bars (tracts at which Neanderthals and non-African humans are most closely related to each other) far outweigh the blue (admixed tracts). In other words, ILS accounts for the vast majority of the tracts plotted in green. Secondly, although there are relatively few admixure tracts they are are on average much longer. By definition ILS tracts must be old and are therefore likely to be short; indeed most of the green tracts are very short indeed (note that the Y axis is on a log scale). Finally, although the orange tracts are a strict subset of the blue, there are places where there are orange bars without blue equivalents. That suggests that the long blue admixture tracts may contain some regions that coalesce within Neanderthals and some that don’t. We can look at (say) the longest of the blue tracts to see how it intersects with the other tracts we’ve calculated:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_mutation_times</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
-    <span class="n">mutation_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">num_mutations</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">trees</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">mutation</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">mutations</span><span class="p">():</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="n">mutation</span><span class="o">.</span><span class="n">node</span><span class="p">)</span>
-            <span class="n">b</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">parent</span><span class="p">(</span><span class="n">mutation</span><span class="o">.</span><span class="n">node</span><span class="p">))</span>
-            <span class="n">mutation_time</span><span class="p">[</span><span class="n">mutation</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mutation_time</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">longest_tract</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">migrating_l</span><span class="p">)</span>
+<span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">migrating</span><span class="p">[</span><span class="n">longest_tract</span><span class="p">,:]</span>
+<span class="n">within_long</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">within_nea</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">within_nea</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">within_nea</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">within_nea</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">pop_configs</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationConfiguration</span><span class="p">(</span><span class="n">sample_size</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
-    <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationConfiguration</span><span class="p">(</span><span class="n">sample_size</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-    <span class="n">msprime</span><span class="o">.</span><span class="n">PopulationConfiguration</span><span class="p">(</span><span class="n">sample_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
-<span class="n">M</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="n">ts</span>  <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-    <span class="n">population_configurations</span><span class="o">=</span><span class="n">pop_configs</span><span class="p">,</span> <span class="n">migration_matrix</span><span class="o">=</span><span class="n">M</span><span class="p">,</span>
-    <span class="n">record_migrations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
-<span class="n">mutation_time</span> <span class="o">=</span> <span class="n">simulate_mutation_times</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">eur_nea_long</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">eur_nea</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">eur_nea</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">eur_nea</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">eur_nea</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Migrating&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">within_long</span><span class="p">),</span> <span class="n">within_nea</span><span class="p">[</span><span class="n">within_long</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">within_nea</span><span class="p">[</span><span class="n">within_long</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Within NEA&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">eur_nea_long</span><span class="p">),</span> <span class="n">eur_nea</span><span class="p">[</span><span class="n">eur_nea_long</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">eur_nea</span><span class="p">[</span><span class="n">eur_nea_long</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;EUR-NEA closest&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ancestry breakdown within the longest (</span><span class="si">{</span><span class="p">(</span><span class="n">upper</span><span class="o">-</span><span class="n">lower</span><span class="p">)</span><span class="o">/</span><span class="mi">1_000</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">kb) admixture tract&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Genomic position&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f9d9ea24e64e987a8238e2ea2ad550e42a32fa00688e99a194152366c2821ffb.png" src="_images/f9d9ea24e64e987a8238e2ea2ad550e42a32fa00688e99a194152366c2821ffb.png" />
+</div>
+</div>
+<p>As we go back in time, the single 178kb admixture tract (in blue) breaks down, with some regions
+coalescing in the Neanderthal population (orange) and some not. Although quite a lot of the tract supports
+grouping Eurasians with Neanderthals (green), substantial chunks of the admixed (blue)
+tract do not map onto the green tracts, and therefore must support one of the two
+other topologies (African+Neanderthal or African+Eurasian). These must be due to ILS.</p>
+<p>The green signal, which is a measure of the local tree topology and which is the primary
+signal that can be extracted from mutational data, is therefore not a very reliable guide to
+which regions of the genome have passed through the admixed route. In other words,
+admixed tracts are likely to be hard to detect simply from the distribution of mutations.</p>
+<section id="locating-mutations">
+<h2>Locating mutations<a class="headerlink" href="#locating-mutations" title="Permalink to this heading">#</a></h2>
+<p>We might be interested in finding the population in which mutations arose. For this, we first need to impose some mutations on the tree sequence using <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.sim_mutations" title="(in Python)"><code class="xref py py-func docutils literal notranslate"><span class="pre">msprime.sim_mutations()</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_mutations</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># rate in /bp/gen</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Once we have run our simulation and assigned times to each mutation, we can then assign populations to each of these mutations. The following function takes a simple approach, but first gathering the migrations for each node into a list. Then, for every mutation, we sequentially examine each migration that affects the mutation’s node and intersects with the site position. Because we know that the migration records are sorted in increasing time order, we can simply apply the effects of each migration while the migration record’s time is less than the time of the mutation. At the end of this process, we then return the computed mapping of mutation IDs to the populations in which they arose.</p>
+<p>Now we work out which population the mutation occurred in, from the times of the mutation and the migration events. The following function takes a simple approach, first gathering the migrations for each node into a list then sequentially examining each migration that affects the mutation’s node and intersects with the site position. Because we know that the migration records are sorted in increasing time order, we can simply apply the effects of each migration while the migration record’s time is less than the time of the mutation. At the end of this process, we then return the computed mapping of mutation IDs to the populations in which they arose.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_mutation_population</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">mutation_time</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_mutation_population</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
     <span class="n">node_migrations</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">migration</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">migrations</span><span class="p">():</span>
         <span class="n">node_migrations</span><span class="p">[</span><span class="n">migration</span><span class="o">.</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">migration</span><span class="p">)</span>
@@ -507,33 +619,102 @@
                     <span class="k">if</span> <span class="n">mig</span><span class="o">.</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">site</span><span class="o">.</span><span class="n">position</span> <span class="o">&lt;</span> <span class="n">mig</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
                         <span class="c1"># Note that we assume that we see the migration records in </span>
                         <span class="c1"># increasing order of time!</span>
-                        <span class="k">if</span> <span class="n">mig</span><span class="o">.</span><span class="n">time</span> <span class="o">&lt;</span> <span class="n">mutation_time</span><span class="p">[</span><span class="n">mutation</span><span class="o">.</span><span class="n">id</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">mig</span><span class="o">.</span><span class="n">time</span> <span class="o">&lt;</span> <span class="n">mutation</span><span class="o">.</span><span class="n">time</span><span class="p">:</span>
                             <span class="k">assert</span> <span class="n">mutation_population</span><span class="p">[</span><span class="n">mutation</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">==</span> <span class="n">mig</span><span class="o">.</span><span class="n">source</span>
                             <span class="n">mutation_population</span><span class="p">[</span><span class="n">mutation</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">mig</span><span class="o">.</span><span class="n">dest</span>
     <span class="k">return</span> <span class="n">mutation_population</span>
 
-<span class="n">mutation_population</span> <span class="o">=</span> <span class="n">get_mutation_population</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">mutation_time</span><span class="p">)</span>
+<span class="n">mutation_population</span> <span class="o">=</span> <span class="n">get_mutation_population</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>We can plot a fraction of the tree sequence (say the first 25kb) using <a class="reference internal" href="viz.html#sec-tskit-viz-styling"><span class="std std-ref">styling</span></a> to colour both mutations and nodes by their population:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-<span class="n">colour_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">}</span>
-<span class="n">node_colours</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="n">colour_map</span><span class="p">[</span><span class="n">tree</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">u</span><span class="p">)]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
-<span class="n">mutation_colours</span> <span class="o">=</span> <span class="p">{</span><span class="n">mut</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="n">colour_map</span><span class="p">[</span><span class="n">mutation_population</span><span class="p">[</span><span class="n">mut</span><span class="o">.</span><span class="n">id</span><span class="p">]]</span> <span class="k">for</span> <span class="n">mut</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">mutations</span><span class="p">()}</span>
-<span class="n">SVG</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">node_colours</span><span class="o">=</span><span class="n">node_colours</span><span class="p">,</span> <span class="n">mutation_colours</span><span class="o">=</span><span class="n">mutation_colours</span><span class="p">))</span>
-    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_units</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">25</span>  <span class="c1"># Conversion factor for kya to generations</span>
+
+<span class="n">colour_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">}</span>
+<span class="n">css</span> <span class="o">=</span> <span class="s2">&quot;.y-axis .tick .grid {stroke: #CCCCCC} .y-axis .tick .lab {font-size: 85%}&quot;</span>
+<span class="n">css</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;.node.p</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> &gt; .sym </span><span class="se">{{</span><span class="s2">fill: </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">colour_map</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+<span class="n">css</span> <span class="o">+=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+    <span class="sa">f</span><span class="s2">&quot;.mut.m</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> .sym </span><span class="se">{{</span><span class="s2">stroke: </span><span class="si">{</span><span class="n">colour_map</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="si">}</span><span class="se">}}</span><span class="s2"> &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;.mut.m</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> .lab </span><span class="se">{{</span><span class="s2">fill: </span><span class="si">{</span><span class="n">colour_map</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="si">}</span><span class="se">}}</span><span class="s2"> &quot;</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mutation_population</span><span class="p">)])</span>
+<span class="n">y_ticks</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">:</span> <span class="s2">&quot;Introgress&quot;</span><span class="p">,</span> <span class="mi">70</span><span class="p">:</span> <span class="s2">&quot;Eur origin&quot;</span><span class="p">,</span> <span class="mi">300</span><span class="p">:</span> <span class="s2">&quot;Nea origin&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">:</span> <span class="s2">&quot;1000&quot;</span><span class="p">}</span>
+<span class="n">y_ticks</span> <span class="o">=</span> <span class="p">{</span><span class="n">y</span> <span class="o">*</span> <span class="n">time_units</span><span class="p">:</span> <span class="n">lab</span> <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">lab</span> <span class="ow">in</span> <span class="n">y_ticks</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">draw_svg</span><span class="p">(</span>
+    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span>
+    <span class="n">x_lim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25_000</span><span class="p">),</span>
+    <span class="n">time_scale</span><span class="o">=</span><span class="s2">&quot;log_time&quot;</span><span class="p">,</span>
+    <span class="n">node_labels</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;Af&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Eu&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;Ne&quot;</span><span class="p">},</span>
+    <span class="n">y_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">y_label</span><span class="o">=</span><span class="s2">&quot;Time (kya)&quot;</span><span class="p">,</span>
+    <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;Genomic position (bp)&quot;</span><span class="p">,</span>
+    <span class="n">y_ticks</span><span class="o">=</span><span class="n">y_ticks</span><span class="p">,</span>
+    <span class="n">y_gridlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="n">css</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/introgression_15_0.svg" src="_images/introgression_15_0.svg" /></div>
+<img alt="_images/25904cb4842cfda95152ab7b12657d3c701b9929f853fdb34550f4f4219a9ba1.svg" src="_images/25904cb4842cfda95152ab7b12657d3c701b9929f853fdb34550f4f4219a9ba1.svg" /></div>
 </div>
-<p>This example shows the locations in which the mutations along the tree branches. We show a single tree here for simplicity, but the method also works when we have recombination.</p>
+<p>The depth of the trees indicates that most coalescences occur well before the origin of
+Neanderthals, and are thus instances of ILS. Moreover, most mutations on the trees are
+red, indicating they occurred in the African population, although a few are blue
+(Eurasian origin) or green (Neanderthal origin). A more comprehensive approach might
+simply count the number of (say) mutations originating in Neanderthals:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dataclasses</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;% of muts from Neanderthals: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mutation_population</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">ts</span><span class="o">.</span><span class="n">num_mutations</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>% of muts from Neanderthals: 12.90%
+</pre></div>
+</div>
+</div>
+</div>
+<p>This seems high because it includes all the mutations that original in Neanderthals that are
+<em>only</em> found in the Neanderthal genome (and not e.g. in the Eurasian sample). In real datasets
+these are usually removed, to leave only those mutations that have been introgressed from Neanderthals
+into modern humans. The percentage of introgressed Neanderthal mutations seen in modern
+humans is much smaller:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  NOTE: we shouldn&#39;t need to mess with metadata to save mutation information once we can</span>
+<span class="c1">#  simplify a tree sequence with migrations, see https://github.com/tskit-dev/tskit/issues/20</span>
+<span class="kn">import</span> <span class="nn">tskit</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">dump_tables</span><span class="p">()</span>
+<span class="n">tables</span><span class="o">.</span><span class="n">mutations</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">tables</span><span class="o">.</span><span class="n">mutations</span><span class="o">.</span><span class="n">metadata_schema</span> <span class="o">=</span> <span class="n">tskit</span><span class="o">.</span><span class="n">MetadataSchema</span><span class="p">({</span><span class="s2">&quot;codec&quot;</span><span class="p">:</span><span class="s2">&quot;json&quot;</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mutation_population</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">mutations</span><span class="p">):</span>
+    <span class="n">tables</span><span class="o">.</span><span class="n">mutations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataclasses</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pop&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">)}))</span>   
+<span class="n">tables</span><span class="o">.</span><span class="n">migrations</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">tables</span><span class="o">.</span><span class="n">simplify</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">extant_ts</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">tree_sequence</span><span class="p">()</span>
+<span class="n">num_introgressed_muts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">extant_ts</span><span class="o">.</span><span class="n">mutations</span><span class="p">()</span> <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;pop&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;% Neanderthal muts in moderns: </span><span class="si">{</span><span class="n">num_introgressed_muts</span><span class="o">/</span><span class="n">extant_ts</span><span class="o">.</span><span class="n">num_mutations</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>% Neanderthal muts in moderns: 0.28%
+</pre></div>
+</div>
+</div>
+</div>
+<p>So in this model, of the mutations in the ~2% of the Neanderthal genome contained in extant
+Eurasians, the vast majority happened in the ancestral African population.
+Only about 1 in 7 actually mutated in Neanderthals themselves.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -547,7 +728,7 @@
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -555,38 +736,103 @@
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="bottlenecks.html" title="previous page">Bottlenecks</a>
-    <a class='right-next' id="next-link" href="completing-forward-sims.html" title="next page">Completing forwards simulations</a>
 
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Tskit Developers<br/>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bottlenecks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Instantaneous Bottlenecks</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="completing_forward_sims.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Completing forwards simulations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#locating-mutations">Locating mutations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tskit Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

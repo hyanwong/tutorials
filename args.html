@@ -1,0 +1,2667 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>ARGs as tree sequences &#8212; Tree Sequence Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'args';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tree sequences and simulation" href="simulation_overview.html" />
+    <link rel="prev" title="Working with Metadata" href="metadata.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/tskit_logo.svg" class="logo__image only-light" alt="Tree Sequence Tutorials - Home"/>
+    <script>document.write(`<img src="_static/tskit_logo.svg" class="logo__image only-dark" alt="Tree Sequence Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="what_is.html">What is a tree sequence?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tree sequence basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="terminology_and_concepts.html">Terminology &amp; concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started with <strong class="program">tskit</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analysing_tree_sequences.html"><em>Analysing tree sequences</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysing_trees.html">Analysing trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incremental_algorithms.html"><em>Incremental algorithms</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="counting_topologies.html">Counting topologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallelization.html"><em>Parallelization</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further tskit tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tables_and_editing.html">Tables and editing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplification.html"><em>Simplification</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="viz.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">Working with Metadata</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ARGs as tree sequences</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="simulation_overview.html">Tree sequences and simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no_mutations.html">Do you really need mutations?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_msprime.html">Advanced <strong class="program">msprime</strong> topics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="demography.html">Demography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bottlenecks.html">Instantaneous Bottlenecks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introgression.html">Introgression</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="completing_forward_sims.html">Completing forwards simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forward_sims.html">Building a forward simulator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_forward_sims.html"><em>Advanced forward simulations</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other languages</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tskitr.html">Tskit and R</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tutorial_development.html"><em>Developing new tutorials</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tskit for ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="popgen.html"><code class="docutils literal notranslate"><span class="pre">Tskit</span></code> for population genetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phylogen.html"><code class="docutils literal notranslate"><span class="pre">Tskit</span></code> for phylogenetics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/args.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ARGs as tree sequences</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-args">Full ARGs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-trees-and-arity">Local trees and arity</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sprs-and-recombination">SPRs and recombination</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-likelihoods">Calculating likelihoods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplification">Simplification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages-of-full-args">Disadvantages of Full ARGs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arg-formats-and-tskit">ARG formats and <code class="docutils literal notranslate"><span class="pre">tskit</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-args-in-tskit">Working with ARGs in <code class="docutils literal notranslate"><span class="pre">tskit</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-traversal">Graph traversal</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#traversing-parent-nodes">Traversing parent nodes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#traversing-child-nodes">Traversing child nodes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-graph-analysis">Other graph analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-software">Other software</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="args-as-tree-sequences">
+<span id="sec-args"></span><h1>ARGs as tree sequences<a class="headerlink" href="#args-as-tree-sequences" title="Permalink to this heading">#</a></h1>
+<p>At its heart, a <code class="docutils literal notranslate"><span class="pre">tskit</span></code> <a class="reference internal" href="what_is.html#sec-what-is"><span class="std std-ref">tree sequence</span></a> consists of a list of
+<a class="reference internal" href="terminology_and_concepts.html#sec-terminology-nodes"><span class="std std-ref">Nodes</span></a>, and a list of <a class="reference internal" href="terminology_and_concepts.html#sec-terminology-edges"><span class="std std-ref">Edges</span></a> that connect
+parent to child nodes. Therefore a succinct tree sequence is equivalent to a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Directed_graph">directed graph</a>,
+which is additionally annotated with genomic positions such that at each
+position, a path through the edges exists which defines a tree. This graph
+interpretation of a tree sequence is tightly connected to the concept of
+an “ancestral recombination graph” (or ARG). See
+<a class="reference external" href="https://www.biorxiv.org/content/10.1101/2023.11.03.565466v1">this preprint</a> for further details.</p>
+<section id="full-args">
+<h2>Full ARGs<a class="headerlink" href="#full-args" title="Permalink to this heading">#</a></h2>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>An original, narrower definition, which we do not use here, restricts the term ARG to
+the neutral coalescent process with simple crossover-recombination, and the
+graph structure defined by that process, see e.g.
+<a class="reference external" href="https://research.monash.edu/en/publications/an-ancestral-recombination-graph">Griffiths &amp; Marjoram (1997)</a></p>
+</aside>
+<p>The term “ARG” is <a class="reference external" href="https://doi.org/10.1086%2F508901">often used</a> to refer to
+a structure consisting of nodes and edges that describe the genetic genealogy of a set
+of sampled chromosomes which have evolved via a process of genetic inheritance combined
+with recombination. ARGs may contain not just nodes corresponding to genetic
+coalescence, but also additional nodes that correspond e.g. to recombination events.
+These “full ARGs” can be stored and analysed in
+<a class="reference external" href="https://tskit.dev">tskit</a> like any other tree sequence. A full ARG can be generated using
+<a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.sim_ancestry" title="(in Python)"><code class="docutils literal notranslate"><span class="pre">msprime.sim_ancestry()</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">record_full_arg=True</span></code> option, as described
+<a class="reference external" href="https://tskit.dev/msprime/docs/stable/ancestry.html#sec-ancestry-full-arg" title="(in Python)"><span class="xref std std-ref">in the msprime docs</span></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">msprime</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1"># Three diploid individuals == six sample genomes</span>
+    <span class="s2">&quot;sequence_length&quot;</span><span class="p">:</span> <span class="mf">1e4</span><span class="p">,</span>
+    <span class="s2">&quot;recombination_rate&quot;</span><span class="p">:</span> <span class="mf">1e-7</span><span class="p">,</span>
+    <span class="s2">&quot;population_size&quot;</span><span class="p">:</span> <span class="mf">1e3</span><span class="p">,</span>
+    <span class="s2">&quot;random_seed&quot;</span><span class="p">:</span> <span class="mi">333</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">ts_arg</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span><span class="o">**</span><span class="n">parameters</span><span class="p">,</span> <span class="n">record_full_arg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">discrete_genome</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># NB: the strict Hudson ARG needs unique crossover positions (i.e. a continuous genome)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulated a &quot;full ARG&quot; under the Hudson model:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot; ARG stored in a tree sequence with </span><span class="si">{</span><span class="n">ts_arg</span><span class="o">.</span><span class="n">num_nodes</span><span class="si">}</span><span class="s2"> nodes and&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">ts_arg</span><span class="o">.</span><span class="n">num_edges</span><span class="si">}</span><span class="s2"> edges (creating </span><span class="si">{</span><span class="n">ts_arg</span><span class="o">.</span><span class="n">num_trees</span><span class="si">}</span><span class="s2"> local trees)&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulated a &quot;full ARG&quot; under the Hudson model:
+ ARG stored in a tree sequence with 17 nodes and 18 edges (creating 3 local trees)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Like any tree sequence, we can also add mutations to the ARG to generate genetic
+variation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">1e-7</span>
+<span class="n">ts_arg</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_mutations</span><span class="p">(</span><span class="n">ts_arg</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">888</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Sample node:  &quot;</span> <span class="o">+</span> <span class="s2">&quot;   &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts_arg</span><span class="o">.</span><span class="n">samples</span><span class="p">()))</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ts_arg</span><span class="o">.</span><span class="n">variants</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variable site </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">alleles</span><span class="p">)[</span><span class="n">v</span><span class="o">.</span><span class="n">genotypes</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     Sample node:  0   1   2   3   4   5
+Variable site 0: [&#39;T&#39; &#39;C&#39; &#39;T&#39; &#39;C&#39; &#39;C&#39; &#39;C&#39;]
+Variable site 1: [&#39;C&#39; &#39;C&#39; &#39;C&#39; &#39;C&#39; &#39;G&#39; &#39;C&#39;]
+Variable site 2: [&#39;T&#39; &#39;T&#39; &#39;G&#39; &#39;T&#39; &#39;T&#39; &#39;T&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualization">
+<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading">#</a></h3>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In an <code class="docutils literal notranslate"><span class="pre">msprime</span></code> full ARG, recombinations are recorded in a specific way, by storing
+the parental genomes of a gamete. This means that
+<em>two</em> <code class="docutils literal notranslate"><span class="pre">tskit</span></code> nodes are created for each recombination, capturing transmission
+to the left vs right of the crossover breakpoint. These two nodes, which exist
+at the same timepoint, are identified by the
+<a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.msprime.NODE_IS_RE_EVENT" title="(in Python)"><code class="xref py py-data docutils literal notranslate"><span class="pre">NODE_IS_RE_EVENT</span></code></a> and
+are displayed as a single point in the “ortho” viz below, labelled with
+two node IDs separated by a slash.</p>
+</aside>
+<p>The normal <a class="reference internal" href="viz.html#sec-tskit-viz"><span class="std std-ref">Visualization</span></a> of a tree sequence is as a set of local
+trees. However, all tree sequences can also be
+<a class="reference internal" href="viz.html#sec-tskit-viz-other-graph"><span class="std std-ref">plotted as graphs</span></a>. In particular, the Hudson “full ARG”
+model guarantees that the graph consists of nodes which mark a split into two child lineages
+(“common ancestor” nodes) or nodes which mark a split into two parent lineages
+(“recombination” nodes). Such ARGs can be visualized with edges drawn as horizontal and vertical
+lines (the “ortho” style in the
+<a class="reference external" href="https://github.com/kitchensjn/tskit_arg_visualizer">tskit_arg_visualiser</a> software):</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%javascript</span>
+<span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span><span class="nx">paths</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">d3</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;https://d3js.org/d3.v7.min&#39;</span><span class="p">}});</span>
+<span class="nx">require</span><span class="p">([</span><span class="s2">&quot;d3&quot;</span><span class="p">],</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">d3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="nb">window</span><span class="p">.</span><span class="nx">d3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">d3</span><span class="p">;});</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<script type="application/javascript">require.config({paths: {d3: 'https://d3js.org/d3.v7.min'}});
+require(["d3"], function(d3) {window.d3 = d3;});
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tskit_arg_visualizer</span>
+<span class="n">d3arg</span> <span class="o">=</span> <span class="n">tskit_arg_visualizer</span><span class="o">.</span><span class="n">D3ARG</span><span class="o">.</span><span class="n">from_ts</span><span class="p">(</span><span class="n">ts</span><span class="o">=</span><span class="n">ts_arg</span><span class="p">)</span>
+<span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">300</span>  <span class="c1"># width and height</span>
+<span class="n">d3arg</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">edge_type</span><span class="o">=</span><span class="s2">&quot;ortho&quot;</span><span class="p">,</span> <span class="n">sample_order</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>.d3arg {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px 20px 60px 20px;
+}
+
+.d3arg:hover .dashboard {
+    visibility: visible;
+}
+
+.dashboard {
+    display: flex;
+    visibility: hidden;
+}
+
+.dashboard button {
+    position: relative;
+    font-size: 30px;
+    border: 0px;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.dashboard button .tip {
+    width: 120px;
+    font-size: 12px;
+    background-color: lightgrey;
+    color: #053e4e;
+    text-align: center;
+    padding: 5px 0px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%; 
+    margin-left: -60px;
+    visibility: hidden;
+}
+
+.dashboard button:hover .desc {
+    visibility: visible;
+}
+
+.dashboard path {
+    fill: grey;
+}
+
+.dashboard button:hover path {
+    fill: #053e4e;
+}
+
+.dashboard button:active path {
+    fill: #1eebb1;
+}
+
+.yaxis path {
+    stroke: #053e4e;
+    stroke-width: 3px;
+}
+
+.yaxis line {
+    stroke: #053e4e;
+    stroke-width: 3px;
+}
+
+.yaxis text {
+    fill: #053e4e;
+    stroke: 1px;
+}
+
+.node {
+    fill: #1eebb1;
+    stroke: #053e4e;
+    stroke-width: 4px;
+}
+
+.hiddennode {
+    fill: lightgrey;
+    stroke: lightgrey;
+    stroke-width: 4px;
+}
+
+.underlink {
+    stroke: #ffffff;
+    stroke-width: 12px;
+    fill: none;
+}
+
+.link {
+    stroke: #053e4e;
+    stroke-width: 4px;
+    fill: none;
+}
+
+.hiddenlink {
+    stroke: lightgrey;
+    stroke-width: 4px;
+    fill: none;
+}
+
+.labels {
+    text-anchor: middle;
+}
+
+.label {
+    fill: #053e4e;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.hiddenlabel {
+    fill: lightgrey;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+svg {
+    display: block;
+}
+
+button {
+    display: block;
+    cursor: pointer;
+}
+
+.saving {
+    display: flex;
+    flex-direction: row;
+}
+
+.saving .message {
+    display: none;
+}</style><script src='https://d3js.org/d3.v7.min.js'></script><div id='arg_7866218186'class='d3arg' style='min-width:540px; min-height:455px;'></div><script>var line = d3.line();
+var step = d3.line().curve(d3.curveStep);
+var stepAfter = d3.line().curve(d3.curveStepAfter);
+var stepBefore = d3.line().curve(d3.curveStepBefore);
+
+function draw_force_diagram() {
+    
+    var graph = {'nodes': [{'id': 0, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [11], 'parent_of': [], 'label': '0', 'fx': 100.0, 'fy': 250.0, 'y': 250.0}, {'id': 1, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [6], 'parent_of': [], 'label': '1', 'fx': 240.0, 'fy': 250.0, 'y': 250.0}, {'id': 2, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [11], 'parent_of': [], 'label': '2', 'fx': 170.0, 'fy': 250.0, 'y': 250.0}, {'id': 3, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [6], 'parent_of': [], 'label': '3', 'fx': 310.0, 'fy': 250.0, 'y': 250.0}, {'id': 4, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [10], 'parent_of': [], 'label': '4', 'fx': 450.0, 'fy': 250.0, 'y': 250.0}, {'id': 5, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [7], 'parent_of': [], 'label': '5', 'fx': 380.0, 'fy': 250.0, 'y': 250.0}, {'id': 6, 'flag': 0, 'time': 56.0454802286223, 'time_01': 0.9594597716363211, 'logtime_01': 0.4408104125482307, 'rank_01': 0.8888888888888888, 'child_of': [9], 'parent_of': [1, 3], 'label': '6', 'x': 275.0, 'fy': 227.77777777777777, 'y': 227.77777777777777}, {'id': 7, 'flag': 131072, 'time': 59.45059299910596, 'time_01': 0.9569966997033771, 'logtime_01': 0.4327931901064175, 'rank_01': 0.7777777777777778, 'child_of': [10], 'parent_of': [5], 'x_pos_reference': 5, 'label': '7/8', 'x': 275.0, 'fy': 205.55555555555557, 'y': 205.55555555555557}, {'id': 9, 'flag': 0, 'time': 120.7850821708138, 'time_01': 0.9126306921779251, 'logtime_01': 0.3359364561713586, 'rank_01': 0.6666666666666667, 'child_of': [12], 'parent_of': [6, 7], 'label': '9', 'x': 275.0, 'fy': 183.33333333333334, 'y': 183.33333333333334}, {'id': 10, 'flag': 0, 'time': 142.86643656492956, 'time_01': 0.8966582507595428, 'logtime_01': 0.31289495466312167, 'rank_01': 0.5555555555555556, 'child_of': [12], 'parent_of': [4, 7], 'label': '10', 'x': 275.0, 'fy': 161.11111111111111, 'y': 161.11111111111111}, {'id': 11, 'flag': 0, 'time': 236.7237255340037, 'time_01': 0.8287670325403284, 'logtime_01': 0.24344667636347894, 'rank_01': 0.4444444444444444, 'child_of': [15], 'parent_of': [0, 2], 'label': '11', 'x': 275.0, 'fy': 138.88888888888889, 'y': 138.88888888888889}, {'id': 12, 'flag': 0, 'time': 272.05118690557765, 'time_01': 0.8032130833963393, 'logtime_01': 0.22428775813629553, 'rank_01': 0.33333333333333337, 'child_of': [13], 'parent_of': [9, 10], 'label': '12', 'x': 275.0, 'fy': 116.66666666666667, 'y': 116.66666666666667}, {'id': 13, 'flag': 131072, 'time': 588.0902773240502, 'time_01': 0.574607728510451, 'logtime_01': 0.11796030426281645, 'rank_01': 0.22222222222222232, 'child_of': [16], 'parent_of': [12], 'x_pos_reference': 12, 'label': '13/14', 'x': 275.0, 'fy': 94.44444444444446, 'y': 94.44444444444446}, {'id': 15, 'flag': 0, 'time': 610.912738605865, 'time_01': 0.5580992109919682, 'logtime_01': 0.11270418970307061, 'rank_01': 0.11111111111111116, 'child_of': [16], 'parent_of': [11, 13], 'label': '15', 'x': 275.0, 'fy': 72.22222222222223, 'y': 72.22222222222223}, {'id': 16, 'flag': 0, 'time': 1382.4658244607965, 'time_01': 0.0, 'logtime_01': -9.998911688890999e-05, 'rank_01': 0.0, 'child_of': [], 'parent_of': [13, 15], 'label': '16', 'x': 275.0, 'fy': 50.0, 'y': 50.0}], 'links': [{'source': 11, 'target': 0, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 2, 'region_fraction': 1.0}, {'source': 6, 'target': 1, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 3, 'region_fraction': 1.0}, {'source': 11, 'target': 2, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 0, 'region_fraction': 1.0}, {'source': 6, 'target': 3, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 1, 'region_fraction': 1.0}, {'source': 10, 'target': 4, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 7, 'region_fraction': 1.0}, {'source': 7, 'target': 5, 'bounds': '0.0-6516.940179280937 6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': '', 'region_fraction': 1.0}, {'source': 9, 'target': 6, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 7, 'region_fraction': 1.0}, {'source': 10, 'target': 7, 'bounds': '0.0-6516.940179280937', 'alt_parent': 9, 'alt_child': 4, 'region_fraction': 0.6516940179280937}, {'source': 9, 'target': 7, 'bounds': '6516.940179280937-10000.0', 'alt_parent': 10, 'alt_child': 6, 'region_fraction': 0.34830598207190633}, {'source': 12, 'target': 9, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 10, 'region_fraction': 1.0}, {'source': 12, 'target': 10, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 9, 'region_fraction': 1.0}, {'source': 15, 'target': 11, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 13, 'region_fraction': 1.0}, {'source': 13, 'target': 12, 'bounds': '0.0-2601.014547981321 2601.014547981321-10000.0', 'alt_parent': '', 'alt_child': '', 'region_fraction': 1.0}, {'source': 16, 'target': 13, 'bounds': '0.0-2601.014547981321', 'alt_parent': 15, 'alt_child': 15, 'region_fraction': 0.26010145479813207}, {'source': 15, 'target': 13, 'bounds': '2601.014547981321-10000.0', 'alt_parent': 16, 'alt_child': 11, 'region_fraction': 0.7398985452018679}, {'source': 16, 'target': 15, 'bounds': '0.0-2601.014547981321', 'alt_parent': '', 'alt_child': 13, 'region_fraction': 0.26010145479813207}], 'breakpoints': [{'start': 0, 'stop': 2601.014547981321, 'x_pos_01': 0.0, 'width_01': 0.26010145479813207, 'x_pos': 50.0, 'width': 117.04565465915942}, {'start': 2601.014547981321, 'stop': 6516.940179280937, 'x_pos_01': 0.26010145479813207, 'width_01': 0.3915925631299616, 'x_pos': 167.04565465915942, 'width': 176.21665340848273}, {'start': 6516.940179280937, 'stop': 10000.0, 'x_pos_01': 0.6516940179280937, 'width_01': 0.34830598207190633, 'x_pos': 343.26230806764215, 'width': 156.73769193235785}]};
+    var y_axis = {'include_labels': 'true', 'ticks': [250.0, 227.77777777777777, 205.55555555555557, 183.33333333333334, 161.11111111111111, 138.88888888888889, 116.66666666666667, 94.44444444444446, 72.22222222222223, 50.0], 'text': [0, 56, 59, 121, 143, 237, 272, 588, 611, 1382], 'max_min': [250.0, 50.0], 'scale': 'rank'};
+    var subset = [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 15, 16];
+    var evenly_distributed_positions = [100.0, 170.0, 240.0, 310.0, 380.0, 450.0];
+
+    var dashboard = d3.select("#arg_7866218186").append("div").attr("class", "dashboard");
+    
+    var clipboard = dashboard.append("button")
+        .on("click", function() {
+            navigator.clipboard.writeText("{'arg': {'nodes': [{'id': 0, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [11], 'parent_of': [], 'label': '0', 'fx': 100.0, 'fy': 250.0, 'y': 250.0}, {'id': 1, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [6], 'parent_of': [], 'label': '1', 'fx': 240.0, 'fy': 250.0, 'y': 250.0}, {'id': 2, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [11], 'parent_of': [], 'label': '2', 'fx': 170.0, 'fy': 250.0, 'y': 250.0}, {'id': 3, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [6], 'parent_of': [], 'label': '3', 'fx': 310.0, 'fy': 250.0, 'y': 250.0}, {'id': 4, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [10], 'parent_of': [], 'label': '4', 'fx': 450.0, 'fy': 250.0, 'y': 250.0}, {'id': 5, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [7], 'parent_of': [], 'label': '5', 'fx': 380.0, 'fy': 250.0, 'y': 250.0}, {'id': 6, 'flag': 0, 'time': 56.0454802286223, 'time_01': 0.9594597716363211, 'logtime_01': 0.4408104125482307, 'rank_01': 0.8888888888888888, 'child_of': [9], 'parent_of': [1, 3], 'label': '6', 'x': 275.0, 'fy': 227.77777777777777, 'y': 227.77777777777777}, {'id': 7, 'flag': 131072, 'time': 59.45059299910596, 'time_01': 0.9569966997033771, 'logtime_01': 0.4327931901064175, 'rank_01': 0.7777777777777778, 'child_of': [10], 'parent_of': [5], 'x_pos_reference': 5, 'label': '7/8', 'x': 275.0, 'fy': 205.55555555555557, 'y': 205.55555555555557}, {'id': 9, 'flag': 0, 'time': 120.7850821708138, 'time_01': 0.9126306921779251, 'logtime_01': 0.3359364561713586, 'rank_01': 0.6666666666666667, 'child_of': [12], 'parent_of': [6, 7], 'label': '9', 'x': 275.0, 'fy': 183.33333333333334, 'y': 183.33333333333334}, {'id': 10, 'flag': 0, 'time': 142.86643656492956, 'time_01': 0.8966582507595428, 'logtime_01': 0.31289495466312167, 'rank_01': 0.5555555555555556, 'child_of': [12], 'parent_of': [4, 7], 'label': '10', 'x': 275.0, 'fy': 161.11111111111111, 'y': 161.11111111111111}, {'id': 11, 'flag': 0, 'time': 236.7237255340037, 'time_01': 0.8287670325403284, 'logtime_01': 0.24344667636347894, 'rank_01': 0.4444444444444444, 'child_of': [15], 'parent_of': [0, 2], 'label': '11', 'x': 275.0, 'fy': 138.88888888888889, 'y': 138.88888888888889}, {'id': 12, 'flag': 0, 'time': 272.05118690557765, 'time_01': 0.8032130833963393, 'logtime_01': 0.22428775813629553, 'rank_01': 0.33333333333333337, 'child_of': [13], 'parent_of': [9, 10], 'label': '12', 'x': 275.0, 'fy': 116.66666666666667, 'y': 116.66666666666667}, {'id': 13, 'flag': 131072, 'time': 588.0902773240502, 'time_01': 0.574607728510451, 'logtime_01': 0.11796030426281645, 'rank_01': 0.22222222222222232, 'child_of': [16], 'parent_of': [12], 'x_pos_reference': 12, 'label': '13/14', 'x': 275.0, 'fy': 94.44444444444446, 'y': 94.44444444444446}, {'id': 15, 'flag': 0, 'time': 610.912738605865, 'time_01': 0.5580992109919682, 'logtime_01': 0.11270418970307061, 'rank_01': 0.11111111111111116, 'child_of': [16], 'parent_of': [11, 13], 'label': '15', 'x': 275.0, 'fy': 72.22222222222223, 'y': 72.22222222222223}, {'id': 16, 'flag': 0, 'time': 1382.4658244607965, 'time_01': 0.0, 'logtime_01': -9.998911688890999e-05, 'rank_01': 0.0, 'child_of': [], 'parent_of': [13, 15], 'label': '16', 'x': 275.0, 'fy': 50.0, 'y': 50.0}], 'links': [{'source': 11, 'target': 0, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 2, 'region_fraction': 1.0}, {'source': 6, 'target': 1, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 3, 'region_fraction': 1.0}, {'source': 11, 'target': 2, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 0, 'region_fraction': 1.0}, {'source': 6, 'target': 3, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 1, 'region_fraction': 1.0}, {'source': 10, 'target': 4, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 7, 'region_fraction': 1.0}, {'source': 7, 'target': 5, 'bounds': '0.0-6516.940179280937 6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': '', 'region_fraction': 1.0}, {'source': 9, 'target': 6, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 7, 'region_fraction': 1.0}, {'source': 10, 'target': 7, 'bounds': '0.0-6516.940179280937', 'alt_parent': 9, 'alt_child': 4, 'region_fraction': 0.6516940179280937}, {'source': 9, 'target': 7, 'bounds': '6516.940179280937-10000.0', 'alt_parent': 10, 'alt_child': 6, 'region_fraction': 0.34830598207190633}, {'source': 12, 'target': 9, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 10, 'region_fraction': 1.0}, {'source': 12, 'target': 10, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 9, 'region_fraction': 1.0}, {'source': 15, 'target': 11, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 13, 'region_fraction': 1.0}, {'source': 13, 'target': 12, 'bounds': '0.0-2601.014547981321 2601.014547981321-10000.0', 'alt_parent': '', 'alt_child': '', 'region_fraction': 1.0}, {'source': 16, 'target': 13, 'bounds': '0.0-2601.014547981321', 'alt_parent': 15, 'alt_child': 15, 'region_fraction': 0.26010145479813207}, {'source': 15, 'target': 13, 'bounds': '2601.014547981321-10000.0', 'alt_parent': 16, 'alt_child': 11, 'region_fraction': 0.7398985452018679}, {'source': 16, 'target': 15, 'bounds': '0.0-2601.014547981321', 'alt_parent': '', 'alt_child': 13, 'region_fraction': 0.26010145479813207}], 'breakpoints': [{'start': 0, 'stop': 2601.014547981321, 'x_pos_01': 0.0, 'width_01': 0.26010145479813207, 'x_pos': 50.0, 'width': 117.04565465915942}, {'start': 2601.014547981321, 'stop': 6516.940179280937, 'x_pos_01': 0.26010145479813207, 'width_01': 0.3915925631299616, 'x_pos': 167.04565465915942, 'width': 176.21665340848273}, {'start': 6516.940179280937, 'stop': 10000.0, 'x_pos_01': 0.6516940179280937, 'width_01': 0.34830598207190633, 'x_pos': 343.26230806764215, 'width': 156.73769193235785}]}, 'width': 500, 'height': 375, 'y_axis': {'include_labels': 'true', 'ticks': [250.0, 227.77777777777777, 205.55555555555557, 183.33333333333334, 161.11111111111111, 138.88888888888889, 116.66666666666667, 94.44444444444446, 72.22222222222223, 50.0], 'text': [0, 56, 59, 121, 143, 237, 272, 588, 611, 1382], 'max_min': [250.0, 50.0], 'scale': 'rank'}, 'tree_highlighting': 'true', 'edge_type': 'ortho', 'variable_edge_width': 'false', 'subset_nodes': [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 15, 16], 'include_node_labels': 'true', 'evenly_distributed_positions': [100.0, 170.0, 240.0, 310.0, 380.0, 450.0]}".replace(/'nodes': .*'links'/, "'nodes': " + JSON.stringify(graph.nodes) + ", 'links'").replaceAll("'", '"'));
+            d3.select("#arg_7866218186 .copymessage").style("visibility", "visible");
+            setTimeout( function() {
+                d3.select("#arg_7866218186 .copymessage").style("visibility", "hidden");
+            }, 1000);
+        });
+    clipboard.append("svg") //<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("viewBox", "0 0 448 512")
+        .append("path")
+        .attr("d", "M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z");
+    clipboard.append("span").attr("class", "tip desc").text("Copy To Clipboard");
+    clipboard.append("span").attr("class", "tip copymessage").text("Copied!");
+
+    var reheat = dashboard.append("button")
+        .on("click", function(event) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();       
+            var order = d3.selectAll("#arg_7866218186 .sample").data().sort((a, b) => d3.ascending(a.x, b.x)).map(a => a.id);;
+            d3.selectAll("#arg_7866218186 .node").classed("unfix", function(d) {
+                if (d.flag != 1) {
+                    delete d.fx;
+                } else {
+                    d.fx = evenly_distributed_positions[order.indexOf(d.id)];
+                }
+            });
+        });
+    reheat.append("svg") //<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("viewBox", "0 0 384 512")
+        .append("path")
+        .attr("d", "M153.6 29.9l16-21.3C173.6 3.2 180 0 186.7 0C198.4 0 208 9.6 208 21.3V43.5c0 13.1 5.4 25.7 14.9 34.7L307.6 159C356.4 205.6 384 270.2 384 337.7C384 434 306 512 209.7 512H192C86 512 0 426 0 320v-3.8c0-48.8 19.4-95.6 53.9-130.1l3.5-3.5c4.2-4.2 10-6.6 16-6.6C85.9 176 96 186.1 96 198.6V288c0 35.3 28.7 64 64 64s64-28.7 64-64v-3.9c0-18-7.2-35.3-19.9-48l-38.6-38.6c-24-24-37.5-56.7-37.5-90.7c0-27.7 9-54.8 25.6-76.9z");
+    reheat.append("span").attr("class", "tip desc").text("Reheat Simulation");
+    
+    var evenly_distribute = dashboard.append("button")
+        .on("click", function() {
+            var order = d3.selectAll("#arg_7866218186 .sample").data().sort((a, b) => d3.ascending(a.x, b.x)).map(a => a.id);;
+            d3.selectAll("#arg_7866218186 .sample").classed("distribute", function(d) {
+                d.fx = evenly_distributed_positions[order.indexOf(d.id)];
+            });
+        });
+    evenly_distribute.append("svg") //<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("viewBox", "0 0 512 512")
+        .append("path")
+        .attr("d", "M504.3 273.6c4.9-4.5 7.7-10.9 7.7-17.6s-2.8-13-7.7-17.6l-112-104c-7-6.5-17.2-8.2-25.9-4.4s-14.4 12.5-14.4 22l0 56-192 0 0-56c0-9.5-5.7-18.2-14.4-22s-18.9-2.1-25.9 4.4l-112 104C2.8 243 0 249.3 0 256s2.8 13 7.7 17.6l112 104c7 6.5 17.2 8.2 25.9 4.4s14.4-12.5 14.4-22l0-56 192 0 0 56c0 9.5 5.7 18.2 14.4 22s18.9 2.1 25.9-4.4l112-104z")
+    evenly_distribute.append("span").attr("class", "tip desc").text("Space Samples");
+
+    var svg = d3.select("#arg_7866218186").append("svg")
+        .attr("width", 500)
+        .attr("height", 375)
+        .style("padding-top", "10px");
+
+    var result = y_axis.ticks.map(function (x) { 
+        return parseInt(x, 10); 
+    });
+
+
+    if (y_axis.include_labels == "true") {
+        var bottom = 375 - 50;
+        if (true) {
+            bottom = 375 - 125;
+        }
+        var yscale = d3.scaleLinear() 
+            .domain([y_axis.max_min[0], y_axis.max_min[1]]) 
+            .range([bottom, 50]); 
+
+        var y_axis_text = y_axis.text;
+
+        var y_axis = d3.axisRight().scale(yscale)
+            .tickValues(result)
+            .tickFormat((d, i) => y_axis_text[i]); 
+
+        var y_axis_labels = svg
+            .append("g")
+            .attr("class", "yaxis")
+            .attr("transform", "translate(5,0)")
+            .call(y_axis);
+    }
+
+    var simulation = d3
+        .forceSimulation(graph.nodes)
+        .force("link", d3.forceLink()
+            .id(function(d) {
+                return d.id;
+            })
+            .links(graph.links)
+        )
+        .force("charge", d3.forceManyBody().strength(-10))
+        .on("tick", ticked);
+
+    var link_container = svg
+        .append("g")
+        .attr("class", "links")
+        .selectAll("path")
+        .data(graph.links)
+        .enter()
+        .append("g")
+        .attr("bounds", function(d) {
+            return d.bounds;
+        });
+
+    var underlink = link_container
+        .append("path")
+        .attr("class", "underlink");
+
+    var link = link_container
+        .append("path")
+        .attr("class", function(d) {
+            if (subset.includes(d.source.id) & subset.includes(d.target.id)) {
+                return "link"
+            } else {
+                return "hiddenlink"
+            }
+        });
+    
+    if (false) {
+        link
+            .style("stroke-width", function(d) {
+                return d.region_fraction * 7 + 1;
+            });
+    }
+    
+    if (true) {
+        link
+            .on('mouseover', function (event, d) {
+                d3.select(this)
+                    .style('stroke', '#1eebb1')
+                    .style("cursor", "pointer");
+                d3.select("#arg_7866218186 .breakpoints")
+                    .selectAll("rect")
+                        .filter(function(j) {
+                            return d.bounds.split(" ").some(function(region) {
+                                region = region.split("-");
+                                return (parseFloat(region[0]) <= j.start) & (parseFloat(region[1]) >= j.stop)
+                            });
+                        })
+                        .style('fill', '#1eebb1');
+            })
+            .on('mouseout', function (d, i) {
+                d3.select(this)
+                    .style('stroke', '#053e4e')
+                    .style("cursor", "default")
+                d3.select("#arg_7866218186 .breakpoints").selectAll("rect")
+                    .style("fill", "#053e4e")
+            });
+    }
+
+    var node = svg
+        .append("g")
+        .attr("class", "nodes")
+        .selectAll("circle")
+        .data(graph.nodes)
+        .enter()
+        .append("circle")
+        .attr("id", function(d) {
+            return String(7866218186) + "_node" + d.id
+        })
+        .attr("class", function(d) {
+            var classy = ""
+            if (subset.includes(d.id)) {
+                classy += "node";
+            } else {
+                classy += "hiddennode";
+            }
+            if (d.flag == 1) {
+                classy += " sample";
+            }
+            return classy
+        })
+        .attr("parents", function(d) {
+            return d.child_of.toString().replace(",", " ")
+        })
+        .attr("children", function(d) {
+            return d.parent_of.toString().replace(",", " ")
+        })
+        .attr("r", 7)
+        .call(
+            d3
+                .drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+        )
+        .on('mouseover', function (d, i) {
+            d3.select(this)
+                .style("cursor", "pointer")
+        });
+
+    
+    if (true) {
+        var label = svg
+            .append("g")
+            .attr("class", "labels")
+            .selectAll("text")
+            .data(graph.nodes)
+            .enter()
+            .append("text")
+                .attr("class", function(d) {
+                    if (subset.includes(d.id)) {
+                        return "label"
+                    } else {
+                        return "hiddenlabel"
+                    }
+                })
+                .text(function (d) { return d.label; });
+    };
+    
+    function determine_path_type(d) {
+        path_type = ""
+        var start_position_x = d.source.x;
+        var start_position_y = d.source.y;
+        var stop_position_x = d.target.x;
+        var stop_position_y = d.target.y;
+        var vnub = Math.min((stop_position_y-start_position_y)/2, 20);
+        if ("y_axis.scale" == "time" | "y_axis.scale" == "log_time") {
+            vnub = 0;
+        }
+        var alt_child = document.getElementById(String(7866218186) + "_node" + d.alt_child);
+        if (alt_child != null) {
+            var alt_child_x = alt_child.getAttribute("cx");
+            var alt_child_y = alt_child.getAttribute("cy");
+        }
+        if (d.source.flag == 131072) {
+            path_type += "r0";
+            start_position_y = d.source.y + vnub;
+        } else {
+            if (d.target.y < alt_child_y) {
+                if (d.target.x < d.source.x) {
+                    if (d.target.x < d.source.x - 40) {
+                        path_type += "tL";
+                    } else {
+                        path_type += "fL";
+                    }
+                    start_position_x = d.source.x - 20;
+                } else {
+                    if (d.target.x > d.source.x + 40) {
+                        path_type += "tR";
+                    } else {
+                        path_type += "fR";
+                    }
+                    start_position_x = d.source.x + 20;
+                }
+            } else if (d.target.y > alt_child_y) {
+                if (alt_child_x < d.source.x) {
+                    if (d.target.x < d.source.x + 40) {
+                        path_type += "fR";
+                    } else {
+                        path_type += "tR";
+                    }
+                    start_position_x = d.source.x + 20;
+                } else {
+                    if (d.target.x > d.source.x - 40) {
+                        path_type += "fL";
+                    } else {
+                        path_type += "tL";
+                    }
+                    start_position_x = d.source.x - 20;
+                }
+            } else {
+                if (d.target.x < alt_child_x) {
+                    if (d.target.x < d.source.x - 40) {
+                        path_type += "tL";
+                    } else {
+                        path_type += "fL";
+                    }
+                    start_position_x = d.source.x - 20;
+                } else if (d.target.x > alt_child_x) {
+                    if (d.target.x > d.source.x + 40) {
+                        path_type += "tR";
+                    } else {
+                        path_type += "fR";
+                    }
+                    start_position_x = d.source.x + 20;
+                } else {
+                    if (d.index % 2 == 0) {
+                        path_type += "fL";
+                        start_position_x = d.source.x - 20;
+                    } else {
+                        path_type += "fR";
+                        start_position_x = d.source.x + 20;
+                    }
+                }
+            }
+        }
+        var alt_parent = document.getElementById(String(7866218186) + "_node" + d.alt_parent);
+        if (alt_parent != null) {
+            var alt_parent_x = alt_parent.getAttribute("cx");
+            var alt_parent_y = alt_parent.getAttribute("cy");
+        }
+        if (d.target.flag == 131072) {
+            if (d.source.y < alt_parent_y) {
+                if (alt_parent_x < d.target.x) {
+                    if (d.source.x < d.target.x + 40) {
+                        path_type += "fR";
+                    } else {
+                        path_type += "tR";
+                    }
+                    stop_position_x = d.target.x + 20;
+                } else {
+                    if (d.source.x > d.target.x - 40) {
+                        path_type += "fL";
+                    } else {
+                        path_type += "tL";
+                    }
+                    stop_position_x = d.target.x - 20;
+                }
+            } else if (d.source.y > alt_parent_y) {
+                if (d.source.x < d.target.x) {
+                    if (d.source.x < d.target.x - 40) {
+                        path_type += "tL";
+                    } else {
+                        path_type += "fL";
+                    }
+                    stop_position_x = d.target.x - 20;
+                } else {
+                    if (d.source.x > d.target.x + 40) {
+                        path_type += "tR";
+                    } else {
+                        path_type += "fR";
+                    }
+                    stop_position_x = d.target.x + 20;
+                }
+            } else {
+                if (d.index % 2 == 0) {
+                    path_type += "fL";
+                    stop_position_x = d.target.x - 20;
+                } else {
+                    path_type += "fR";
+                    stop_position_x = d.target.x + 20;
+                }
+            }
+        } else {
+            path_type += "b0";
+            stop_position_y = d.target.y - vnub;
+        }
+        if (path_type == "fLb0" ) {
+            if (start_position_x >= stop_position_x) {
+                path_type = "tLb0";
+            }
+        } else if (path_type == "fRb0") {
+            if (start_position_x <= stop_position_x) {
+                path_type = "tRb0";
+            }
+        } else if (path_type == "r0fL") {
+            if (start_position_x <= stop_position_x) {
+                path_type = "r0tL";
+            }
+        } else if (path_type == "r0fR") {
+            if (start_position_x >= stop_position_x) {
+                path_type = "r0tR";
+            }
+        } else if (path_type == "fLfL") {
+            if (start_position_x <= stop_position_x) {
+                path_type = "fLtL";
+            } else {
+                path_type = "tLfL";
+            }
+        } else if (path_type == "fRfR") {
+            if (start_position_x >= stop_position_x) {
+                path_type = "fRtR";
+            } else {
+                path_type = "tRfR";
+            }
+        }
+        if ((d.source.id == 60) & (d.target.id == 35)) {
+            path_type = "r0b0";
+            start_position_x = d.source.x;
+            start_position_y = d.source.y + vnub;
+            stop_position_x = d.target.x;
+            stop_position_y = d.target.y - vnub;
+        }
+        return [path_type, start_position_x, start_position_y, stop_position_x, stop_position_y];
+    }
+
+    function ticked() {
+
+        node
+            .attr("cx", function(d) {
+                if (y_axis.include_labels == "false") {
+                    return d.x = Math.max(50, Math.min(500-50, d.x));
+                } else {
+                    return d.x = Math.max(100, Math.min(500-50, d.x));
+                }
+            })
+            .attr("cy", function(d) {
+                return d.y;
+            });
+
+        underlink
+            .attr("d", function(d) {
+                if ("ortho" == "ortho") {
+                    const output = determine_path_type(d);
+                
+                    const path_type = output[0];
+                    const simple_path_type = Array.from(path_type)[0] + Array.from(path_type)[2];
+                    const start_position_x = output[1];
+                    const start_position_y = output[2];
+                    const stop_position_x = output[3];
+                    const stop_position_y = output[4];
+
+                    const after_paths = ["rf", "tb", "tf"];
+                    const before_paths = ["rt", "fb", "ft"];
+                    const step_paths = ["tt"];
+                    const mid_paths = ["rb", "ff"];
+
+                    if (after_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + stepAfter([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (before_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + stepBefore([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (step_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + step([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (mid_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + line([[start_position_x, start_position_y],[start_position_x, start_position_y + (stop_position_y - start_position_y)/2]]) + line([[start_position_x, start_position_y + (stop_position_y - start_position_y)/2],[stop_position_x, start_position_y + (stop_position_y - start_position_y)/2]]) + line([[stop_position_x, start_position_y + (stop_position_y - start_position_y)/2], [stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    }
+                }
+            });
+
+        link
+            .attr("path_type", function(d) {
+                return determine_path_type(d)[0];
+            })
+            .attr("d", function(d) {
+                if ("ortho" == "ortho") {
+                    const output = determine_path_type(d);
+                
+                    const path_type = output[0];
+                    const simple_path_type = Array.from(path_type)[0] + Array.from(path_type)[2];
+                    const start_position_x = output[1];
+                    const start_position_y = output[2];
+                    const stop_position_x = output[3];
+                    const stop_position_y = output[4];
+
+                    const after_paths = ["rf", "tb", "tf"];
+                    const before_paths = ["rt", "fb", "ft"];
+                    const step_paths = ["tt"];
+                    const mid_paths = ["rb", "ff"];
+
+                    if (after_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + stepAfter([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (before_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + stepBefore([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (step_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + step([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (mid_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + line([[start_position_x, start_position_y],[start_position_x, start_position_y + (stop_position_y - start_position_y)/2]]) + line([[start_position_x, start_position_y + (stop_position_y - start_position_y)/2],[stop_position_x, start_position_y + (stop_position_y - start_position_y)/2]]) + line([[stop_position_x, start_position_y + (stop_position_y - start_position_y)/2], [stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    }
+                } else if ("ortho" == "line") {
+                    if (d.source.id == d.alt_parent) {
+                        var leftOrRight = 20;
+                        if (d.index % 2 == 0) {
+                            leftOrRight = -20;
+                        }
+                        return "M " + d.source.x + " " + d.source.y + " C " + (d.source.x + leftOrRight).toString() + " " +  (d.source.y - 10).toString() + ", " + (d.target.x + leftOrRight).toString() + " " + (d.target.y + 10).toString() + ", " + d.target.x + " " + d.target.y;
+                    } else {
+                        return line([[d.source.x, d.source.y], [d.target.x, d.target.y]]);
+                    }
+                }
+            });
+
+        function determine_label_positioning(d) {
+            if (d.flag == 131072 || d.parent_of.length == 0 || d.child_of.length == 0) {
+                return "c";
+            } else if (d.child_of.length == 1) {
+                var parent = document.getElementById(String(7866218186) + "_node" + d.child_of[0])
+                if (parent != null) {
+                    var parent_x = parent.getAttribute("cx");
+                    if (parent_x > d.x) {
+                        return "l";
+                    } else {
+                        return "r";
+                    }
+                } else {
+                    return "r";
+                }
+            } else {
+                return "r";
+            }
+        };
+
+        if (true) {
+
+            label
+                .attr("x", function(d) {
+                    var positioning = determine_label_positioning(d);
+                    if (positioning == "l") {
+                        return d.x - 15;
+                    } else if (positioning == "r") {
+                        return d.x + 15;
+                    } else {
+                        return d.x;
+                    }
+                })
+                .style("text-anchor", function(d) {
+                    var positioning = determine_label_positioning(d);
+                    if (positioning == "l") {
+                        return "end";
+                    } else if (positioning == "r") {
+                        return "start";
+                    } else {
+                        return "middle";
+                    }
+                })
+                .attr("y", function(d) {
+                    if (d.parent_of.length == 0) {
+                        return d.y + 25;
+                    } else {
+                        return d.y - 15;
+                    }
+                });
+        };
+    }
+
+    function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+    }
+
+    function dragged(event, d) {
+        d.fx = event.x;
+    }
+
+    if (true) {
+        
+        var th_group = svg.append("g").attr("class", "tree_highlighting");
+        
+        th_group
+            .append("g")
+            .attr("class", "breakpoints")
+            .selectAll("rect")
+            .data(graph.breakpoints)
+            .enter()
+            .append("rect")
+            .attr("start", function(d) {
+                return d.start;
+            })
+            .attr("stop", function(d) {
+                return d.stop;
+            })
+            .attr("x", function(d) {
+                return d.x_pos;
+            })
+            .attr("y", 375-60)
+            .attr("width", function(d) {
+                return d.width;
+            })
+            .attr("height", 40)
+            .attr("stroke", "#FFFFFF")
+            .attr("stroke-width", 5)
+            .attr("fill", "#053e4e")
+            .on('mouseover', function (event, d) {
+                d3.select(this)
+                    .style('fill', '#1eebb1')
+                    .style("cursor", "pointer");
+                var highlight_links = d3.select("#arg_7866218186 .links")
+                    .selectAll("g")
+                        .filter(function(j) {
+                            return j.bounds.split(" ").some(function(region) {
+                                region = region.split("-");
+                                return (parseFloat(region[1]) > d.start) & (parseFloat(region[0]) < d.stop)
+                            });
+                        });
+                highlight_links.raise();
+                //if (false) {
+                    highlight_links
+                        .select(".link")
+                        .style("stroke", "#1eebb1");
+                //} else {
+                //    highlight_links
+                //        .select(".link")
+                //        .style("stroke", "#1eebb1")
+                //        .style("stroke-width", 7);
+                //};
+            })
+            .on('mouseout', function (d, i) {
+                d3.select(this)
+                    .style('fill', '#053e4e')
+                    .style("cursor", "default");
+                //if (false) {
+                    d3.selectAll("#arg_7866218186 .link")
+                        .style("stroke", "#053e4e");
+                //} else {
+                //    d3.selectAll("#arg_7866218186 .link")
+                //        .style("stroke", "#053e4e")
+                //        .style("stroke-width", 3);
+                //};     
+            });
+        
+        var endpoints = th_group.append("g").attr("class", "endpoints");
+        
+        endpoints
+            .append("text")
+                .attr("class", "label")
+                .style("text-anchor", "start")
+                .text(graph.breakpoints[0].start)
+                .attr("x", graph.breakpoints[0].x_pos)
+                .attr("y", 375-5);
+        
+        endpoints
+            .append("text")
+                .attr("class", "label")
+                .style("text-anchor", "end")
+                .text(graph.breakpoints[graph.breakpoints.length-1].stop)
+                .attr("x", 500)
+                .attr("y", 375-5);
+    }
+}
+
+draw_force_diagram()</script></div></div>
+</div>
+</section>
+<section id="local-trees-and-arity">
+<h3>Local trees and arity<a class="headerlink" href="#local-trees-and-arity" title="Permalink to this heading">#</a></h3>
+<p>Below is a plot of the equivalent local trees in the ARG above,
+colouring recombination nodes in red and common
+ancestor nodes (unlabelled) in blue.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the recombination nodes in red, with a horizontal line at the time of occurrence,</span>
+<span class="c1"># and only label nodes that are samples or recombination nodes.</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ts_arg</span><span class="o">.</span><span class="n">samples</span><span class="p">())</span>
+<span class="n">re_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">nd</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">ts_arg</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">nd</span><span class="o">.</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">msprime</span><span class="o">.</span><span class="n">NODE_IS_RE_EVENT</span><span class="p">)</span>
+<span class="n">ca_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ts_arg</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">))</span> <span class="o">-</span> <span class="n">re_nodes</span> <span class="o">-</span> <span class="n">samples</span>
+<span class="n">re_times</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">nd</span><span class="o">.</span><span class="n">time</span><span class="p">)</span> <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">ts_arg</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">nd</span><span class="o">.</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">msprime</span><span class="o">.</span><span class="n">NODE_IS_RE_EVENT</span><span class="p">]</span>
+<span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;.y-axis .grid {stroke: #ff000033} .mut .sym {stroke: goldenrod}&quot;</span>
+<span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">re_nodes</span><span class="p">:</span>
+    <span class="n">style</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;.n</span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2"> &gt; .sym </span><span class="se">{{</span><span class="s2">fill: red</span><span class="se">}}</span><span class="s2">&quot;</span>
+<span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ca_nodes</span><span class="p">:</span>
+    <span class="n">style</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;.n</span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2"> &gt; .sym </span><span class="se">{{</span><span class="s2">fill: blue</span><span class="se">}}</span><span class="s2">&quot;</span>
+<span class="n">ts_arg</span><span class="o">.</span><span class="n">draw_svg</span><span class="p">(</span>
+    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>
+    <span class="n">y_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">y_ticks</span><span class="o">=</span><span class="n">re_times</span><span class="p">,</span>
+    <span class="n">y_gridlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+    <span class="n">mutation_labels</span><span class="o">=</span><span class="p">{},</span>
+    <span class="n">node_labels</span><span class="o">=</span><span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">samples</span> <span class="o">|</span> <span class="n">re_nodes</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/22e524f9905352995560947ea74616906a1262b40618d84a33bb599238ed863a.svg" src="_images/22e524f9905352995560947ea74616906a1262b40618d84a33bb599238ed863a.svg" /></div>
+</div>
+<p>The number of children descending from a node in a local tree can be termed the
+“local arity” of that node. It is clear from the plot above that red nodes always
+have a local arity of 1, and blue nodes sometimes do. This may seem an unusual
+state of affairs: tree representations often focus on branch-points, and ignore nodes
+with a single child. Indeed, it is possible to <a class="reference internal" href="#sec-args-simplification"><span class="std std-ref">simplify</span></a> the
+ARG above, resulting in a graph whose local trees only contain branch points or tips
+(i.e. local arity is never 1). Such a graph is <a class="reference internal" href="#sec-args-disadvantages"><span class="std std-ref">more compact</span></a>
+than the full ARG, but it omits some information about the timings and
+topological operations associated with recombination
+events and some common ancestor events. This information, as captured by the local
+unary nodes, is useful for</p>
+<ol class="arabic simple">
+<li><p>Retaining precise information about the time and lineages involved in recombination.
+This is required e.g. to ensure we can always work out the tree editing (or
+<a class="reference internal" href="terminology_and_concepts.html#sec-concepts-sprs"><span class="std std-ref">subtree-prune-and-regraft (SPR)</span></a>) moves
+required to change one local tree into another as you move along the genome.</p></li>
+<li><p>Calculating the likelihood of an full ARG under a specific model of evolution
+(most commonly, the neutral coalescent with recombination, or CwR, as modelled e.g. by
+<a class="reference external" href="https://doi.org/10.1016/0040-5809(83)90013-8">Hudson (1983)</a>)</p></li>
+</ol>
+<section id="sprs-and-recombination">
+<span id="sec-args-sprs"></span><h4>SPRs and recombination<a class="headerlink" href="#sprs-and-recombination" title="Permalink to this heading">#</a></h4>
+<p>The location of the recombination nodes in the trees above imply that the
+<em>recombination events</em> happened ~588 and ~59 generations ago. The older one,
+at 588 generations, involved node
+13 (to the left of position 2601.01) and node 14 (to the right). As well as narrowing
+down the recombination event to a specific point in time, the position of these two
+nodes tells us that the SPR to convert the first into the second tree
+involves pruning the branch above samples 1, 3, 4, and 5 and regrafting it onto the
+branch above samples 0 and 2, rather than the other way around. Note that this
+particular recombination does not change the <em>topology</em> of the tree, but simply the
+branch lengths.</p>
+<p>The recombination event 59 generations ago involved nodes 7 and 8, with the crossover
+ocurring at position 6516.94. The SPR operation which converts the middle tree into the
+last one involves pruning the branch above sample node 5 and regrafting it onto the
+branch above the common ancestor of 1 and 3. In this case, the recombination has led to
+a change in topology, such that the closest relative of 5 is node 4 from positions 0
+to 6516.94, but 1 and 3 from positions 6516.94 to 10,000.</p>
+</section>
+</section>
+<section id="calculating-likelihoods">
+<span id="sec-args-likelihoods"></span><h3>Calculating likelihoods<a class="headerlink" href="#calculating-likelihoods" title="Permalink to this heading">#</a></h3>
+<p>Because our ARG above was generated under the standard Hudson model (e.g. neutral
+evolution in a large population with unique recombination breakpoints along a continuous
+genome), we can calculate its likelihood under that model, for a given recombination
+rate and population size, using the <a class="reference external" href="https://tskit.dev/msprime/docs/stable/api.html#msprime.log_arg_likelihood" title="(in Python)"><code class="docutils literal notranslate"><span class="pre">msprime.log_arg_likelihood()</span></code></a> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Log likelihood of the genealogy under the Hudson model:&quot;</span><span class="p">,</span>
+    <span class="n">msprime</span><span class="o">.</span><span class="n">log_arg_likelihood</span><span class="p">(</span>
+        <span class="n">ts_arg</span><span class="p">,</span>
+        <span class="n">recombination_rate</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;recombination_rate&quot;</span><span class="p">],</span>
+        <span class="n">Ne</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;population_size&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log likelihood of the genealogy under the Hudson model: -89.68606886284756
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This likelihood calculation is tied to the specific <code class="docutils literal notranslate"><span class="pre">tskit</span></code> representation of the ARG that
+is output by the <code class="docutils literal notranslate"><span class="pre">msprime</span></code> simulator. In particular, it expects each recombination event to
+correspond to two recombination nodes, which allows so-called “diamond” events to be
+represented, in which both parents at a recombination event trace directly back to the
+same common ancestor.</p>
+</div>
+</section>
+</section>
+<section id="simplification">
+<span id="sec-args-simplification"></span><h2>Simplification<a class="headerlink" href="#simplification" title="Permalink to this heading">#</a></h2>
+<p>If we fully <a class="reference internal" href="simplification.html#sec-simplification"><span class="std std-ref">simplify</span></a> the tree above, all remaining nodes
+(apart from the samples) will have a local arity greater than one.
+This loses information about the timings of recombination and non-coalescent
+common ancestry, but it still keeps the local tree structure intact:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">ts_arg</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">draw_svg</span><span class="p">(</span>
+    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>
+    <span class="n">y_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">node_labels</span><span class="o">=</span><span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">samples</span><span class="p">()},</span>
+    <span class="n">mutation_labels</span><span class="o">=</span><span class="p">{},</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;.mut .sym {stroke: goldenrod}&quot;</span><span class="p">,</span>
+    <span class="n">y_ticks</span><span class="o">=</span><span class="p">[</span><span class="n">t</span><span class="o">*</span><span class="mi">500</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ccd8b909f77ca1a5c77922f86baf2bd128eab494040c6a69549555754131ee4f.svg" src="_images/ccd8b909f77ca1a5c77922f86baf2bd128eab494040c6a69549555754131ee4f.svg" /></div>
+</div>
+<p>Note that all recombination nodes have been lost from this graph; the effects of recombination
+are instead reflected in more recent coalescent nodes that are recombinant decendants of the
+original recombination nodes. This results in graph nodes which simultanousely have
+multiple children and multiple parents. Graphs with such nodes are unsuited to
+the “ortho” style of
+graph plotting. Instead, we can plot the tree sequence graph using diagonal lines:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d3graph</span> <span class="o">=</span> <span class="n">tskit_arg_visualizer</span><span class="o">.</span><span class="n">D3ARG</span><span class="o">.</span><span class="n">from_ts</span><span class="p">(</span><span class="n">ts</span><span class="o">=</span><span class="n">ts</span><span class="p">)</span>
+<span class="n">d3graph</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">sample_order</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>.d3arg {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px 20px 60px 20px;
+}
+
+.d3arg:hover .dashboard {
+    visibility: visible;
+}
+
+.dashboard {
+    display: flex;
+    visibility: hidden;
+}
+
+.dashboard button {
+    position: relative;
+    font-size: 30px;
+    border: 0px;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.dashboard button .tip {
+    width: 120px;
+    font-size: 12px;
+    background-color: lightgrey;
+    color: #053e4e;
+    text-align: center;
+    padding: 5px 0px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%; 
+    margin-left: -60px;
+    visibility: hidden;
+}
+
+.dashboard button:hover .desc {
+    visibility: visible;
+}
+
+.dashboard path {
+    fill: grey;
+}
+
+.dashboard button:hover path {
+    fill: #053e4e;
+}
+
+.dashboard button:active path {
+    fill: #1eebb1;
+}
+
+.yaxis path {
+    stroke: #053e4e;
+    stroke-width: 3px;
+}
+
+.yaxis line {
+    stroke: #053e4e;
+    stroke-width: 3px;
+}
+
+.yaxis text {
+    fill: #053e4e;
+    stroke: 1px;
+}
+
+.node {
+    fill: #1eebb1;
+    stroke: #053e4e;
+    stroke-width: 4px;
+}
+
+.hiddennode {
+    fill: lightgrey;
+    stroke: lightgrey;
+    stroke-width: 4px;
+}
+
+.underlink {
+    stroke: #ffffff;
+    stroke-width: 12px;
+    fill: none;
+}
+
+.link {
+    stroke: #053e4e;
+    stroke-width: 4px;
+    fill: none;
+}
+
+.hiddenlink {
+    stroke: lightgrey;
+    stroke-width: 4px;
+    fill: none;
+}
+
+.labels {
+    text-anchor: middle;
+}
+
+.label {
+    fill: #053e4e;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.hiddenlabel {
+    fill: lightgrey;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+svg {
+    display: block;
+}
+
+button {
+    display: block;
+    cursor: pointer;
+}
+
+.saving {
+    display: flex;
+    flex-direction: row;
+}
+
+.saving .message {
+    display: none;
+}</style><script src='https://d3js.org/d3.v7.min.js'></script><div id='arg_9487718637'class='d3arg' style='min-width:540px; min-height:455px;'></div><script>var line = d3.line();
+var step = d3.line().curve(d3.curveStep);
+var stepAfter = d3.line().curve(d3.curveStepAfter);
+var stepBefore = d3.line().curve(d3.curveStepBefore);
+
+function draw_force_diagram() {
+    
+    var graph = {'nodes': [{'id': 0, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [9], 'parent_of': [], 'label': '0', 'fx': 100.0, 'fy': 250.0, 'y': 250.0}, {'id': 1, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [6], 'parent_of': [], 'label': '1', 'fx': 240.0, 'fy': 250.0, 'y': 250.0}, {'id': 2, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [9], 'parent_of': [], 'label': '2', 'fx': 170.0, 'fy': 250.0, 'y': 250.0}, {'id': 3, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [6], 'parent_of': [], 'label': '3', 'fx': 310.0, 'fy': 250.0, 'y': 250.0}, {'id': 4, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [8, 10], 'parent_of': [], 'label': '4', 'fx': 450.0, 'fy': 250.0, 'y': 250.0}, {'id': 5, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [7, 8], 'parent_of': [], 'label': '5', 'fx': 380.0, 'fy': 250.0, 'y': 250.0}, {'id': 6, 'flag': 0, 'time': 56.0454802286223, 'time_01': 0.9594597716363211, 'logtime_01': 0.4408104125482307, 'rank_01': 0.8571428571428572, 'child_of': [7, 10], 'parent_of': [1, 3], 'label': '6', 'x': 275.0, 'fy': 221.42857142857144, 'y': 221.42857142857144}, {'id': 7, 'flag': 0, 'time': 120.7850821708138, 'time_01': 0.9126306921779251, 'logtime_01': 0.3359364561713586, 'rank_01': 0.7142857142857143, 'child_of': [10], 'parent_of': [5, 6], 'label': '7', 'x': 275.0, 'fy': 192.85714285714286, 'y': 192.85714285714286}, {'id': 8, 'flag': 0, 'time': 142.86643656492956, 'time_01': 0.8966582507595428, 'logtime_01': 0.31289495466312167, 'rank_01': 0.5714285714285714, 'child_of': [10], 'parent_of': [4, 5], 'label': '8', 'x': 275.0, 'fy': 164.28571428571428, 'y': 164.28571428571428}, {'id': 9, 'flag': 0, 'time': 236.7237255340037, 'time_01': 0.8287670325403284, 'logtime_01': 0.24344667636347894, 'rank_01': 0.4285714285714286, 'child_of': [11, 12], 'parent_of': [0, 2], 'label': '9', 'x': 275.0, 'fy': 135.71428571428572, 'y': 135.71428571428572}, {'id': 10, 'flag': 0, 'time': 272.05118690557765, 'time_01': 0.8032130833963393, 'logtime_01': 0.22428775813629553, 'rank_01': 0.2857142857142858, 'child_of': [11, 12], 'parent_of': [4, 6, 7, 8], 'label': '10', 'x': 275.0, 'fy': 107.14285714285717, 'y': 107.14285714285717}, {'id': 11, 'flag': 0, 'time': 610.912738605865, 'time_01': 0.5580992109919682, 'logtime_01': 0.11270418970307061, 'rank_01': 0.1428571428571429, 'child_of': [], 'parent_of': [9, 10], 'label': '11', 'x': 275.0, 'fy': 78.57142857142858, 'y': 78.57142857142858}, {'id': 12, 'flag': 0, 'time': 1382.4658244607965, 'time_01': 0.0, 'logtime_01': -9.998911688890999e-05, 'rank_01': 0.0, 'child_of': [], 'parent_of': [9, 10], 'label': '12', 'x': 275.0, 'fy': 50.0, 'y': 50.0}], 'links': [{'source': 9, 'target': 0, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 2, 'region_fraction': 1.0}, {'source': 6, 'target': 1, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 3, 'region_fraction': 1.0}, {'source': 9, 'target': 2, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 0, 'region_fraction': 1.0}, {'source': 6, 'target': 3, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 1, 'region_fraction': 1.0}, {'source': 8, 'target': 4, 'bounds': '0.0-6516.940179280937', 'alt_parent': '', 'alt_child': 5, 'region_fraction': 0.6516940179280937}, {'source': 10, 'target': 4, 'bounds': '6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': 6, 'region_fraction': 0.34830598207190633}, {'source': 7, 'target': 5, 'bounds': '6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': 6, 'region_fraction': 0.34830598207190633}, {'source': 8, 'target': 5, 'bounds': '0.0-6516.940179280937', 'alt_parent': '', 'alt_child': 4, 'region_fraction': 0.6516940179280937}, {'source': 7, 'target': 6, 'bounds': '6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': 5, 'region_fraction': 0.34830598207190633}, {'source': 10, 'target': 6, 'bounds': '0.0-6516.940179280937', 'alt_parent': '', 'alt_child': 4, 'region_fraction': 0.6516940179280937}, {'source': 10, 'target': 7, 'bounds': '6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': 4, 'region_fraction': 0.34830598207190633}, {'source': 10, 'target': 8, 'bounds': '0.0-6516.940179280937', 'alt_parent': '', 'alt_child': 4, 'region_fraction': 0.6516940179280937}, {'source': 11, 'target': 9, 'bounds': '2601.014547981321-10000.0', 'alt_parent': '', 'alt_child': 10, 'region_fraction': 0.7398985452018679}, {'source': 12, 'target': 9, 'bounds': '0.0-2601.014547981321', 'alt_parent': '', 'alt_child': 10, 'region_fraction': 0.26010145479813207}, {'source': 11, 'target': 10, 'bounds': '2601.014547981321-10000.0', 'alt_parent': '', 'alt_child': 9, 'region_fraction': 0.7398985452018679}, {'source': 12, 'target': 10, 'bounds': '0.0-2601.014547981321', 'alt_parent': '', 'alt_child': 9, 'region_fraction': 0.26010145479813207}], 'breakpoints': [{'start': 0, 'stop': 2601.014547981321, 'x_pos_01': 0.0, 'width_01': 0.26010145479813207, 'x_pos': 50.0, 'width': 117.04565465915942}, {'start': 2601.014547981321, 'stop': 6516.940179280937, 'x_pos_01': 0.26010145479813207, 'width_01': 0.3915925631299616, 'x_pos': 167.04565465915942, 'width': 176.21665340848273}, {'start': 6516.940179280937, 'stop': 10000.0, 'x_pos_01': 0.6516940179280937, 'width_01': 0.34830598207190633, 'x_pos': 343.26230806764215, 'width': 156.73769193235785}]};
+    var y_axis = {'include_labels': 'true', 'ticks': [250.0, 221.42857142857144, 192.85714285714286, 164.28571428571428, 135.71428571428572, 107.14285714285717, 78.57142857142858, 50.0], 'text': [0, 56, 121, 143, 237, 272, 611, 1382], 'max_min': [250.0, 50.0], 'scale': 'rank'};
+    var subset = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    var evenly_distributed_positions = [100.0, 170.0, 240.0, 310.0, 380.0, 450.0];
+
+    var dashboard = d3.select("#arg_9487718637").append("div").attr("class", "dashboard");
+    
+    var clipboard = dashboard.append("button")
+        .on("click", function() {
+            navigator.clipboard.writeText("{'arg': {'nodes': [{'id': 0, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [9], 'parent_of': [], 'label': '0', 'fx': 100.0, 'fy': 250.0, 'y': 250.0}, {'id': 1, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [6], 'parent_of': [], 'label': '1', 'fx': 240.0, 'fy': 250.0, 'y': 250.0}, {'id': 2, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [9], 'parent_of': [], 'label': '2', 'fx': 170.0, 'fy': 250.0, 'y': 250.0}, {'id': 3, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [6], 'parent_of': [], 'label': '3', 'fx': 310.0, 'fy': 250.0, 'y': 250.0}, {'id': 4, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [8, 10], 'parent_of': [], 'label': '4', 'fx': 450.0, 'fy': 250.0, 'y': 250.0}, {'id': 5, 'flag': 1, 'time': 0.0, 'time_01': 1.0, 'logtime_01': 1.0, 'rank_01': 1.0, 'child_of': [7, 8], 'parent_of': [], 'label': '5', 'fx': 380.0, 'fy': 250.0, 'y': 250.0}, {'id': 6, 'flag': 0, 'time': 56.0454802286223, 'time_01': 0.9594597716363211, 'logtime_01': 0.4408104125482307, 'rank_01': 0.8571428571428572, 'child_of': [7, 10], 'parent_of': [1, 3], 'label': '6', 'x': 275.0, 'fy': 221.42857142857144, 'y': 221.42857142857144}, {'id': 7, 'flag': 0, 'time': 120.7850821708138, 'time_01': 0.9126306921779251, 'logtime_01': 0.3359364561713586, 'rank_01': 0.7142857142857143, 'child_of': [10], 'parent_of': [5, 6], 'label': '7', 'x': 275.0, 'fy': 192.85714285714286, 'y': 192.85714285714286}, {'id': 8, 'flag': 0, 'time': 142.86643656492956, 'time_01': 0.8966582507595428, 'logtime_01': 0.31289495466312167, 'rank_01': 0.5714285714285714, 'child_of': [10], 'parent_of': [4, 5], 'label': '8', 'x': 275.0, 'fy': 164.28571428571428, 'y': 164.28571428571428}, {'id': 9, 'flag': 0, 'time': 236.7237255340037, 'time_01': 0.8287670325403284, 'logtime_01': 0.24344667636347894, 'rank_01': 0.4285714285714286, 'child_of': [11, 12], 'parent_of': [0, 2], 'label': '9', 'x': 275.0, 'fy': 135.71428571428572, 'y': 135.71428571428572}, {'id': 10, 'flag': 0, 'time': 272.05118690557765, 'time_01': 0.8032130833963393, 'logtime_01': 0.22428775813629553, 'rank_01': 0.2857142857142858, 'child_of': [11, 12], 'parent_of': [4, 6, 7, 8], 'label': '10', 'x': 275.0, 'fy': 107.14285714285717, 'y': 107.14285714285717}, {'id': 11, 'flag': 0, 'time': 610.912738605865, 'time_01': 0.5580992109919682, 'logtime_01': 0.11270418970307061, 'rank_01': 0.1428571428571429, 'child_of': [], 'parent_of': [9, 10], 'label': '11', 'x': 275.0, 'fy': 78.57142857142858, 'y': 78.57142857142858}, {'id': 12, 'flag': 0, 'time': 1382.4658244607965, 'time_01': 0.0, 'logtime_01': -9.998911688890999e-05, 'rank_01': 0.0, 'child_of': [], 'parent_of': [9, 10], 'label': '12', 'x': 275.0, 'fy': 50.0, 'y': 50.0}], 'links': [{'source': 9, 'target': 0, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 2, 'region_fraction': 1.0}, {'source': 6, 'target': 1, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 3, 'region_fraction': 1.0}, {'source': 9, 'target': 2, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 0, 'region_fraction': 1.0}, {'source': 6, 'target': 3, 'bounds': '0.0-10000.0', 'alt_parent': '', 'alt_child': 1, 'region_fraction': 1.0}, {'source': 8, 'target': 4, 'bounds': '0.0-6516.940179280937', 'alt_parent': '', 'alt_child': 5, 'region_fraction': 0.6516940179280937}, {'source': 10, 'target': 4, 'bounds': '6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': 6, 'region_fraction': 0.34830598207190633}, {'source': 7, 'target': 5, 'bounds': '6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': 6, 'region_fraction': 0.34830598207190633}, {'source': 8, 'target': 5, 'bounds': '0.0-6516.940179280937', 'alt_parent': '', 'alt_child': 4, 'region_fraction': 0.6516940179280937}, {'source': 7, 'target': 6, 'bounds': '6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': 5, 'region_fraction': 0.34830598207190633}, {'source': 10, 'target': 6, 'bounds': '0.0-6516.940179280937', 'alt_parent': '', 'alt_child': 4, 'region_fraction': 0.6516940179280937}, {'source': 10, 'target': 7, 'bounds': '6516.940179280937-10000.0', 'alt_parent': '', 'alt_child': 4, 'region_fraction': 0.34830598207190633}, {'source': 10, 'target': 8, 'bounds': '0.0-6516.940179280937', 'alt_parent': '', 'alt_child': 4, 'region_fraction': 0.6516940179280937}, {'source': 11, 'target': 9, 'bounds': '2601.014547981321-10000.0', 'alt_parent': '', 'alt_child': 10, 'region_fraction': 0.7398985452018679}, {'source': 12, 'target': 9, 'bounds': '0.0-2601.014547981321', 'alt_parent': '', 'alt_child': 10, 'region_fraction': 0.26010145479813207}, {'source': 11, 'target': 10, 'bounds': '2601.014547981321-10000.0', 'alt_parent': '', 'alt_child': 9, 'region_fraction': 0.7398985452018679}, {'source': 12, 'target': 10, 'bounds': '0.0-2601.014547981321', 'alt_parent': '', 'alt_child': 9, 'region_fraction': 0.26010145479813207}], 'breakpoints': [{'start': 0, 'stop': 2601.014547981321, 'x_pos_01': 0.0, 'width_01': 0.26010145479813207, 'x_pos': 50.0, 'width': 117.04565465915942}, {'start': 2601.014547981321, 'stop': 6516.940179280937, 'x_pos_01': 0.26010145479813207, 'width_01': 0.3915925631299616, 'x_pos': 167.04565465915942, 'width': 176.21665340848273}, {'start': 6516.940179280937, 'stop': 10000.0, 'x_pos_01': 0.6516940179280937, 'width_01': 0.34830598207190633, 'x_pos': 343.26230806764215, 'width': 156.73769193235785}]}, 'width': 500, 'height': 375, 'y_axis': {'include_labels': 'true', 'ticks': [250.0, 221.42857142857144, 192.85714285714286, 164.28571428571428, 135.71428571428572, 107.14285714285717, 78.57142857142858, 50.0], 'text': [0, 56, 121, 143, 237, 272, 611, 1382], 'max_min': [250.0, 50.0], 'scale': 'rank'}, 'tree_highlighting': 'true', 'edge_type': 'line', 'variable_edge_width': 'false', 'subset_nodes': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 'include_node_labels': 'true', 'evenly_distributed_positions': [100.0, 170.0, 240.0, 310.0, 380.0, 450.0]}".replace(/'nodes': .*'links'/, "'nodes': " + JSON.stringify(graph.nodes) + ", 'links'").replaceAll("'", '"'));
+            d3.select("#arg_9487718637 .copymessage").style("visibility", "visible");
+            setTimeout( function() {
+                d3.select("#arg_9487718637 .copymessage").style("visibility", "hidden");
+            }, 1000);
+        });
+    clipboard.append("svg") //<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("viewBox", "0 0 448 512")
+        .append("path")
+        .attr("d", "M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z");
+    clipboard.append("span").attr("class", "tip desc").text("Copy To Clipboard");
+    clipboard.append("span").attr("class", "tip copymessage").text("Copied!");
+
+    var reheat = dashboard.append("button")
+        .on("click", function(event) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();       
+            var order = d3.selectAll("#arg_9487718637 .sample").data().sort((a, b) => d3.ascending(a.x, b.x)).map(a => a.id);;
+            d3.selectAll("#arg_9487718637 .node").classed("unfix", function(d) {
+                if (d.flag != 1) {
+                    delete d.fx;
+                } else {
+                    d.fx = evenly_distributed_positions[order.indexOf(d.id)];
+                }
+            });
+        });
+    reheat.append("svg") //<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("viewBox", "0 0 384 512")
+        .append("path")
+        .attr("d", "M153.6 29.9l16-21.3C173.6 3.2 180 0 186.7 0C198.4 0 208 9.6 208 21.3V43.5c0 13.1 5.4 25.7 14.9 34.7L307.6 159C356.4 205.6 384 270.2 384 337.7C384 434 306 512 209.7 512H192C86 512 0 426 0 320v-3.8c0-48.8 19.4-95.6 53.9-130.1l3.5-3.5c4.2-4.2 10-6.6 16-6.6C85.9 176 96 186.1 96 198.6V288c0 35.3 28.7 64 64 64s64-28.7 64-64v-3.9c0-18-7.2-35.3-19.9-48l-38.6-38.6c-24-24-37.5-56.7-37.5-90.7c0-27.7 9-54.8 25.6-76.9z");
+    reheat.append("span").attr("class", "tip desc").text("Reheat Simulation");
+    
+    var evenly_distribute = dashboard.append("button")
+        .on("click", function() {
+            var order = d3.selectAll("#arg_9487718637 .sample").data().sort((a, b) => d3.ascending(a.x, b.x)).map(a => a.id);;
+            d3.selectAll("#arg_9487718637 .sample").classed("distribute", function(d) {
+                d.fx = evenly_distributed_positions[order.indexOf(d.id)];
+            });
+        });
+    evenly_distribute.append("svg") //<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .attr("viewBox", "0 0 512 512")
+        .append("path")
+        .attr("d", "M504.3 273.6c4.9-4.5 7.7-10.9 7.7-17.6s-2.8-13-7.7-17.6l-112-104c-7-6.5-17.2-8.2-25.9-4.4s-14.4 12.5-14.4 22l0 56-192 0 0-56c0-9.5-5.7-18.2-14.4-22s-18.9-2.1-25.9 4.4l-112 104C2.8 243 0 249.3 0 256s2.8 13 7.7 17.6l112 104c7 6.5 17.2 8.2 25.9 4.4s14.4-12.5 14.4-22l0-56 192 0 0 56c0 9.5 5.7 18.2 14.4 22s18.9 2.1 25.9-4.4l112-104z")
+    evenly_distribute.append("span").attr("class", "tip desc").text("Space Samples");
+
+    var svg = d3.select("#arg_9487718637").append("svg")
+        .attr("width", 500)
+        .attr("height", 375)
+        .style("padding-top", "10px");
+
+    var result = y_axis.ticks.map(function (x) { 
+        return parseInt(x, 10); 
+    });
+
+
+    if (y_axis.include_labels == "true") {
+        var bottom = 375 - 50;
+        if (true) {
+            bottom = 375 - 125;
+        }
+        var yscale = d3.scaleLinear() 
+            .domain([y_axis.max_min[0], y_axis.max_min[1]]) 
+            .range([bottom, 50]); 
+
+        var y_axis_text = y_axis.text;
+
+        var y_axis = d3.axisRight().scale(yscale)
+            .tickValues(result)
+            .tickFormat((d, i) => y_axis_text[i]); 
+
+        var y_axis_labels = svg
+            .append("g")
+            .attr("class", "yaxis")
+            .attr("transform", "translate(5,0)")
+            .call(y_axis);
+    }
+
+    var simulation = d3
+        .forceSimulation(graph.nodes)
+        .force("link", d3.forceLink()
+            .id(function(d) {
+                return d.id;
+            })
+            .links(graph.links)
+        )
+        .force("charge", d3.forceManyBody().strength(-10))
+        .on("tick", ticked);
+
+    var link_container = svg
+        .append("g")
+        .attr("class", "links")
+        .selectAll("path")
+        .data(graph.links)
+        .enter()
+        .append("g")
+        .attr("bounds", function(d) {
+            return d.bounds;
+        });
+
+    var underlink = link_container
+        .append("path")
+        .attr("class", "underlink");
+
+    var link = link_container
+        .append("path")
+        .attr("class", function(d) {
+            if (subset.includes(d.source.id) & subset.includes(d.target.id)) {
+                return "link"
+            } else {
+                return "hiddenlink"
+            }
+        });
+    
+    if (false) {
+        link
+            .style("stroke-width", function(d) {
+                return d.region_fraction * 7 + 1;
+            });
+    }
+    
+    if (true) {
+        link
+            .on('mouseover', function (event, d) {
+                d3.select(this)
+                    .style('stroke', '#1eebb1')
+                    .style("cursor", "pointer");
+                d3.select("#arg_9487718637 .breakpoints")
+                    .selectAll("rect")
+                        .filter(function(j) {
+                            return d.bounds.split(" ").some(function(region) {
+                                region = region.split("-");
+                                return (parseFloat(region[0]) <= j.start) & (parseFloat(region[1]) >= j.stop)
+                            });
+                        })
+                        .style('fill', '#1eebb1');
+            })
+            .on('mouseout', function (d, i) {
+                d3.select(this)
+                    .style('stroke', '#053e4e')
+                    .style("cursor", "default")
+                d3.select("#arg_9487718637 .breakpoints").selectAll("rect")
+                    .style("fill", "#053e4e")
+            });
+    }
+
+    var node = svg
+        .append("g")
+        .attr("class", "nodes")
+        .selectAll("circle")
+        .data(graph.nodes)
+        .enter()
+        .append("circle")
+        .attr("id", function(d) {
+            return String(9487718637) + "_node" + d.id
+        })
+        .attr("class", function(d) {
+            var classy = ""
+            if (subset.includes(d.id)) {
+                classy += "node";
+            } else {
+                classy += "hiddennode";
+            }
+            if (d.flag == 1) {
+                classy += " sample";
+            }
+            return classy
+        })
+        .attr("parents", function(d) {
+            return d.child_of.toString().replace(",", " ")
+        })
+        .attr("children", function(d) {
+            return d.parent_of.toString().replace(",", " ")
+        })
+        .attr("r", 7)
+        .call(
+            d3
+                .drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+        )
+        .on('mouseover', function (d, i) {
+            d3.select(this)
+                .style("cursor", "pointer")
+        });
+
+    
+    if (true) {
+        var label = svg
+            .append("g")
+            .attr("class", "labels")
+            .selectAll("text")
+            .data(graph.nodes)
+            .enter()
+            .append("text")
+                .attr("class", function(d) {
+                    if (subset.includes(d.id)) {
+                        return "label"
+                    } else {
+                        return "hiddenlabel"
+                    }
+                })
+                .text(function (d) { return d.label; });
+    };
+    
+    function determine_path_type(d) {
+        path_type = ""
+        var start_position_x = d.source.x;
+        var start_position_y = d.source.y;
+        var stop_position_x = d.target.x;
+        var stop_position_y = d.target.y;
+        var vnub = Math.min((stop_position_y-start_position_y)/2, 20);
+        if ("y_axis.scale" == "time" | "y_axis.scale" == "log_time") {
+            vnub = 0;
+        }
+        var alt_child = document.getElementById(String(9487718637) + "_node" + d.alt_child);
+        if (alt_child != null) {
+            var alt_child_x = alt_child.getAttribute("cx");
+            var alt_child_y = alt_child.getAttribute("cy");
+        }
+        if (d.source.flag == 131072) {
+            path_type += "r0";
+            start_position_y = d.source.y + vnub;
+        } else {
+            if (d.target.y < alt_child_y) {
+                if (d.target.x < d.source.x) {
+                    if (d.target.x < d.source.x - 40) {
+                        path_type += "tL";
+                    } else {
+                        path_type += "fL";
+                    }
+                    start_position_x = d.source.x - 20;
+                } else {
+                    if (d.target.x > d.source.x + 40) {
+                        path_type += "tR";
+                    } else {
+                        path_type += "fR";
+                    }
+                    start_position_x = d.source.x + 20;
+                }
+            } else if (d.target.y > alt_child_y) {
+                if (alt_child_x < d.source.x) {
+                    if (d.target.x < d.source.x + 40) {
+                        path_type += "fR";
+                    } else {
+                        path_type += "tR";
+                    }
+                    start_position_x = d.source.x + 20;
+                } else {
+                    if (d.target.x > d.source.x - 40) {
+                        path_type += "fL";
+                    } else {
+                        path_type += "tL";
+                    }
+                    start_position_x = d.source.x - 20;
+                }
+            } else {
+                if (d.target.x < alt_child_x) {
+                    if (d.target.x < d.source.x - 40) {
+                        path_type += "tL";
+                    } else {
+                        path_type += "fL";
+                    }
+                    start_position_x = d.source.x - 20;
+                } else if (d.target.x > alt_child_x) {
+                    if (d.target.x > d.source.x + 40) {
+                        path_type += "tR";
+                    } else {
+                        path_type += "fR";
+                    }
+                    start_position_x = d.source.x + 20;
+                } else {
+                    if (d.index % 2 == 0) {
+                        path_type += "fL";
+                        start_position_x = d.source.x - 20;
+                    } else {
+                        path_type += "fR";
+                        start_position_x = d.source.x + 20;
+                    }
+                }
+            }
+        }
+        var alt_parent = document.getElementById(String(9487718637) + "_node" + d.alt_parent);
+        if (alt_parent != null) {
+            var alt_parent_x = alt_parent.getAttribute("cx");
+            var alt_parent_y = alt_parent.getAttribute("cy");
+        }
+        if (d.target.flag == 131072) {
+            if (d.source.y < alt_parent_y) {
+                if (alt_parent_x < d.target.x) {
+                    if (d.source.x < d.target.x + 40) {
+                        path_type += "fR";
+                    } else {
+                        path_type += "tR";
+                    }
+                    stop_position_x = d.target.x + 20;
+                } else {
+                    if (d.source.x > d.target.x - 40) {
+                        path_type += "fL";
+                    } else {
+                        path_type += "tL";
+                    }
+                    stop_position_x = d.target.x - 20;
+                }
+            } else if (d.source.y > alt_parent_y) {
+                if (d.source.x < d.target.x) {
+                    if (d.source.x < d.target.x - 40) {
+                        path_type += "tL";
+                    } else {
+                        path_type += "fL";
+                    }
+                    stop_position_x = d.target.x - 20;
+                } else {
+                    if (d.source.x > d.target.x + 40) {
+                        path_type += "tR";
+                    } else {
+                        path_type += "fR";
+                    }
+                    stop_position_x = d.target.x + 20;
+                }
+            } else {
+                if (d.index % 2 == 0) {
+                    path_type += "fL";
+                    stop_position_x = d.target.x - 20;
+                } else {
+                    path_type += "fR";
+                    stop_position_x = d.target.x + 20;
+                }
+            }
+        } else {
+            path_type += "b0";
+            stop_position_y = d.target.y - vnub;
+        }
+        if (path_type == "fLb0" ) {
+            if (start_position_x >= stop_position_x) {
+                path_type = "tLb0";
+            }
+        } else if (path_type == "fRb0") {
+            if (start_position_x <= stop_position_x) {
+                path_type = "tRb0";
+            }
+        } else if (path_type == "r0fL") {
+            if (start_position_x <= stop_position_x) {
+                path_type = "r0tL";
+            }
+        } else if (path_type == "r0fR") {
+            if (start_position_x >= stop_position_x) {
+                path_type = "r0tR";
+            }
+        } else if (path_type == "fLfL") {
+            if (start_position_x <= stop_position_x) {
+                path_type = "fLtL";
+            } else {
+                path_type = "tLfL";
+            }
+        } else if (path_type == "fRfR") {
+            if (start_position_x >= stop_position_x) {
+                path_type = "fRtR";
+            } else {
+                path_type = "tRfR";
+            }
+        }
+        if ((d.source.id == 60) & (d.target.id == 35)) {
+            path_type = "r0b0";
+            start_position_x = d.source.x;
+            start_position_y = d.source.y + vnub;
+            stop_position_x = d.target.x;
+            stop_position_y = d.target.y - vnub;
+        }
+        return [path_type, start_position_x, start_position_y, stop_position_x, stop_position_y];
+    }
+
+    function ticked() {
+
+        node
+            .attr("cx", function(d) {
+                if (y_axis.include_labels == "false") {
+                    return d.x = Math.max(50, Math.min(500-50, d.x));
+                } else {
+                    return d.x = Math.max(100, Math.min(500-50, d.x));
+                }
+            })
+            .attr("cy", function(d) {
+                return d.y;
+            });
+
+        underlink
+            .attr("d", function(d) {
+                if ("line" == "ortho") {
+                    const output = determine_path_type(d);
+                
+                    const path_type = output[0];
+                    const simple_path_type = Array.from(path_type)[0] + Array.from(path_type)[2];
+                    const start_position_x = output[1];
+                    const start_position_y = output[2];
+                    const stop_position_x = output[3];
+                    const stop_position_y = output[4];
+
+                    const after_paths = ["rf", "tb", "tf"];
+                    const before_paths = ["rt", "fb", "ft"];
+                    const step_paths = ["tt"];
+                    const mid_paths = ["rb", "ff"];
+
+                    if (after_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + stepAfter([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (before_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + stepBefore([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (step_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + step([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (mid_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + line([[start_position_x, start_position_y],[start_position_x, start_position_y + (stop_position_y - start_position_y)/2]]) + line([[start_position_x, start_position_y + (stop_position_y - start_position_y)/2],[stop_position_x, start_position_y + (stop_position_y - start_position_y)/2]]) + line([[stop_position_x, start_position_y + (stop_position_y - start_position_y)/2], [stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    }
+                }
+            });
+
+        link
+            .attr("path_type", function(d) {
+                return determine_path_type(d)[0];
+            })
+            .attr("d", function(d) {
+                if ("line" == "ortho") {
+                    const output = determine_path_type(d);
+                
+                    const path_type = output[0];
+                    const simple_path_type = Array.from(path_type)[0] + Array.from(path_type)[2];
+                    const start_position_x = output[1];
+                    const start_position_y = output[2];
+                    const stop_position_x = output[3];
+                    const stop_position_y = output[4];
+
+                    const after_paths = ["rf", "tb", "tf"];
+                    const before_paths = ["rt", "fb", "ft"];
+                    const step_paths = ["tt"];
+                    const mid_paths = ["rb", "ff"];
+
+                    if (after_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + stepAfter([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (before_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + stepBefore([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (step_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + step([[start_position_x, start_position_y],[stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    } else if (mid_paths.includes(simple_path_type)) {
+                        return line([[d.source.x, d.source.y],[start_position_x, start_position_y]]) + line([[start_position_x, start_position_y],[start_position_x, start_position_y + (stop_position_y - start_position_y)/2]]) + line([[start_position_x, start_position_y + (stop_position_y - start_position_y)/2],[stop_position_x, start_position_y + (stop_position_y - start_position_y)/2]]) + line([[stop_position_x, start_position_y + (stop_position_y - start_position_y)/2], [stop_position_x, stop_position_y]]) + line([[stop_position_x, stop_position_y], [d.target.x, d.target.y]]);
+                    }
+                } else if ("line" == "line") {
+                    if (d.source.id == d.alt_parent) {
+                        var leftOrRight = 20;
+                        if (d.index % 2 == 0) {
+                            leftOrRight = -20;
+                        }
+                        return "M " + d.source.x + " " + d.source.y + " C " + (d.source.x + leftOrRight).toString() + " " +  (d.source.y - 10).toString() + ", " + (d.target.x + leftOrRight).toString() + " " + (d.target.y + 10).toString() + ", " + d.target.x + " " + d.target.y;
+                    } else {
+                        return line([[d.source.x, d.source.y], [d.target.x, d.target.y]]);
+                    }
+                }
+            });
+
+        function determine_label_positioning(d) {
+            if (d.flag == 131072 || d.parent_of.length == 0 || d.child_of.length == 0) {
+                return "c";
+            } else if (d.child_of.length == 1) {
+                var parent = document.getElementById(String(9487718637) + "_node" + d.child_of[0])
+                if (parent != null) {
+                    var parent_x = parent.getAttribute("cx");
+                    if (parent_x > d.x) {
+                        return "l";
+                    } else {
+                        return "r";
+                    }
+                } else {
+                    return "r";
+                }
+            } else {
+                return "r";
+            }
+        };
+
+        if (true) {
+
+            label
+                .attr("x", function(d) {
+                    var positioning = determine_label_positioning(d);
+                    if (positioning == "l") {
+                        return d.x - 15;
+                    } else if (positioning == "r") {
+                        return d.x + 15;
+                    } else {
+                        return d.x;
+                    }
+                })
+                .style("text-anchor", function(d) {
+                    var positioning = determine_label_positioning(d);
+                    if (positioning == "l") {
+                        return "end";
+                    } else if (positioning == "r") {
+                        return "start";
+                    } else {
+                        return "middle";
+                    }
+                })
+                .attr("y", function(d) {
+                    if (d.parent_of.length == 0) {
+                        return d.y + 25;
+                    } else {
+                        return d.y - 15;
+                    }
+                });
+        };
+    }
+
+    function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+    }
+
+    function dragged(event, d) {
+        d.fx = event.x;
+    }
+
+    if (true) {
+        
+        var th_group = svg.append("g").attr("class", "tree_highlighting");
+        
+        th_group
+            .append("g")
+            .attr("class", "breakpoints")
+            .selectAll("rect")
+            .data(graph.breakpoints)
+            .enter()
+            .append("rect")
+            .attr("start", function(d) {
+                return d.start;
+            })
+            .attr("stop", function(d) {
+                return d.stop;
+            })
+            .attr("x", function(d) {
+                return d.x_pos;
+            })
+            .attr("y", 375-60)
+            .attr("width", function(d) {
+                return d.width;
+            })
+            .attr("height", 40)
+            .attr("stroke", "#FFFFFF")
+            .attr("stroke-width", 5)
+            .attr("fill", "#053e4e")
+            .on('mouseover', function (event, d) {
+                d3.select(this)
+                    .style('fill', '#1eebb1')
+                    .style("cursor", "pointer");
+                var highlight_links = d3.select("#arg_9487718637 .links")
+                    .selectAll("g")
+                        .filter(function(j) {
+                            return j.bounds.split(" ").some(function(region) {
+                                region = region.split("-");
+                                return (parseFloat(region[1]) > d.start) & (parseFloat(region[0]) < d.stop)
+                            });
+                        });
+                highlight_links.raise();
+                //if (false) {
+                    highlight_links
+                        .select(".link")
+                        .style("stroke", "#1eebb1");
+                //} else {
+                //    highlight_links
+                //        .select(".link")
+                //        .style("stroke", "#1eebb1")
+                //        .style("stroke-width", 7);
+                //};
+            })
+            .on('mouseout', function (d, i) {
+                d3.select(this)
+                    .style('fill', '#053e4e')
+                    .style("cursor", "default");
+                //if (false) {
+                    d3.selectAll("#arg_9487718637 .link")
+                        .style("stroke", "#053e4e");
+                //} else {
+                //    d3.selectAll("#arg_9487718637 .link")
+                //        .style("stroke", "#053e4e")
+                //        .style("stroke-width", 3);
+                //};     
+            });
+        
+        var endpoints = th_group.append("g").attr("class", "endpoints");
+        
+        endpoints
+            .append("text")
+                .attr("class", "label")
+                .style("text-anchor", "start")
+                .text(graph.breakpoints[0].start)
+                .attr("x", graph.breakpoints[0].x_pos)
+                .attr("y", 375-5);
+        
+        endpoints
+            .append("text")
+                .attr("class", "label")
+                .style("text-anchor", "end")
+                .text(graph.breakpoints[graph.breakpoints.length-1].stop)
+                .attr("x", 500)
+                .attr("y", 375-5);
+    }
+}
+
+draw_force_diagram()</script></div></div>
+</div>
+<p>These “simplified” graphs are what are produced as the default <code class="docutils literal notranslate"><span class="pre">msprime</span></code> output. The
+exact SPR moves from tree to tree may no longer be obvious, and the ARG likelihood
+cannot be calculated from a tree sequence of this form.</p>
+<p>Note that we can still calculate the <em>mutation likelihood</em>
+(i.e. the likelihood of the observed pattern of mutations, given the genealogy) because
+the topology and branch lengths of the local trees remain unchanged after simplification:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Log likelihood of mutations given the genealogy:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &quot;full&quot; ARG:&#39;</span><span class="p">,</span>  <span class="n">msprime</span><span class="o">.</span><span class="n">log_mutation_likelihood</span><span class="p">(</span><span class="n">ts_arg</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="n">mu</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; simplified:&quot;</span><span class="p">,</span> <span class="n">msprime</span><span class="o">.</span><span class="n">log_mutation_likelihood</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="n">mu</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Log likelihood of mutations given the genealogy:
+ &quot;full&quot; ARG: -33.204860594400216
+ simplified: -33.204860594400216
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="disadvantages-of-full-args">
+<span id="sec-args-disadvantages"></span><h2>Disadvantages of Full ARGs<a class="headerlink" href="#disadvantages-of-full-args" title="Permalink to this heading">#</a></h2>
+<p>There are two main reasons why you might <em>not</em> want to store a full ARG, but instead use
+a simplified version. Firstly if you are inferring ARGs from real data (rather than simulating
+them), it may not be possible or even desirable to infer recombination events. Often
+there are many possible recombination events which are compatible with a given
+set of recombined genome sequences.</p>
+<p>Secondly, even if you <em>are</em> simulating genetic ancestry, storing full ARG requires many extra nodes.
+In fact, as the sequence length increases, the non-coalescent nodes come
+to dominate the tree sequence.
+We can calculate the percentage of non-coalescent nodes by comparing a full ARG with
+its simplified version:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">large_sim_parameters</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">large_sim_parameters</span><span class="p">[</span><span class="s2">&quot;sequence_length&quot;</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">1000</span>
+<span class="n">large_ts_arg</span> <span class="o">=</span> <span class="n">msprime</span><span class="o">.</span><span class="n">sim_ancestry</span><span class="p">(</span><span class="o">**</span><span class="n">large_sim_parameters</span><span class="p">,</span> <span class="n">record_full_arg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">large_ts</span> <span class="o">=</span> <span class="n">large_ts_arg</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Non-coalescent nodes take up &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">large_ts</span><span class="o">.</span><span class="n">num_nodes</span><span class="o">/</span><span class="n">large_ts_arg</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">% &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;of this </span><span class="si">{</span><span class="n">large_ts</span><span class="o">.</span><span class="n">sequence_length</span><span class="o">/</span><span class="mf">1e6</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2"> megabase </span><span class="si">{</span><span class="n">large_ts</span><span class="o">.</span><span class="n">num_samples</span><span class="si">}</span><span class="s2">-tip ARG&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-coalescent nodes take up 99.32% of this 10 megabase 6-tip ARG
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is one of the primary reasons that nodes which are never associated with coalescent
+events are excluded by default in simulation software such as
+<a class="reference external" href="https://tskit.dev/software/msprime.html">msprime</a> and
+<a class="reference external" href="https://tskit.dev/software/SLiM.html">SLiM</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As well as ancestrally relevant nodes, the original (mathematical) ARG formulation by
+<a class="reference external" href="https://www.jstor.org/stable/4355649">Griffiths (1991)</a> includes recombination
+nodes that are not ancestral to the samples. This leads to a graph with an
+vastly larger number of nodes than even the ARGs simulated here, and using such
+structures for simulation or inference is therefore infeasible.</p>
+</div>
+</section>
+<section id="arg-formats-and-tskit">
+<h2>ARG formats and <code class="docutils literal notranslate"><span class="pre">tskit</span></code><a class="headerlink" href="#arg-formats-and-tskit" title="Permalink to this heading">#</a></h2>
+<p>It is worth noting a subtle and somewhat philosophical
+difference between some classical ARG formulations, and the ARG formulation
+used in <code class="docutils literal notranslate"><span class="pre">tskit</span></code>. Classically, nodes in an ARG are taken to represent <em>events</em>
+(specifically, “common ancestor”, “recombination”, and “sampling” events),
+and genomic regions of inheritance are encoded by storing a specific breakpoint location on
+each recombination node. In contrast, <a class="reference external" href="https://tskit.dev/tskit/docs/stable/glossary.html#sec-data-model-definitions-node" title="(in Python)"><span class="xref myst">nodes</span></a> in a <code class="docutils literal notranslate"><span class="pre">tskit</span></code>
+ARG correspond to <em>genomes</em>. More crucially, inherited regions are defined by intervals
+stored on <em>edges</em> (via the <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.Edge.left" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">left</span></code></a> and  <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.Edge.right" title="(in Python)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">right</span></code></a> properties),
+rather than on nodes. Here, for example, is the edge table from our ARG:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_arg</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">edges</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <div>
+            <style scoped="">
+                .tskit-table tbody tr th:only-of-type {vertical-align: middle;}
+                .tskit-table tbody tr th {vertical-align: top;}
+                .tskit-table tbody td {text-align: right;padding: 0.5em 0.5em;}
+                .tskit-table tbody th {padding: 0.5em 0.5em;}
+            </style>
+            <table border="1" class="tskit-table">
+                <thead>
+                    <tr>
+                        <th>id</th><th>left</th><th>right</th><th>parent</th><th>child</th><th>metadata</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>0.00000000</td><td>10000.00000000</td><td>6</td><td>1</td><td></td></tr>
+<tr><td>1</td><td>0.00000000</td><td>10000.00000000</td><td>6</td><td>3</td><td></td></tr>
+<tr><td>2</td><td>0.00000000</td><td>6516.94017928</td><td>7</td><td>5</td><td></td></tr>
+<tr><td>3</td><td>6516.94017928</td><td>10000.00000000</td><td>8</td><td>5</td><td></td></tr>
+<tr><td>4</td><td>0.00000000</td><td>10000.00000000</td><td>9</td><td>6</td><td></td></tr>
+<tr><td>5</td><td>6516.94017928</td><td>10000.00000000</td><td>9</td><td>8</td><td></td></tr>
+<tr><td>6</td><td>0.00000000</td><td>10000.00000000</td><td>10</td><td>4</td><td></td></tr>
+<tr><td>7</td><td>0.00000000</td><td>6516.94017928</td><td>10</td><td>7</td><td></td></tr>
+<tr><td>8</td><td>0.00000000</td><td>10000.00000000</td><td>11</td><td>0</td><td></td></tr>
+<tr><td>9</td><td>0.00000000</td><td>10000.00000000</td><td>11</td><td>2</td><td></td></tr>
+<tr><td>10</td><td>0.00000000</td><td>10000.00000000</td><td>12</td><td>9</td><td></td></tr>
+<tr><td>11</td><td>0.00000000</td><td>10000.00000000</td><td>12</td><td>10</td><td></td></tr>
+<tr><td>12</td><td>0.00000000</td><td>2601.01454798</td><td>13</td><td>12</td><td></td></tr>
+<tr><td>13</td><td>2601.01454798</td><td>10000.00000000</td><td>14</td><td>12</td><td></td></tr>
+<tr><td>14</td><td>0.00000000</td><td>10000.00000000</td><td>15</td><td>11</td><td></td></tr>
+<tr><td>15</td><td>2601.01454798</td><td>10000.00000000</td><td>15</td><td>14</td><td></td></tr>
+<tr><td>16</td><td>0.00000000</td><td>2601.01454798</td><td>16</td><td>13</td><td></td></tr>
+<tr><td>17</td><td>0.00000000</td><td>2601.01454798</td><td>16</td><td>15</td><td></td></tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div></div>
+</div>
+<p>Technically therefore, ARGs stored by <code class="docutils literal notranslate"><span class="pre">tskit</span></code> are edge-annotated
+“genome ARGs”, or <a class="reference external" href="https://www.biorxiv.org/content/10.1101/2023.11.03.565466v1">gARGs</a>.
+This flexible format can describe both simulated genetic ancestries (including
+those involving <a class="reference external" href="https://tskit.dev/msprime/docs/stable/ancestry.html#sec-ancestry-gene-conversion" title="(in Python)"><span>Gene conversion</span></a>), and e.g. real-world
+genetic ancestries, such as
+<a class="reference external" href="https://www.biorxiv.org/content/10.1101/2023.06.08.544212v1">inferrred recombining viral genealogies</a>.
+The focus on genomes rather than events is also what makes
+simplification possible, and means <code class="docutils literal notranslate"><span class="pre">tskit</span></code> can encode ancestry without having
+to pin down exactly when specific ancestral events took place.</p>
+</section>
+<section id="working-with-args-in-tskit">
+<h2>Working with ARGs in <code class="docutils literal notranslate"><span class="pre">tskit</span></code><a class="headerlink" href="#working-with-args-in-tskit" title="Permalink to this heading">#</a></h2>
+<p>All tree sequences, including, but not limited to full ARGs, can be treated as
+directed (acyclic) graphs. Although many tree sequence operations operate from left to
+right along the genome, some are more naturally though of as passing from node
+to node via the edges, regardless of the genomic position of the edge. This section
+describes some of these fundamental graph operations.</p>
+<section id="graph-traversal">
+<h3>Graph traversal<a class="headerlink" href="#graph-traversal" title="Permalink to this heading">#</a></h3>
+<p>The standard edge iterator, <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.TreeSequence.edge_diffs" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TreeSequence.edge_diffs()</span></code></a>, goes from left to
+right along the genome, matching the <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.TreeSequence.trees" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TreeSequence.trees()</span></code></a> iterator. Although
+this will visit all the edges in the graph, these will <em>not</em> necessarily be grouped
+by the node ID either of the edge parent or the edge child. To do this, an alternative
+traversal (from top-to-bottom or bottom-to-top of the tree sequence) is required.</p>
+<p>To traverse the graph by node ID, the <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.TreeSequence.nodes" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TreeSequence.nodes()</span></code></a> iterator can be
+used. In particular, because parents are required to be strictly older than their
+children, iterating through nodes using <code class="docutils literal notranslate"><span class="pre">order=&quot;timeasc&quot;</span></code> will ensure that children
+are always visited before their parents (similar to a breadth-first or “level order”
+search). However, using <a class="reference external" href="https://tskit.dev/tskit/docs/stable/python-api.html#tskit.TreeSequence.nodes" title="(in Python)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TreeSequence.nodes()</span></code></a> is inefficient if you also
+want to access the <em>edges</em> associated with each node.</p>
+<p>The examples below show how to efficiently visit the all the edges in a
+tree sequence, grouped by the nodes to which they are connected, while
+also ensuring that children are visited before parents (or vice versa).</p>
+<section id="traversing-parent-nodes">
+<h4>Traversing parent nodes<a class="headerlink" href="#traversing-parent-nodes" title="Permalink to this heading">#</a></h4>
+<p>The most efficient graph traversal method visits all the parent nodes in the
+tree sequence, grouping edges for which that node is a parent. This is simple
+because edges in a tree sequence are <a class="reference external" href="https://tskit.dev/tskit/docs/stable/data-model.html#sec-edge-requirements" title="(in Python)"><span class="xref std std-ref">ordered</span></a>
+firstly by the time of the parent node, then by node ID.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="k">def</span> <span class="nf">edges_by_parent_timeasc</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">edges</span><span class="p">(),</span> <span class="n">operator</span><span class="o">.</span><span class="n">attrgetter</span><span class="p">(</span><span class="s2">&quot;parent&quot;</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">parent_id</span><span class="p">,</span> <span class="n">edges</span> <span class="ow">in</span> <span class="n">edges_by_parent_timeasc</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">parent_id</span><span class="p">)</span><span class="o">.</span><span class="n">time</span>
+    <span class="n">children</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="o">.</span><span class="n">child</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">parent_id</span><span class="si">}</span><span class="s2"> at time </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> has these child node IDs: </span><span class="si">{</span><span class="n">children</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 6 at time 56.0454802286223 has these child node IDs: {1, 3}
+Node 7 at time 120.7850821708138 has these child node IDs: {5, 6}
+Node 8 at time 142.86643656492956 has these child node IDs: {4, 5}
+Node 9 at time 236.7237255340037 has these child node IDs: {0, 2}
+Node 10 at time 272.05118690557765 has these child node IDs: {8, 4, 6, 7}
+Node 11 at time 610.912738605865 has these child node IDs: {9, 10}
+Node 12 at time 1382.4658244607965 has these child node IDs: {9, 10}
+</pre></div>
+</div>
+</div>
+</div>
+<p>This visits children before parents. To visit parents before children, you can
+simply use <code class="docutils literal notranslate"><span class="pre">reversed(ts.edges())</span></code> rather than <code class="docutils literal notranslate"><span class="pre">ts.edges()</span></code> within the
+<code class="docutils literal notranslate"><span class="pre">groupby</span></code> function. Note that terminal nodes (i.e. which are either isolated
+or leaf nodes in all local trees) are not visited by this function: therefore
+the method above will omit all the terminal sample nodes.</p>
+</section>
+<section id="traversing-child-nodes">
+<h4>Traversing child nodes<a class="headerlink" href="#traversing-child-nodes" title="Permalink to this heading">#</a></h4>
+<p>Sometimes you may wish to iterate over all the edges for which a node is a
+child (rather than a parent). This can be done by sorting the edges by
+child node time (then child node id). This is a little slower, but can be
+done relatively efficiently as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">edges_by_child_timeasc</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+    <span class="c1"># edges sorted by child node time, then child node id using np.lexsort</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">lexsort</span><span class="p">((</span><span class="n">ts</span><span class="o">.</span><span class="n">edges_child</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes_time</span><span class="p">[</span><span class="n">ts</span><span class="o">.</span><span class="n">edges_child</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">attrgetter</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">child_id</span><span class="p">,</span> <span class="n">edges</span> <span class="ow">in</span> <span class="n">edges_by_child_timeasc</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">child_id</span><span class="p">)</span><span class="o">.</span><span class="n">time</span>
+    <span class="n">parents</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="o">.</span><span class="n">parent</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">child_id</span><span class="si">}</span><span class="s2"> at time </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> has these parent node IDs: </span><span class="si">{</span><span class="n">parents</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node 0 at time 0.0 has these parent node IDs: {9}
+Node 1 at time 0.0 has these parent node IDs: {6}
+Node 2 at time 0.0 has these parent node IDs: {9}
+Node 3 at time 0.0 has these parent node IDs: {6}
+Node 4 at time 0.0 has these parent node IDs: {8, 10}
+Node 5 at time 0.0 has these parent node IDs: {8, 7}
+Node 6 at time 56.0454802286223 has these parent node IDs: {10, 7}
+Node 7 at time 120.7850821708138 has these parent node IDs: {10}
+Node 8 at time 142.86643656492956 has these parent node IDs: {10}
+Node 9 at time 236.7237255340037 has these parent node IDs: {11, 12}
+Node 10 at time 272.05118690557765 has these parent node IDs: {11, 12}
+</pre></div>
+</div>
+</div>
+</div>
+<p>To visit parents before children, the <code class="docutils literal notranslate"><span class="pre">lexsort</span></code> can take the negated
+<code class="docutils literal notranslate"><span class="pre">-ts.nodes_time</span></code> rather than simply using <code class="docutils literal notranslate"><span class="pre">ts.nodes_time</span></code>. Note that nodes
+which are never children of an edge are not visited by this algorithm. Such
+nodes are either <a class="reference external" href="https://tskit.dev/tskit/docs/stable/data-model.html#sec-data-model-tree-isolated-nodes" title="(in Python)"><span class="xref std std-ref">isolated</span></a> or a
+<a class="reference external" href="https://tskit.dev/tskit/docs/stable/data-model.html#sec-data-model-tree-roots" title="(in Python)"><span class="xref std std-ref">root</span></a> in each local tree.</p>
+</section>
+</section>
+<section id="other-graph-analysis">
+<span id="sec-args-other-analysis"></span><h3>Other graph analysis<a class="headerlink" href="#other-graph-analysis" title="Permalink to this heading">#</a></h3>
+<p>For graph-theory based analysis, it can be helpful to convert a tree sequence
+to a <a class="reference external" href="https://networkx.org/">networkx</a> graph. This can be done using the
+following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tskit</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="k">def</span> <span class="nf">to_networkx_graph</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">interval_lists</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make an nx graph from a tree sequence. If `intervals_lists` is True, then</span>
+<span class="sd">    each graph edge will have an ``intervals`` attribute containing a *list*</span>
+<span class="sd">    of tskit.Intervals per parent/child combination. Otherwise each graph edge</span>
+<span class="sd">    will correspond to a tskit edge, with a ``left`` and ``right`` attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">edges_parent</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">edges_child</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">edges_left</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">edges_right</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_edgelist</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D</span><span class="p">),</span> <span class="n">edge_attr</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">create_using</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">interval_lists</span><span class="p">:</span>
+        <span class="n">GG</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>  <span class="c1"># Mave a new graph with one edge that can contai</span>
+        <span class="k">for</span> <span class="n">parent</span><span class="p">,</span> <span class="n">children</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">adjacency</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">child</span><span class="p">,</span> <span class="n">edict</span> <span class="ow">in</span> <span class="n">children</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">ilist</span> <span class="o">=</span> <span class="p">[</span><span class="n">tskit</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edict</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+                <span class="n">GG</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="n">ilist</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">GG</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">{</span><span class="n">n</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;flags&#39;</span><span class="p">:</span><span class="n">n</span><span class="o">.</span><span class="n">flags</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">n</span><span class="o">.</span><span class="n">time</span><span class="p">}</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ts</span><span class="o">.</span><span class="n">nodes</span><span class="p">()})</span>
+    <span class="k">return</span> <span class="n">G</span>
+
+<span class="n">arg</span> <span class="o">=</span> <span class="n">to_networkx_graph</span><span class="p">(</span><span class="n">ts_arg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is then possible to use the full range of networkx functions to analyse the graph:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">nx</span><span class="o">.</span><span class="n">is_directed_acyclic_graph</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>  <span class="c1"># All ARGs should be DAGs</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All descendants of node 10 are&quot;</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">descendants</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>All descendants of node 10 are {4, 5, 7}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Networkx also has some built-in drawing functions: below is one of the simplest ones
+(for other possibilities, see the <a class="reference internal" href="viz.html#sec-tskit-viz"><span class="std std-ref">Visualization</span></a> tutorial).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">topological_generations</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">reverse</span><span class="p">())):</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+        <span class="n">arg</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s2">&quot;layer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">multipartite_layout</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">subset_key</span><span class="o">=</span><span class="s2">&quot;layer&quot;</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1b05165f5732d51bf3eaa9c8d1a36301aa7662807445d8561098f9781fb157a4.png" src="_images/1b05165f5732d51bf3eaa9c8d1a36301aa7662807445d8561098f9781fb157a4.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="other-software">
+<h2>Other software<a class="headerlink" href="#other-software" title="Permalink to this heading">#</a></h2>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Show how ARGweaver output can be converted to tskit form.</p>
+</div>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Show how KwARG output can be converted to tskit form.</p>
+</div>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>Implement conversion between the 2 RE node version and the 1 RE node version</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="metadata.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Working with Metadata</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="simulation_overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tree sequences and simulation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-args">Full ARGs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-trees-and-arity">Local trees and arity</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sprs-and-recombination">SPRs and recombination</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-likelihoods">Calculating likelihoods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplification">Simplification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages-of-full-args">Disadvantages of Full ARGs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arg-formats-and-tskit">ARG formats and <code class="docutils literal notranslate"><span class="pre">tskit</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-args-in-tskit">Working with ARGs in <code class="docutils literal notranslate"><span class="pre">tskit</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-traversal">Graph traversal</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#traversing-parent-nodes">Traversing parent nodes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#traversing-child-nodes">Traversing child nodes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-graph-analysis">Other graph analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-software">Other software</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tskit Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
